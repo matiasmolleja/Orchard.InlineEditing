@@ -1,0 +1,56 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Widgets.Models;
+
+@{
+    var widgetPart = ((IContent)Model.ContentItem).As<WidgetPart>();
+    var tag = Tag(Model, "article");    
+    ContentItem contentItem = (ContentItem)Model.ContentItem;
+}
+@tag.StartElement
+
+@if ((widgetPart.RenderTitle && HasText(widgetPart.Title)) || Model.Header != null)
+{
+    <header>
+        @if ((widgetPart.RenderTitle && HasText(widgetPart.Title)))
+        {
+
+            if (AuthorizedFor(Orchard.Core.Contents.Permissions.EditContent) && Model.ContentItem.Id > 0)
+            {
+                using (Script.Foot())
+                {
+                    <script type="text/javascript">
+                        var widgetTitlePart = new WidgetTitlePart( @contentItem.Id , '@widgetPart.Title');
+                        myIEPageVM.widgetTitleParts().push(widgetTitlePart);
+                    </script>
+                };
+
+                <div class="inline-editing-content-control" data-bind="visible: editorMode">
+                    <ul class="actions-controls">
+                        <li><i class="icon-pencil icon-border" style="color:green;"></i></li>
+                    </ul>
+                </div>
+
+                <h1 class="mce_WidgetTitlePart_@contentItem.Id" id="mce_WidgetTitlePart_@contentItem.Id">@widgetPart.Title</h1>
+
+            }
+            else
+            {
+                <h1>@widgetPart.Title</h1>
+            }
+        }
+        else
+        {
+            @Display(Model.Header)
+        }
+
+    </header>
+}
+
+@Display(Model.Child)
+@if (Model.Footer != null)
+{
+    <footer>
+        @Display(Model.Footer)
+    </footer>
+}
+@tag.EndElement

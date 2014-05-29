@@ -1,0 +1,16 @@
+desktop.ini
+obj/
+*.suo
+*.sln.cache
+*.orig
+*.user
+*Thumbs.db
+build
+buildazure
+buildtasks
+artifacts
+robots.txt
+src/Orchard.Web/App_Data/*
+!src/Orchard.Web/App_Data/Localization
+!src/Orchard.Web/App_Data/Sites
+src/**/bin/*

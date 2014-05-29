@@ -1,0 +1,39 @@
+@using Orchard.ContentManagement;
+@using Orchard.Core.Contents;
+@using Orchard.Core.Title.Models;
+
+@{
+    ContentItem contentItem = (ContentItem)Model.ContentItem;
+    TitlePart tpart = contentItem.As<TitlePart>();
+}
+
+@{
+    Layout.Title = Model.Title;
+}
+
+
+@if (AuthorizedFor(Permissions.EditContent) && Model.ContentItem.Id > 0)
+{
+
+    using (Script.Foot())
+    {
+        <script type="text/javascript">
+            var titlePart = new TitlePart( @contentItem.Id , '@tpart.Title');
+            myIEPageVM.titleParts().push(titlePart);
+        </script>
+    };
+
+    <div class="inline-editing-content-control" data-bind="visible: editorMode">
+        <ul class="actions-controls">
+            <li><i class="icon-pencil icon-border" style="color:green;"></i></li>
+        </ul>
+    </div>
+
+    <h1 class="mce_TitlePart_@contentItem.Id" id="mce_TitlePart_@contentItem.Id">@Model.Title</h1>
+
+
+}
+else
+{
+    <h1>@Model.Title</h1>
+}

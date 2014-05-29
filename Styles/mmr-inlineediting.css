@@ -1,0 +1,136 @@
+﻿.inline-editing-topbar{
+   position:fixed;
+   top:0;
+   left:0;
+   width:100%;
+   height:40px;
+   background-color:#333333;
+   z-index:10000;
+   color: #5F97AF;
+   margin:0;
+   padding:0;
+}
+
+ul#command-bar
+{
+    /*border:solid 1px green;*/
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+ul#command-bar li{
+   display:inline;
+   margin:0;
+   padding:0; 
+}
+
+ul#command-bar i{
+    padding-right:6px;
+}
+
+
+
+
+.inline-editing-topbar a:link,
+.inline-editing-topbar a:visited,
+.inline-editing-topbar a:active {
+    color: #AEC3CE;
+    text-decoration: none;
+    font-size:1.077em;
+    display:block;
+    float:left;
+    height:30px;
+    padding:5px 18px;
+    border-left: solid 1px #4c4f44;
+    line-height:24px;
+    
+}
+.inline-editing-topbar a i
+{
+   margin-right:6px;
+}
+
+
+.inline-editing-topbar a:hover
+{
+    background:#3A822E;
+    color:#fff;
+    text-decoration: none;
+}
+a:link.topbaractivelink, 
+a:visited.topbaractivelink ,
+a:hover.topbaractivelink,
+a:active .topbaractivelink {
+    background:#3A822E;
+    color:#fff;
+    text-decoration: none;
+}
+
+.inline-editing-topbar a#dashboard-link {    
+    background: url('images/orchardLogo.gif') no-repeat scroll 0% 0% transparent;
+    display: block;
+    height: 43px;
+    width:43px;
+    margin: -5px 0px 0px 5px;
+    text-indent: -9999px;
+    width: 40px;
+    /*float:left;*/
+    border:none;
+}
+
+.inline-editing-content-control{
+    border:dotted 1px lightgray;
+}
+.inline-editing-content-control .actions-controls ul{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+
+.inline-editing-content-control .actions-controls li {
+    display:inline;
+    float:right;
+}
+.inline-editing-content-control .actions-controls{
+    /*list-style:none;
+    list-style-type:none;*/
+    
+    float:right;
+    /*border-top:solid 1px #808080;
+    border-left:solid 1px #808080;
+    border-right:solid 1px #808080;
+    border-bottom:none;*/
+    padding:0;
+    margin:-23px 0px 0px 0px;
+
+}
+
+
+
+    .inline-editing-content-control .actions-controls a {
+        display:block;
+        padding:5px;
+        /*padding:0 5px;*/
+        color:#343434;
+        
+    }
+    .inline-editing-content-control .actions-controls a:hover {
+        /*background-color: #343434;*/
+        color:#fff;
+    }
+
+    a.inline-editing-pen-icon:link,a.inline-editing-pen-icon:visited {
+        float:right;
+        display:block;
+        padding:8px;
+        background-color:lightgray;
+        color: #343434;
+        margin:-23px 0px 0px 0px;
+    }
+
+a.inline-editing-pen-icon:hover, a.inline-editing-pen-icon:active {
+    color:white;
+    background-color:green;
+}
+
+

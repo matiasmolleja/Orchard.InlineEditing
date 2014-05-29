@@ -1,0 +1,13 @@
+﻿Name: Mmr.InlineEditing
+AntiForgery: enabled
+Author: Matías Molleja
+Website: http://orchardproject.net
+Version: 0.8
+OrchardVersion: 1.8
+Description: Provides frontend inline editing of bodies and titles in Orchard.
+Category: Content
+Features:
+    Mmr.InlineEditing:
+		Name: Inline Editing
+        Description: Provides frontend inline editing of bodies and titles in Orchard.
+		Dependencies: Orchard.JQuery, Orchard.Caching, Orchard.Widgets

@@ -1,0 +1,36 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Core.Contents;
+@using Orchard.Core.Common.Models;
+
+@{
+    ContentItem contentItem = (ContentItem)Model.ContentItem;
+    BodyPart bodyPart = contentItem.As<BodyPart>();
+}
+
+
+@if (AuthorizedFor(Permissions.EditContent) && Model.ContentItem.Id > 0)
+{
+    using (Script.Foot())
+    {
+        <script type="text/javascript">
+            var bodyPart = new BodyPart( @contentItem.Id , '@bodyPart.Text');
+            myIEPageVM.bodyParts().push(bodyPart);            
+        </script>
+    };
+
+    <div class="inline-editing-content-control" data-bind="visible: editorMode">
+        <ul class="actions-controls">
+            <li><i class="icon-pencil icon-border" style="color:green;"></i></li>
+        </ul>
+    </div>
+
+    <div class="inline-editing-body-control">
+        <div class="mce_BodyPart_@contentItem.Id" id="mce_BodyPart_@contentItem.Id">
+            @Model.Html
+        </div>
+    </div>
+}
+else
+{
+    @Model.Html
+}

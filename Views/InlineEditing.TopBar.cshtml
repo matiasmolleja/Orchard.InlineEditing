@@ -1,0 +1,59 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Core.Contents;
+@*@using Orchard.Utility.Extensions;*@
+
+@{
+    ContentItem contentItem = (ContentItem)Model.ContentItem;
+    ContentPart cntPart = contentItem.As<ContentPart>();
+
+    var isEditorModeEnabledForThisSession = HttpContext.Current.Session["editorMode"];
+    if (isEditorModeEnabledForThisSession == null)
+    { isEditorModeEnabledForThisSession = false; }
+}
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        myIEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
+        myIEPageVM.saveDraftActionUrl = '@Url.Action("ChangeTextAjax", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+        myIEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+
+        $(document).ready(function () {
+            myIEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
+        });
+
+
+        $(document)
+          .ajaxStart(function () {
+              $("#icon-save").removeClass("icon-save");
+              $("#icon-save").addClass("icon-refresh icon-spin");
+          })
+          .ajaxStop(function () {
+              $("#icon-save").removeClass("icon-refresh icon-spin icon-large");
+              $("#icon-save").addClass("icon-save");
+          });
+    </script>
+}
+
+<div class="inline-editing-topbar">
+    <ul id="command-bar">
+        <li>
+            <a>@Html.ActionLink(T("Dashboard").ToString(), "Index", new { Area = "Dashboard", Controller = "Admin" }, new { @id = "dashboard-link" })</a>
+        </li>
+        <li>
+            <a href="#"
+               id="editorModeLink"
+               data-bind="click:toggleEditorMode , css: { topbaractivelink : editorMode}">
+                <i class="icon-pencil"></i> Editor Mode
+            </a>
+        </li>
+        <li>
+            <a href="#"
+               id="mmr-another-save-button"
+               data-bind="click: saveEditedPage , visible: editorMode">
+                <i id="icon-save" class="icon-save"></i>Save
+            </a>
+        </li>
+    </ul>
+</div>
+@*<pre data-bind="text: JSON.stringify(ko.toJS(myIEPageVM), null, 2)"></pre>*@
