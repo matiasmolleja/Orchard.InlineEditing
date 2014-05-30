@@ -1,11 +1,13 @@
 @using Orchard.ContentManagement;
 @using Orchard.Core.Contents;
 @using Orchard.Core.Title.Models;
+@using Newtonsoft.Json;
 
 @{
     ContentItem contentItem = (ContentItem)Model.ContentItem;
-    TitlePart tpart = contentItem.As<TitlePart>();
-}
+    TitlePart titlePart = contentItem.As<TitlePart>();
+    //string escapedContent = Newtonsoft.Json.JsonConvert.SerializeObject(titlePart.Title);    
+    }
 
 @{
     Layout.Title = Model.Title;
@@ -18,7 +20,7 @@
     using (Script.Foot())
     {
         <script type="text/javascript">
-            var titlePart = new TitlePart( @contentItem.Id , '@tpart.Title');
+            var titlePart = new TitlePart( @contentItem.Id , '@titlePart.Title');
             myIEPageVM.titleParts().push(titlePart);
         </script>
     };

@@ -36,7 +36,7 @@ using Orchard.Environment.Extensions;
 // Todo: warning when leaving the page with unsaved changes.
 // Todo: warning when switching off editorMode if unsaved changes.
 // Todo: new lines in body give error.
-
+// Todo: title parts and widget title parts should not have new lines. Or, if it can, it should escape invalid characters.
 namespace Mmr.InlineEditing.Controllers
 {
     [OrchardFeature("Mmr.InlineEditing")]
@@ -107,14 +107,14 @@ namespace Mmr.InlineEditing.Controllers
                     errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
 
                 
-                bodyPart.Text = clientBodyPart.bodyPartContents ;
+                bodyPart.Text = clientBodyPart.Contents ;
             }
 
             foreach (var clientTitlePart in updates.titleParts)
             {
                 int contentItemId = (int)clientTitlePart.contentItemId;
 
-                if (String.IsNullOrEmpty(clientTitlePart.titleContents))
+                if (String.IsNullOrEmpty(clientTitlePart.Contents))
                     errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
                 
                 var ci = _contentManager.Get((int)clientTitlePart.contentItemId);
@@ -127,7 +127,7 @@ namespace Mmr.InlineEditing.Controllers
                 if (titlePart == null)
                     errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
 
-                titlePart.Title =this.DecodeHtml( clientTitlePart.titleContents);
+                titlePart.Title = this.DecodeHtml(clientTitlePart.Contents);
 
              
             }
@@ -145,7 +145,7 @@ namespace Mmr.InlineEditing.Controllers
                 if (widgetTitlePart == null)
                     errors.Add(new ErrorInformation("error", "Widget Title Part can not be null", contentItemId, "WidgetTitlePart"));
 
-                widgetTitlePart.Title = clientWidgetTitlePart.titleContents;
+                widgetTitlePart.Title = clientWidgetTitlePart.Contents;
             }
 
             if (errors.Count>0)

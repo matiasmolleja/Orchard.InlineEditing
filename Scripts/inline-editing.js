@@ -1,16 +1,18 @@
 ﻿// MODEL PARTS
 function BodyPart(passedItemId, passedContents) {
     var self = this;
+    self.isDirty = false;
     self.contentItemId = passedItemId;
-    self.bodyPartContents = ko.observable(passedContents + ":" + self.contentItemId);
+    self.Contents = ko.observable(passedContents);
     self.isCurrentlyEditedItem = ko.observable(false);
 };
 
 
 function WidgetTitlePart(passedItemId, passedContents) {
-    var self = this;
+    var self = this;    
     self.contentItemId = passedItemId;
-    self.titleContents = ko.observable(  passedContents + ":" + self.contentItemId);
+    self.isDirty = false;
+    self.Contents = ko.observable(passedContents);
     self.isCurrentlyEditedItem = ko.observable(false);
 };
 
@@ -18,7 +20,8 @@ function WidgetTitlePart(passedItemId, passedContents) {
 function TitlePart(passedItemId, passedContents) {
     var self = this;
     self.contentItemId = passedItemId;
-    self.titleContents = ko.observable(passedContents + ":" + self.contentItemId);
+    self.isDirty = false;
+    self.Contents = ko.observable(passedContents);
     self.isCurrentlyEditedItem = ko.observable(false);
 };
 //todo: reference json2.js library for ko.toJSON to work on older browsers: http://knockoutjs.com/documentation/json-data.html
@@ -71,7 +74,7 @@ function TitlePart(passedItemId, passedContents) {
                 console.log('bodypart' + bp + ':' + bpItemId);
                 var idofcontrol = 'mce_BodyPart_' + bpItemId;
                 console.log(idofcontrol);
-                bp.bodyPartContents = tinyMCE.get(idofcontrol).getContent();
+                bp.Contents = tinyMCE.get(idofcontrol).getContent();
                 console.log(idofcontrol);
             }
 
@@ -79,8 +82,8 @@ function TitlePart(passedItemId, passedContents) {
                 var tp = self.titleParts()[i];
                 var tpItemId = tp.contentItemId;
                 var idofcontrol = 'mce_TitlePart_' + tpItemId;
-                console.log(idofcontrol);
-                tp.titleContents = tinyMCE.get(idofcontrol).getContent();
+                tp.Contents = tinyMCE.get(idofcontrol).getContent({ format: 'text' });
+                console.log(tp.titleContents);
                 console.log(idofcontrol);
             }
 
@@ -88,7 +91,7 @@ function TitlePart(passedItemId, passedContents) {
                 var wtp = self.widgetTitleParts()[i];
                 var wtpItemId = wtp.contentItemId;
                 console.log('widget title part ' + wtp + ':' + wtpItemId);
-                wtp.titleContents = tinyMCE.get('mce_WidgetTitlePart_' + wtpItemId).getContent();
+                wtp.Contents = tinyMCE.get('mce_WidgetTitlePart_' + wtpItemId).getContent({ format: 'text' });
             }
 
             

@@ -19,14 +19,14 @@ namespace Mmr.InlineEditing.ViewModels
     public class InlineEditingBodyPart
     {
         public int contentItemId { get; set; }
-        public string bodyPartContents { get; set; }
+        public string Contents { get; set; }
         public bool isCurrentlyEditedItem { get; set; }
     }
 
     public class InlineEditingTitlePart
     {
         public int contentItemId { get; set; }
-        public string titleContents { get; set; }
+        public string Contents { get; set; }
         public bool isCurrentlyEditedItem { get; set; }
 
     }
@@ -35,7 +35,7 @@ namespace Mmr.InlineEditing.ViewModels
     public class InlineEditingWidgetTitlePart
     {
         public int contentItemId { get; set; }
-        public string titleContents { get; set; }
+        public string Contents { get; set; }
         public bool isCurrentlyEditedItem { get; set; }
 
     }

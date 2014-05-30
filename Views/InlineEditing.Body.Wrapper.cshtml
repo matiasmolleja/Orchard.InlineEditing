@@ -1,10 +1,12 @@
 ﻿@using Orchard.ContentManagement;
 @using Orchard.Core.Contents;
 @using Orchard.Core.Common.Models;
+@using Newtonsoft.Json;
 
 @{
     ContentItem contentItem = (ContentItem)Model.ContentItem;
     BodyPart bodyPart = contentItem.As<BodyPart>();
+    string escapedContent = Newtonsoft.Json.JsonConvert.SerializeObject(bodyPart.Text);    
 }
 
 
@@ -13,11 +15,11 @@
     using (Script.Foot())
     {
         <script type="text/javascript">
-            var bodyPart = new BodyPart( @contentItem.Id , '@bodyPart.Text');
+            var bodyPart = new BodyPart( @contentItem.Id ,'@escapedContent');            
             myIEPageVM.bodyParts().push(bodyPart);            
         </script>
     };
-
+    
     <div class="inline-editing-content-control" data-bind="visible: editorMode">
         <ul class="actions-controls">
             <li><i class="icon-pencil icon-border" style="color:green;"></i></li>
