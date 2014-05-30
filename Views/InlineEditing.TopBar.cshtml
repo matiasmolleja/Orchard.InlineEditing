@@ -11,29 +11,39 @@
     { isEditorModeEnabledForThisSession = false; }
 }
 
-@using (Script.Foot())
-{
-    <script type="text/javascript">
-        myIEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
-        myIEPageVM.saveDraftActionUrl = '@Url.Action("ChangeTextAjax", "InlineEditing", new { area = "Mmr.InlineEditing" })';
-        myIEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
-
-        $(document).ready(function () {
-            myIEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
-        });
+@*@if (AuthorizedFor(Orchard.Core.Contents.Permissions.EditContent))
+{*@
 
 
-        $(document)
-          .ajaxStart(function () {
-              $("#icon-save").removeClass("icon-save");
-              $("#icon-save").addClass("icon-refresh icon-spin");
-          })
-          .ajaxStop(function () {
-              $("#icon-save").removeClass("icon-refresh icon-spin icon-large");
-              $("#icon-save").addClass("icon-save");
-          });
-    </script>
-}
+    @using (Script.Foot())
+    {
+        <script type="text/javascript">
+            //console.log(myVM.name);
+
+            myIEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
+            myIEPageVM.saveDraftActionUrl = '@Url.Action("ChangeTextAjax", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+            myIEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+
+            $(document).ready(function () {
+                myIEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
+            });
+
+
+            $(document)
+              .ajaxStart(function () {
+                  $("#icon-save").removeClass("icon-save");
+                  $("#icon-save").addClass("icon-refresh icon-spin");
+              })
+              .ajaxStop(function () {
+                  $("#icon-save").removeClass("icon-refresh icon-spin icon-large");
+                  $("#icon-save").addClass("icon-save");
+              });
+
+            //$(window).bind('beforeunload', function () {
+            //    return 'Are you sure you want to leave?';
+            //});
+        </script>
+    }
 
 <div class="inline-editing-topbar">
     <ul id="command-bar">
@@ -57,3 +67,4 @@
     </ul>
 </div>
 @*<pre data-bind="text: JSON.stringify(ko.toJS(myIEPageVM), null, 2)"></pre>*@
+@*}*@

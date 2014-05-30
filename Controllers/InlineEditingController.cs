@@ -37,6 +37,8 @@ using Orchard.Environment.Extensions;
 // Todo: warning when switching off editorMode if unsaved changes.
 // Todo: new lines in body give error.
 // Todo: title parts and widget title parts should not have new lines. Or, if it can, it should escape invalid characters.
+// Todo: check if we can delete DecodeHtml.
+// Todo: topbar is hiding title. See if we can apply some css to the body to move it down the height of the topbar. Or at least allow collapsing of topbar.
 namespace Mmr.InlineEditing.Controllers
 {
     [OrchardFeature("Mmr.InlineEditing")]

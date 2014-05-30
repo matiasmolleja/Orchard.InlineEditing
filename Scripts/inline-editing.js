@@ -1,4 +1,19 @@
-﻿// MODEL PARTS
+﻿//function simpleViewModel() {
+//    var self = this;
+//    self.name = "a name";
+//}
+
+//var myVM = new simpleViewModel();
+//ko.applyBindings(myVM);
+
+
+var myIEPageVM = new InlineEditingPageViewModel();
+// Activates knockout.js
+ko.applyBindings(myIEPageVM);
+
+
+
+// MODEL PARTS
 function BodyPart(passedItemId, passedContents) {
     var self = this;
     self.isDirty = false;
@@ -24,6 +39,7 @@ function TitlePart(passedItemId, passedContents) {
     self.Contents = ko.observable(passedContents);
     self.isCurrentlyEditedItem = ko.observable(false);
 };
+
 //todo: reference json2.js library for ko.toJSON to work on older browsers: http://knockoutjs.com/documentation/json-data.html
     function InlineEditingPageViewModel() {
         var self = this;
@@ -188,9 +204,8 @@ function TitlePart(passedItemId, passedContents) {
         }
     };
 
-var myIEPageVM = new InlineEditingPageViewModel();
-// Activates knockout.js
-ko.applyBindings(myIEPageVM);
+
+
 
 
 
