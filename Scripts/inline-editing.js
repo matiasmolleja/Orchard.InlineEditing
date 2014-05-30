@@ -28,7 +28,6 @@ function TitlePart(passedItemId, passedContents) {
     function InlineEditingPageViewModel() {
         var self = this;
         self.name = "a name";
-        self.editorsAlreadyLoaded = false;
         self.editorMode = ko.observable(false);
         self.CurrentlyEditedItemId = ko.observable(0);
         self.antiForgeryToken=null,
@@ -130,35 +129,14 @@ function TitlePart(passedItemId, passedContents) {
 
         self.editorMode.subscribe(function (newValue) {
 
-            console.log("Editor mode is: " + newValue);
-
-            if ((newValue == true) && (self.editorsAlreadyLoaded == false)) {
-
-                console.log("initializing editors");
-                console.log("bodyparts length: " + self.bodyParts().length);
-                for (var i = 0; i < self.bodyParts().length; i++) {
-                    console.log("initializing editors for bodyparts");
-                    var itemId = self.bodyParts()[i].contentItemId;
-                    buildEditorForHtmlField(itemId, "BodyPart");
-                    console.log("initializing editors for bodyparts");
-
-                };
-                console.log("title parts length: " + self.titleParts().length);
-                for (var i = 0; i < self.titleParts().length; i++) {
-                    
-                    var itemId = self.titleParts()[i].contentItemId;
-                    buildEditorForTextField(itemId, "TitlePart");
-                    console.log("initializing editors for titlepars");
-                };
-                console.log("widgettitle parts length: " + self.widgetTitleParts().length);
-                for (var i = 0; i < self.widgetTitleParts().length; i++) {
-                    var itemId = self.widgetTitleParts()[i].contentItemId;
-                    buildEditorForTextField(itemId, "WidgetTitlePart");
-                    console.log("initializing editors for widgetTitleParts");
-                };
-
-
+            if (newValue == true) {
+                self.addEditors();
             }
+            else
+            {
+                self.removeEditors();
+            }
+
             //update session with editor mode. todo: check if it is better using cookies.
             $.ajax({
                 type: "POST",
@@ -188,6 +166,27 @@ function TitlePart(passedItemId, passedContents) {
 
         });
 
+        self.addEditors = function () {
+            
+                for (var i = 0; i < self.bodyParts().length; i++) {
+                    var itemId = self.bodyParts()[i].contentItemId;
+                    buildEditorForHtmlField(itemId, "BodyPart");
+                };
+                
+                for (var i = 0; i < self.titleParts().length; i++) {
+                    var itemId = self.titleParts()[i].contentItemId;
+                    buildEditorForTextField(itemId, "TitlePart");                    
+                };
+                
+                for (var i = 0; i < self.widgetTitleParts().length; i++) {
+                    var itemId = self.widgetTitleParts()[i].contentItemId;
+                    buildEditorForTextField(itemId, "WidgetTitlePart");                    
+                };          
+
+        }
+        self.removeEditors = function () {
+            tinymce.remove();
+        }
     };
 
 var myIEPageVM = new InlineEditingPageViewModel();
