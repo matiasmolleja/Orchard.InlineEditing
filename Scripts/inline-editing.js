@@ -27,7 +27,6 @@ function TitlePart(passedItemId, passedContents) {
 //todo: reference json2.js library for ko.toJSON to work on older browsers: http://knockoutjs.com/documentation/json-data.html
     function InlineEditingPageViewModel() {
         var self = this;
-        self.name = "a name";
         self.editorMode = ko.observable(false);
         self.CurrentlyEditedItemId = ko.observable(0);
         self.antiForgeryToken=null,

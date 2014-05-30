@@ -8,8 +8,6 @@ namespace Mmr.InlineEditing.ViewModels
     public class InlineUpdatesViewModel
     {
         public bool EditorMode { get; set; }
-        //public bool editorsAlreadyLoaded { get; set; }
-        public string name { get; set; }
         public IEnumerable<InlineEditingBodyPart>  bodyParts { get; set; }
         public IEnumerable<InlineEditingTitlePart> titleParts{ get; set; }
         public IEnumerable<InlineEditingWidgetTitlePart> widgetTitleParts { get; set; }
