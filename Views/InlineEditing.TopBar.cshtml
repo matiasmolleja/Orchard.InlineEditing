@@ -39,9 +39,12 @@
                   $("#icon-save").addClass("icon-save");
               });
 
-            //$(window).bind('beforeunload', function () {
-            //    return 'Are you sure you want to leave?';
-            //});
+            $(window).bind('beforeunload', function () {
+                if (myIEPageVM.isDirty()) {
+                    return 'You have unsaved changes.Are you sure you want to leave?';
+                }
+                
+            });
         </script>
     }
 
@@ -64,7 +67,20 @@
                 <i id="icon-save" class="icon-save"></i>Save
             </a>
         </li>
+        <li>
+            <a href="#" data-bind="click: makeDirty">Make dirty</a>
+        </li>
+        <li>
+            <a href="#" data-bind="click: makeClean">Make clean</a>
+        </li>
+        <li>
+            <span>IsDirty: </span><span data-bind="text: isDirty">..</span>
+        </li>
+        <li>
+            <span>DirtyParts.length: </span><span data-bind="text: dirtyParts().length">......</span>
+        </li>
+
     </ul>
 </div>
-@*<pre data-bind="text: JSON.stringify(ko.toJS(myIEPageVM), null, 2)"></pre>*@
+<pre data-bind="text: JSON.stringify(ko.toJS(myIEPageVM), null, 2)"></pre>
 @*}*@

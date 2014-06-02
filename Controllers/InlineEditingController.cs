@@ -96,59 +96,59 @@ namespace Mmr.InlineEditing.Controllers
             }
 
 
-            foreach (var clientBodyPart in updates.bodyParts)
-            {
-                int contentItemId = (int)clientBodyPart.contentItemId;
-                var ci = _contentManager.Get(contentItemId);
-                if (ci == null)
-                    errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
+            //foreach (var clientBodyPart in updates.bodyParts)
+            //{
+            //    int contentItemId = (int)clientBodyPart.contentItemId;
+            //    var ci = _contentManager.Get(contentItemId);
+            //    if (ci == null)
+            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
 
-                var bodyPart = ci.As<BodyPart>();
+            //    var bodyPart = ci.As<BodyPart>();
 
-                if (bodyPart == null)
-                    errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
+            //    if (bodyPart == null)
+            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
 
                 
-                bodyPart.Text = clientBodyPart.Contents ;
-            }
+            //    bodyPart.Text = clientBodyPart.Contents ;
+            //}
 
-            foreach (var clientTitlePart in updates.titleParts)
-            {
-                int contentItemId = (int)clientTitlePart.contentItemId;
+            //foreach (var clientTitlePart in updates.titleParts)
+            //{
+            //    int contentItemId = (int)clientTitlePart.contentItemId;
 
-                if (String.IsNullOrEmpty(clientTitlePart.Contents))
-                    errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
+            //    if (String.IsNullOrEmpty(clientTitlePart.Contents))
+            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
                 
-                var ci = _contentManager.Get((int)clientTitlePart.contentItemId);
+            //    var ci = _contentManager.Get((int)clientTitlePart.contentItemId);
 
-                if (ci == null)
-                    errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
+            //    if (ci == null)
+            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
 
-                var titlePart = ci.As<TitlePart>();
+            //    var titlePart = ci.As<TitlePart>();
 
-                if (titlePart == null)
-                    errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
+            //    if (titlePart == null)
+            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
 
-                titlePart.Title = this.DecodeHtml(clientTitlePart.Contents);
+            //    titlePart.Title = this.DecodeHtml(clientTitlePart.Contents);
 
              
-            }
+            //}
 
-            foreach (var clientWidgetTitlePart in updates.widgetTitleParts)
-            {
-                var contentItemId = (int)clientWidgetTitlePart.contentItemId;
-                var ci = _contentManager.Get(contentItemId);
+            //foreach (var clientWidgetTitlePart in updates.widgetTitleParts)
+            //{
+            //    var contentItemId = (int)clientWidgetTitlePart.contentItemId;
+            //    var ci = _contentManager.Get(contentItemId);
 
-                if (ci == null)
-                    errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "WidgetTitlePart"));
+            //    if (ci == null)
+            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "WidgetTitlePart"));
 
-                var widgetTitlePart = ci.As<WidgetPart>();
+            //    var widgetTitlePart = ci.As<WidgetPart>();
 
-                if (widgetTitlePart == null)
-                    errors.Add(new ErrorInformation("error", "Widget Title Part can not be null", contentItemId, "WidgetTitlePart"));
+            //    if (widgetTitlePart == null)
+            //        errors.Add(new ErrorInformation("error", "Widget Title Part can not be null", contentItemId, "WidgetTitlePart"));
 
-                widgetTitlePart.Title = clientWidgetTitlePart.Contents;
-            }
+            //    widgetTitlePart.Title = clientWidgetTitlePart.Contents;
+            //}
 
             if (errors.Count>0)
             {

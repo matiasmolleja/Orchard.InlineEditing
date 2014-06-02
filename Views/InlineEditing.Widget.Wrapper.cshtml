@@ -21,8 +21,8 @@
                 using (Script.Foot())
                 {
                     <script type="text/javascript">
-                        var widgetTitlePart = new WidgetTitlePart( @contentItem.Id , '@widgetPart.Title');
-                        myIEPageVM.widgetTitleParts().push(widgetTitlePart);
+                        var wt =  giveMeAWidgetTitlePart(@contentItem.Id, '@widgetPart.Title', 'widgetTitlePart');
+                        myIEPageVM.parts().push(wt);
                     </script>
                 };
 

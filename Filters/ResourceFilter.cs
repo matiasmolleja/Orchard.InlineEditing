@@ -63,6 +63,7 @@ namespace Mmr.InlineEditing.Filters
             
             _resourceManager.Require("script", "Mmr.InlineEditing.Knockout-2.3.0").AtFoot();
             _resourceManager.Require("script", "Mmr.InlineEditing.Tiny").AtFoot();
+            _resourceManager.Require("script", "Mmr.InlineEditing.PartsFactory").AtFoot();
             _resourceManager.Require("script", "Mmr.InlineEditing.InlineEditing").AtFoot();
 
             //_resourceManager.Include("style", "Mmr.InlineEditing.Style").AtHead();

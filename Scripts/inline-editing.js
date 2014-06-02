@@ -1,54 +1,17 @@
-﻿//function simpleViewModel() {
-//    var self = this;
-//    self.name = "a name";
-//}
-
-//var myVM = new simpleViewModel();
-//ko.applyBindings(myVM);
-
-
-var myIEPageVM = new InlineEditingPageViewModel();
-// Activates knockout.js
-ko.applyBindings(myIEPageVM);
-
-
-
-// MODEL PARTS
-function BodyPart(passedItemId, passedContents) {
-    var self = this;
-    self.isDirty = false;
-    self.contentItemId = passedItemId;
-    self.Contents = ko.observable(passedContents);
-    self.isCurrentlyEditedItem = ko.observable(false);
-};
-
-
-function WidgetTitlePart(passedItemId, passedContents) {
-    var self = this;    
-    self.contentItemId = passedItemId;
-    self.isDirty = false;
-    self.Contents = ko.observable(passedContents);
-    self.isCurrentlyEditedItem = ko.observable(false);
-};
-
-
-function TitlePart(passedItemId, passedContents) {
-    var self = this;
-    self.contentItemId = passedItemId;
-    self.isDirty = false;
-    self.Contents = ko.observable(passedContents);
-    self.isCurrentlyEditedItem = ko.observable(false);
-};
-
-//todo: reference json2.js library for ko.toJSON to work on older browsers: http://knockoutjs.com/documentation/json-data.html
+﻿//todo: reference json2.js library for ko.toJSON to work on older browsers: http://knockoutjs.com/documentation/json-data.html
     function InlineEditingPageViewModel() {
         var self = this;
         self.editorMode = ko.observable(false);
         self.CurrentlyEditedItemId = ko.observable(0);
-        self.antiForgeryToken=null,
-        self.bodyParts = ko.observableArray([]);
-        self.widgetTitleParts = ko.observableArray([]);
-        self.titleParts = ko.observableArray([]);
+        self.antiForgeryToken = null;
+
+        self.parts = ko.observableArray([]);
+
+        self.dirtyParts = ko.observableArray([]);
+        self.isDirty = ko.computed(function () {
+            return self.dirtyParts().length > 0;
+        });
+
         self.updateSessionValuesUrl;
         self.saveDraftActionUrl;
 
@@ -60,60 +23,20 @@ function TitlePart(passedItemId, passedContents) {
             return (self.editorMode()); // && (self.contentsPart().isCurrentlyEditedItem());
         });
 
-        self.toggleEditorMode = function () {
-            
+        self.toggleEditorMode = function () {            
             var newValue = false;
             if (self.editorMode() == false) {
                 newValue = true;
             }
             self.editorMode(newValue);
-            
-            
         };
-        // Operations
 
-        //self.cancelContentPartEditing = function () {
-        //    self.contentsPart().isCurrentlyEditedItem(false);
-        //};
 
         
         self.saveEditedPage = function () {
             console.log('trying to save the contents' + self.antiForgeryToken);
             //var folderPath = $(this).data('media-path');
             console.log( 'version : ' + tinyMCE.majorVersion);// + '.' + tinymce.minorVersion;
-
-            for (var i = 0; i < self.bodyParts().length; i++) {
-                var bp = self.bodyParts()[i];
-                var bpItemId = bp.contentItemId;
-                console.log('bodypart' + bp + ':' + bpItemId);
-                var idofcontrol = 'mce_BodyPart_' + bpItemId;
-                console.log(idofcontrol);
-                bp.Contents = tinyMCE.get(idofcontrol).getContent();
-                console.log(idofcontrol);
-            }
-
-            for (var i = 0; i < self.titleParts().length; i++) {
-                var tp = self.titleParts()[i];
-                var tpItemId = tp.contentItemId;
-                var idofcontrol = 'mce_TitlePart_' + tpItemId;
-                tp.Contents = tinyMCE.get(idofcontrol).getContent({ format: 'text' });
-                console.log(tp.titleContents);
-                console.log(idofcontrol);
-            }
-
-            for (var i = 0; i < self.widgetTitleParts().length; i++) {
-                var wtp = self.widgetTitleParts()[i];
-                var wtpItemId = wtp.contentItemId;
-                console.log('widget title part ' + wtp + ':' + wtpItemId);
-                wtp.Contents = tinyMCE.get('mce_WidgetTitlePart_' + wtpItemId).getContent({ format: 'text' });
-            }
-
-            
-
-            //var mceContents = $("#mce_bodyPart_12").getContent();
-            //var retrievedMceContents = tinyMCE.get('mce_bodyPart_' + contentsContentItemId).getContent();
-            
-            //console.log("retrieved with id dinamic: " + retrievedMceContents);
 
             $.ajax({
                 type: "POST",
@@ -128,7 +51,12 @@ function TitlePart(passedItemId, passedContents) {
                 if (result) {
                     var notification = result; // JSON.parse(result.responseText);
                     Notify(notification.MsgType, notification.Message);
+                    // reset everypart: content equals to initial content.
+                    self.setInitialContentsEqualToContents();
+                    //self.dirtyParts().removeAll();
                     console.log(notification.Message);
+
+                    
 
                 } else {                    
                     Notify('error', 'There was an error: nothing returned from the server.')
@@ -147,10 +75,10 @@ function TitlePart(passedItemId, passedContents) {
             if (newValue == true) {
                 self.addEditors();
             }
-            else
-            {
+            else {
                 self.removeEditors();
             }
+
 
             //update session with editor mode. todo: check if it is better using cookies.
             $.ajax({
@@ -181,31 +109,58 @@ function TitlePart(passedItemId, passedContents) {
 
         });
 
+        // todo: the logic for creating an editor should reside on a function inside each part.(open to extension closed to modif).
         self.addEditors = function () {
-            
-                for (var i = 0; i < self.bodyParts().length; i++) {
-                    var itemId = self.bodyParts()[i].contentItemId;
-                    buildEditorForHtmlField(itemId, "BodyPart");
-                };
-                
-                for (var i = 0; i < self.titleParts().length; i++) {
-                    var itemId = self.titleParts()[i].contentItemId;
-                    buildEditorForTextField(itemId, "TitlePart");                    
-                };
-                
-                for (var i = 0; i < self.widgetTitleParts().length; i++) {
-                    var itemId = self.widgetTitleParts()[i].contentItemId;
-                    buildEditorForTextField(itemId, "WidgetTitlePart");                    
-                };          
+            console.log('adding editors');
+            ko.utils.arrayForEach(self.parts(), function (item) {                
+                item.addEditor();                
+            });                     
 
-        }
+        };
         self.removeEditors = function () {
             tinymce.remove();
+        };
+
+        self.setInitialContentsEqualToContents = function () {
+            console.log('setInitialContentsEqualToContents');
+            //for (var i = 0; i < myIEPageVM.bodyParts().length; i++) {
+            //    var p = myIEPageVM.bodyParts()[i];
+            //    var v = p.Contents;
+            //    p.initialContents(v);
+            //}
+
+            //for (var i = 0; i < myIEPageVM.titleParts().length; i++) {
+            //    var p = myIEPageVM.titleParts()[i];
+            //    var v = p.Contents;
+            //    p.initialContents(v);
+            //}
+
+            //for (var i = 0; i < myIEPageVM.widgetTitleParts().length; i++) {
+            //    var p = myIEPageVM.widgetTitleParts()[i];
+            //    var v = p.Contents;
+            //    p.initialContents(v);
+            //}
+        }
+        // todo: Delete make dirty and make clean
+        self.makeDirty = function () {
+            //console.log(self.bodyParts()[0].contentItemId);
+            //console.log('before:' + self.bodyParts()[0].Contents());
+            //self.bodyParts()[0].Contents('tralari');
+            //self.bodyParts()[0].InitialContents('lerele');
+            //console.log('after- Contents:' + self.bodyParts()[0].Contents() + ' - Inintial Contents: ' + self.bodyParts()[0].InitialContents());
+            
+        };
+        self.makeClean = function () {
+            //var initial = self.bodyParts()[0].InitialContents();
+            //self.bodyParts()[0].Contents(initial);
+            //console.log('cleaned up');
         }
     };
 
 
-
+var myIEPageVM = new InlineEditingPageViewModel();
+// Activates knockout.js
+ko.applyBindings(myIEPageVM);
 
 
 

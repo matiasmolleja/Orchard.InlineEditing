@@ -15,8 +15,9 @@
     using (Script.Foot())
     {
         <script type="text/javascript">
-            var bodyPart = new BodyPart( @contentItem.Id ,'@escapedContent');            
-            myIEPageVM.bodyParts().push(bodyPart);            
+    console.log('at the time of adding this is dirtyparts:' + myIEPageVM.dirtyParts().length);
+            var bp =  giveMeABodyPart(@contentItem.Id, '@escapedContent', 'bodyPart');
+            myIEPageVM.parts().push(bp);
         </script>
     };
     

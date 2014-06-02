@@ -16,6 +16,10 @@ namespace Mmr.InlineEditing
                 .DefineScript("Mmr.InlineEditing.InlineEditing")
                 .SetUrl("inline-editing.js")
                 .SetDependencies("jQuery");
+            manifest
+                .DefineScript("Mmr.InlineEditing.PartsFactory")
+                .SetUrl("inline-editing-parts-factory.js")
+                .SetDependencies("jQuery");
 
 
             // TinyMce 4.0.26 init and styles.

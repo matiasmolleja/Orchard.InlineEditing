@@ -20,8 +20,8 @@
     using (Script.Foot())
     {
         <script type="text/javascript">
-            var titlePart = new TitlePart( @contentItem.Id , '@titlePart.Title');
-            myIEPageVM.titleParts().push(titlePart);
+            var tp =  giveMeATitlePart(@contentItem.Id, '@titlePart.Title', 'titlePart');
+            myIEPageVM.parts().push(tp);
         </script>
     };
 
