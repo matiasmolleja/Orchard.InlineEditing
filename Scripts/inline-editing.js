@@ -6,19 +6,12 @@
         self.antiForgeryToken = null;
         
         self.parts = ko.observableArray([]);
-        self.dirtyness = new giveMeADirtynessIndicator();
 
         //self.aGivenPart = ko.computed giveMeABodyPart(56, 'passedContents', 'passedPartType');
         self.myPart = ko.computed(function (data) {
             console.log('computing' + data);
             return ko.observable('my computed' + data );
         });
-
-        //function (data) {
-           
-        //    console.log(data);
-        //    return ko.observable('ksdkjhkfs');
-        //}
 
         self.dirtyParts = ko.observableArray([]);
         self.isDirty = new ko.computed(function () {
@@ -67,7 +60,7 @@
                     console.log('saved ok:' + notification.ErrorType + ':' + notification.ErrorMessage);
                     Notify(notification.ErrorType, notification.ErrorMessage);
                     // reset everypart: content equals to initial content.
-                    self.setInitialContentsEqualToContents();
+                    self.cleanAfterSaving();
                     //self.dirtyParts().removeAll();
                     console.log(notification.Message);
 
@@ -136,45 +129,27 @@
             tinymce.remove();
         };
 
-        self.setInitialContentsEqualToContents = function () {
-            console.log('setInitialContentsEqualToContents');
-            //for (var i = 0; i < myIEPageVM.bodyParts().length; i++) {
-            //    var p = myIEPageVM.bodyParts()[i];
-            //    var v = p.Contents;
-            //    p.initialContents(v);
-            //}
+        self.cleanAfterSaving = function () {
+            console.log('cleaning by saving');
+            ko.utils.arrayForEach(self.parts(), function (item) {
+                item.cleanAfterSaving();
+            });
 
-            //for (var i = 0; i < myIEPageVM.titleParts().length; i++) {
-            //    var p = myIEPageVM.titleParts()[i];
-            //    var v = p.Contents;
-            //    p.initialContents(v);
-            //}
+            self.dirtyParts([]);
 
-            //for (var i = 0; i < myIEPageVM.widgetTitleParts().length; i++) {
-            //    var p = myIEPageVM.widgetTitleParts()[i];
-            //    var v = p.Contents;
-            //    p.initialContents(v);
-            //}
         }
-        // todo: Delete make dirty and make clean
-        self.makeDirty = function () {
-        };
-        self.makeClean = function () {
-        };
-        self.aMsg = ko.observable('hola');
+
+
+        // Utility functions 
         self.partFromId = function (data) {
             if (self.parts()[0] == undefined) {
-                return 'unde';
+                return 'null';
             }
-            else {
-                //return self.parts()[0].isDirty();
+            else {                
                 return ko.utils.arrayFirst(self.parts(), function (item) {
-                    //console.log('pregunto is data: ' + data + ' equals to item.contentitemid:'  + item.contentItemId  );
                     return data === item.contentItemId;
                 });
             }
-
-            
         };
     };
 

@@ -23,6 +23,9 @@
         }
         myIEPageVM.dirtyParts.valueHasMutated();
     });
+    self.cleanAfterSaving = function () {
+        self.InitialContents = self.Contents;
+    }
 };
 
 function giveMeABodyPart(passedItemId, passedContents, passedPartType) {
@@ -58,10 +61,3 @@ function giveMeAWidgetTitlePart(passedItemId, passedContents, passedPartType) {
 
     return clientPart;
 };
-
-var giveMeADirtynessIndicator = function ()
-{    var self = this;
-    self.name = ko.observable('dirtyname');
-    self.shouldShow = ko.observable(true);
-    return self;
-}

@@ -11,10 +11,6 @@
     { isEditorModeEnabledForThisSession = false; }
 }
 
-@*@if (AuthorizedFor(Orchard.Core.Contents.Permissions.EditContent))
-{*@
-
-
     @using (Script.Foot())
     {
         <script type="text/javascript">
@@ -68,12 +64,6 @@
             </a>
         </li>
         <li>
-            <a href="#" data-bind="click: makeDirty">Make dirty</a>
-        </li>
-        <li>
-            <a href="#" data-bind="click: makeClean">Make clean</a>
-        </li>
-        <li>
             <span>IsDirty: </span><span data-bind="text: isDirty">..</span>
         </li>
         <li>
@@ -82,5 +72,4 @@
 
     </ul>
 </div>
-<pre data-bind="text: JSON.stringify(ko.toJS(myIEPageVM), null, 2)"></pre>
-@*}*@
+@*<pre data-bind="text: JSON.stringify(ko.toJS(myIEPageVM), null, 2)"></pre>*@
