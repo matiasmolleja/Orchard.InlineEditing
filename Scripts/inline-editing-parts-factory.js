@@ -58,3 +58,10 @@ function giveMeAWidgetTitlePart(passedItemId, passedContents, passedPartType) {
 
     return clientPart;
 };
+
+var giveMeADirtynessIndicator = function ()
+{    var self = this;
+    self.name = ko.observable('dirtyname');
+    self.shouldShow = ko.observable(true);
+    return self;
+}

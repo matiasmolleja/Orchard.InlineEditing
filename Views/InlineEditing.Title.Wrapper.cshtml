@@ -27,7 +27,15 @@
 
     <div class="inline-editing-content-control" data-bind="visible: editorMode">
         <ul class="actions-controls">
-            <li><i class="icon-pencil icon-border" style="color:green;"></i></li>
+            <li>
+                <i class="icon-pencil icon-border"
+                   data-bind="css: { iconeditdirty : partFromId(@contentItem.Id).isDirty }">
+                </i>
+            </li>
+            <li>
+                @Html.ItemEditLinkWithReturnUrl(T("Dashboard").Text, (ContentItem)Model.ContentItem)
+            </li>
+
         </ul>
     </div>
 

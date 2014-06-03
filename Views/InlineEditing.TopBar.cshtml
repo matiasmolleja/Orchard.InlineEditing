@@ -18,14 +18,14 @@
     @using (Script.Foot())
     {
         <script type="text/javascript">
-            //console.log(myVM.name);
-
+            
             myIEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
             myIEPageVM.saveDraftActionUrl = '@Url.Action("ChangeTextAjax", "InlineEditing", new { area = "Mmr.InlineEditing" })';
             myIEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
 
             $(document).ready(function () {
                 myIEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
+                myIEPageVM.parts.valueHasMutated();
             });
 
 

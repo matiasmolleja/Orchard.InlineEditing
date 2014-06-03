@@ -4,11 +4,24 @@
         self.editorMode = ko.observable(false);
         self.CurrentlyEditedItemId = ko.observable(0);
         self.antiForgeryToken = null;
-
+        
         self.parts = ko.observableArray([]);
+        self.dirtyness = new giveMeADirtynessIndicator();
+
+        //self.aGivenPart = ko.computed giveMeABodyPart(56, 'passedContents', 'passedPartType');
+        self.myPart = ko.computed(function (data) {
+            console.log('computing' + data);
+            return ko.observable('my computed' + data );
+        });
+
+        //function (data) {
+           
+        //    console.log(data);
+        //    return ko.observable('ksdkjhkfs');
+        //}
 
         self.dirtyParts = ko.observableArray([]);
-        self.isDirty = ko.computed(function () {
+        self.isDirty = new ko.computed(function () {
             return self.dirtyParts().length > 0;
         });
 
@@ -145,18 +158,24 @@
         }
         // todo: Delete make dirty and make clean
         self.makeDirty = function () {
-            //console.log(self.bodyParts()[0].contentItemId);
-            //console.log('before:' + self.bodyParts()[0].Contents());
-            //self.bodyParts()[0].Contents('tralari');
-            //self.bodyParts()[0].InitialContents('lerele');
-            //console.log('after- Contents:' + self.bodyParts()[0].Contents() + ' - Inintial Contents: ' + self.bodyParts()[0].InitialContents());
-            
         };
         self.makeClean = function () {
-            //var initial = self.bodyParts()[0].InitialContents();
-            //self.bodyParts()[0].Contents(initial);
-            //console.log('cleaned up');
-        }
+        };
+        self.aMsg = ko.observable('hola');
+        self.partFromId = function (data) {
+            if (self.parts()[0] == undefined) {
+                return 'unde';
+            }
+            else {
+                //return self.parts()[0].isDirty();
+                return ko.utils.arrayFirst(self.parts(), function (item) {
+                    //console.log('pregunto is data: ' + data + ' equals to item.contentitemid:'  + item.contentItemId  );
+                    return data === item.contentItemId;
+                });
+            }
+
+            
+        };
     };
 
 

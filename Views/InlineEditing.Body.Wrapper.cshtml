@@ -15,17 +15,28 @@
     using (Script.Foot())
     {
         <script type="text/javascript">
-    console.log('at the time of adding this is dirtyparts:' + myIEPageVM.dirtyParts().length);
-    var bp =  giveMeABodyPart(@contentItem.Id, '@escapedContent', 'bodyPart');
-            
+            console.log('at the time of adding this is dirtyparts:' + myIEPageVM.dirtyParts().length);
+            var bp =  giveMeABodyPart(@contentItem.Id, '@escapedContent', 'bodyPart');
             myIEPageVM.parts().push(bp);
+            console.log('bodywarpper' + myIEPageVM.parts().length);
+
         </script>
     };
     
+    @*<p  data-bind="text: function(data) { myPart('@contentItem.Id',data)}">dd</p>*@
+    <p data-bind="text: partFromId(@contentItem.Id).contentItemId ">dd</p>
+
     <div class="inline-editing-content-control" data-bind="visible: editorMode">
-        <ul class="actions-controls" data-bind="with : myIEPageVM.parts[0]">
-            <li><i class="icon-pencil icon-border" style="color:green;"></i></li>
-            <li><p data-bind="visible: isDirty">...</p></li>
+        <ul class="actions-controls">
+            <li>
+                <i class="icon-pencil icon-border"
+                   data-bind="css: { iconeditdirty : partFromId(@contentItem.Id).isDirty }">
+                </i>
+            </li>
+            <li>
+                @Html.ItemEditLinkWithReturnUrl(T("Dashboard").Text, (ContentItem)Model.ContentItem)
+            </li>
+
         </ul>
     </div>
 

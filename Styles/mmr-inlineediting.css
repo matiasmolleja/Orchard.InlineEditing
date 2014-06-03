@@ -134,3 +134,9 @@ a.inline-editing-pen-icon:hover, a.inline-editing-pen-icon:active {
 }
 
 
+.iconeditclean {
+    color: #343434;
+}
+.iconeditdirty{
+    color: #f15100;
+}
