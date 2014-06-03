@@ -2,12 +2,7 @@
     var self = this;
     self.partType = ko.observable(passedPartType);
     self.contentItemId = passedItemId;
-    self.Contents = ko.observable(passedContents);
-
-    //self.addEditor = function () {
-    //    console.log('you should add an editor in the concrete part.');
-    //};
-
+    self.Contents = ko.observable(passedContents);    
     self.InitialContents = ko.observable(passedContents);
     self.isDirty = ko.computed(function () {
         var newval = (self.Contents() !== self.InitialContents())

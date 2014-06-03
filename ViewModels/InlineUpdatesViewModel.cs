@@ -9,14 +9,16 @@ namespace Mmr.InlineEditing.ViewModels
     {
         public bool EditorMode { get; set; }
         public IEnumerable<InlineEditingPart> parts { get; set; }
+        public IEnumerable<InlineEditingPart> dirtyParts { get; set; }
 
     }
 
     public class InlineEditingPart
     {
         public int contentItemId { get; set;  }
-        public int Contents { get; set; }
-        public int editorContents { get; set; }
+        public string Contents { get; set; }
+        public string PartType { get; set; }
+        
     }
     public class InlineEditingBodyPart
     {

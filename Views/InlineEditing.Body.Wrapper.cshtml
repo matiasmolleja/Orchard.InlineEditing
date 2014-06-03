@@ -16,14 +16,16 @@
     {
         <script type="text/javascript">
     console.log('at the time of adding this is dirtyparts:' + myIEPageVM.dirtyParts().length);
-            var bp =  giveMeABodyPart(@contentItem.Id, '@escapedContent', 'bodyPart');
+    var bp =  giveMeABodyPart(@contentItem.Id, '@escapedContent', 'bodyPart');
+            
             myIEPageVM.parts().push(bp);
         </script>
     };
     
     <div class="inline-editing-content-control" data-bind="visible: editorMode">
-        <ul class="actions-controls">
+        <ul class="actions-controls" data-bind="with : myIEPageVM.parts[0]">
             <li><i class="icon-pencil icon-border" style="color:green;"></i></li>
+            <li><p data-bind="visible: isDirty">...</p></li>
         </ul>
     </div>
 

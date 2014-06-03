@@ -49,8 +49,10 @@
                 },
             }).done(function (result) {
                 if (result) {
+                    
                     var notification = result; // JSON.parse(result.responseText);
-                    Notify(notification.MsgType, notification.Message);
+                    console.log('saved ok:' + notification.ErrorType + ':' + notification.ErrorMessage);
+                    Notify(notification.ErrorType, notification.ErrorMessage);
                     // reset everypart: content equals to initial content.
                     self.setInitialContentsEqualToContents();
                     //self.dirtyParts().removeAll();
@@ -165,7 +167,7 @@ ko.applyBindings(myIEPageVM);
 
 
 var Notify = function (MsgType, Message) {
-
+    console.log('notifiying...' + MsgType + ':' + Message);
     if (MsgType== 'error') {
         toastr.error(Message);
     }
@@ -173,7 +175,8 @@ var Notify = function (MsgType, Message) {
         toastr.warning(Message);
     }
     else if(MsgType == 'success')
-    {        
+    {
+        console.log('showing toastr');
         toastr.success(Message);
     }
     else {

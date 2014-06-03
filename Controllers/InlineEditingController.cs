@@ -39,6 +39,7 @@ using Orchard.Environment.Extensions;
 // Todo: title parts and widget title parts should not have new lines. Or, if it can, it should escape invalid characters.
 // Todo: check if we can delete DecodeHtml.
 // Todo: topbar is hiding title. See if we can apply some css to the body to move it down the height of the topbar. Or at least allow collapsing of topbar.
+// Todo: upload only dirty parts. Not the full viewmodel.
 namespace Mmr.InlineEditing.Controllers
 {
     [OrchardFeature("Mmr.InlineEditing")]
@@ -91,64 +92,53 @@ namespace Mmr.InlineEditing.Controllers
             if (updates==null)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                var errorClientNotification = new { MsgType = "error", Message = "te informo que las cagao." }; //info-warning-error
+                var errorClientNotification = new { MsgType = "error", Message = T("The updates are not valid.") }; //success-info-warning-error
                 return Json(errorClientNotification);
             }
 
+            
 
-            //foreach (var clientBodyPart in updates.bodyParts)
-            //{
-            //    int contentItemId = (int)clientBodyPart.contentItemId;
-            //    var ci = _contentManager.Get(contentItemId);
-            //    if (ci == null)
-            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
+            foreach (var clientPart in updates.dirtyParts)
+            {
+                int contentItemId = (int)clientPart.contentItemId;
+                var ci = _contentManager.Get(contentItemId);
+                if (ci == null)
+                    errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
 
-            //    var bodyPart = ci.As<BodyPart>();
+                if (clientPart.PartType.ToLower()== "bodypart")
+                {
 
-            //    if (bodyPart == null)
-            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
+                    var part = ci.As<BodyPart>();
 
+                    if (part == null)
+                        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
+
+
+                    part.Text = clientPart.Contents;
+
+                }
+                else if (clientPart.PartType.ToLower() == "titlepart")
+                {
+                    var part = ci.As<TitlePart>();
+
+                    if (part == null)
+                        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "TitlePart"));
+
+
+                    part.Title = clientPart.Contents;
+                }
+                else if (clientPart.PartType.ToLower() == "widgettitlepart")
+                {
+                    var part = ci.As<WidgetPart>();
+
+                    if (part == null)
+                        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "WidgetTitlePart"));
+
+
+                    part.Title = clientPart.Contents;
+                }
                 
-            //    bodyPart.Text = clientBodyPart.Contents ;
-            //}
-
-            //foreach (var clientTitlePart in updates.titleParts)
-            //{
-            //    int contentItemId = (int)clientTitlePart.contentItemId;
-
-            //    if (String.IsNullOrEmpty(clientTitlePart.Contents))
-            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
-                
-            //    var ci = _contentManager.Get((int)clientTitlePart.contentItemId);
-
-            //    if (ci == null)
-            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
-
-            //    var titlePart = ci.As<TitlePart>();
-
-            //    if (titlePart == null)
-            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
-
-            //    titlePart.Title = this.DecodeHtml(clientTitlePart.Contents);
-
-             
-            //}
-
-            //foreach (var clientWidgetTitlePart in updates.widgetTitleParts)
-            //{
-            //    var contentItemId = (int)clientWidgetTitlePart.contentItemId;
-            //    var ci = _contentManager.Get(contentItemId);
-
-            //    if (ci == null)
-            //        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "WidgetTitlePart"));
-
-            //    var widgetTitlePart = ci.As<WidgetPart>();
-
-            //    if (widgetTitlePart == null)
-            //        errors.Add(new ErrorInformation("error", "Widget Title Part can not be null", contentItemId, "WidgetTitlePart"));
-
-            //    widgetTitlePart.Title = clientWidgetTitlePart.Contents;
-            //}
+            }
 
             if (errors.Count>0)
             {
@@ -162,8 +152,8 @@ namespace Mmr.InlineEditing.Controllers
             
             
             Response.StatusCode = (int)HttpStatusCode.OK;
-        
-            var successClientNotification = new { MsgType = "success", Message = "Your changes has been accepted" };
+            var msg = new ErrorInformation("success", "Your changes has been accepted", 0, "-");
+            var successClientNotification = msg;
                return Json(successClientNotification);        
         
         
@@ -225,11 +215,11 @@ namespace Mmr.InlineEditing.Controllers
             throw new NotImplementedException();
         }
 
-        private string DecodeHtml(string htmlEncodedString)
-        {            
-            StringWriter writer = new StringWriter();
-            Server.HtmlDecode(htmlEncodedString, writer);
-            return writer.ToString();            
-        }
+        //private string DecodeHtml(string htmlEncodedString)
+        //{            
+        //    StringWriter writer = new StringWriter();
+        //    Server.HtmlDecode(htmlEncodedString, writer);
+        //    return writer.ToString();            
+        //}
     }
 }
