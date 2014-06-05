@@ -27,7 +27,6 @@ using System.Web.Mvc;
 // Todo: check different themes.
 // Todo: warning when switching off editorMode if unsaved changes.
 // Todo: title parts and widget title parts should not have new lines. Or, if it can, it should escape invalid characters.
-// Todo: remove caching as a dependency of the module
 // Todo: manage error cases for each submited part , rather than as a whole.
 // Todo: add ui hint to buttons.
 // Todo: localization on the client javascript.

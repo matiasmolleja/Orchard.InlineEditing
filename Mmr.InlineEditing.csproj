@@ -208,7 +208,7 @@
     <Content Include="Styles\font-awesome\scss\_mixins.scss" />
     <Content Include="Styles\font-awesome\scss\_path.scss" />
     <Content Include="Styles\font-awesome\scss\_variables.scss" />
-    <Content Include="Views\actionControls.cshtml" />
+    <Content Include="Views\InlineEditing.ActionControls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
