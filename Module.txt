@@ -10,4 +10,4 @@ Features:
     Mmr.InlineEditing:
 		Name: Inline Editing
         Description: Provides frontend inline editing of bodies and titles in Orchard.
-		Dependencies: Orchard.JQuery, Orchard.Caching, Orchard.Widgets
+		Dependencies: Orchard.JQuery, Orchard.Widgets
