@@ -1,44 +1,39 @@
-﻿using Orchard;
+﻿using Mmr.InlineEditing.ViewModels;
+using Newtonsoft.Json;
+using Orchard;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.MetaData;
+using Orchard.Core.Common.Models;
 using Orchard.Core.Contents;
+using Orchard.Core.Title.Models;
 using Orchard.Data;
 using Orchard.DisplayManagement;
+using Orchard.Environment.Extensions;
 using Orchard.Localization;
 using Orchard.Logging;
+using Orchard.Mvc;
+using Orchard.Mvc.Extensions;
 using Orchard.Settings;
+using Orchard.UI.Notify;
+using Orchard.Widgets.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using System.Web;
-using System.Web.Mvc;
-using Orchard.UI.Notify;
-using Orchard.Mvc.Extensions;
-using Orchard.Core.Common.Models;
-using Orchard.Mvc;
-using Orchard.Services;
-using Mmr.InlineEditing.ViewModels;
 using System.Net;
-using Orchard.Core.Title.Models;
-using Orchard.Widgets.Models;
-using Orchard.Exceptions;
-using System.IO;
-using System.Threading;
-using Orchard.Environment.Extensions;
+using System.Web.Mvc;
 
 // Todo: enable localization through the use of T()
-// Todo: tinymce editors are still enabled when editormode is off.
-// Todo: spinner floated to the right. Or inside the Save Button, replacing the disk icon.
 // Todo: limit scope of my scripts as explained in Dojo Course.
 // Todo: minify css and script files (don't forget the tinyMce MediaLibrary plugin).
 // Todo: check different themes.
-// Todo: warning when leaving the page with unsaved changes.
 // Todo: warning when switching off editorMode if unsaved changes.
-// Todo: new lines in body give error.
 // Todo: title parts and widget title parts should not have new lines. Or, if it can, it should escape invalid characters.
-// Todo: check if we can delete DecodeHtml.
-// Todo: topbar is hiding title. See if we can apply some css to the body to move it down the height of the topbar. Or at least allow collapsing of topbar.
+// Todo: remove caching as a dependency of the module
+// Todo: manage error cases for each submited part , rather than as a whole.
+// Todo: add ui hint to buttons.
+// Todo: localization on the client javascript.
+// Todo: pencil icon in actions is not nice.
+// Todo: changing the body of the widget set the title as isDirty.
+// Todo: dashboard actions in actions control is not working.
 
 namespace Mmr.InlineEditing.Controllers
 {
@@ -215,11 +210,5 @@ namespace Mmr.InlineEditing.Controllers
             throw new NotImplementedException();
         }
 
-        //private string DecodeHtml(string htmlEncodedString)
-        //{            
-        //    StringWriter writer = new StringWriter();
-        //    Server.HtmlDecode(htmlEncodedString, writer);
-        //    return writer.ToString();            
-        //}
     }
 }
