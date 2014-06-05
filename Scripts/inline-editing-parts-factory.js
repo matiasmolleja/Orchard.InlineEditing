@@ -12,23 +12,24 @@
     self.isDirty.subscribe(function (newValue) {
 
         if (newValue == true) {
-            var indexof = myIEPageVM.dirtyParts().indexOf(self);
+            var indexof = IEPageVM.dirtyParts().indexOf(self);
             if (indexof == -1) {
-                ko.utils.arrayPushAll(myIEPageVM.dirtyParts(), [self]);
+                ko.utils.arrayPushAll(IEPageVM.dirtyParts(), [self]);
             }
 
         }
         else {
-            ko.utils.arrayRemoveItem(myIEPageVM.dirtyParts(), self);
+            ko.utils.arrayRemoveItem(IEPageVM.dirtyParts(), self);
         }
-        myIEPageVM.dirtyParts.valueHasMutated();
+        IEPageVM.dirtyParts.valueHasMutated();
     });
     self.cleanAfterSaving = function () {
-        self.InitialContents = self.Contents;
+        var c = self.Contents();
+        self.InitialContents(c);
     }
 };
 
-function giveMeABodyPart(passedItemId, passedContents, passedPartType) {
+function createBodyPart(passedItemId, passedContents, passedPartType) {
 
     var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
 
@@ -39,7 +40,7 @@ function giveMeABodyPart(passedItemId, passedContents, passedPartType) {
     return clientPart;
 };
 
-function giveMeATitlePart(passedItemId, passedContents, passedPartType) {
+function createTitlePart(passedItemId, passedContents, passedPartType) {
 
     var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
 
@@ -51,7 +52,7 @@ function giveMeATitlePart(passedItemId, passedContents, passedPartType) {
 };
 
 
-function giveMeAWidgetTitlePart(passedItemId, passedContents, passedPartType) {
+function createWidgetTitlePart(passedItemId, passedContents, passedPartType) {
 
     var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
 

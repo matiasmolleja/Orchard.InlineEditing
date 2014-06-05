@@ -6,40 +6,25 @@
 @{
     ContentItem contentItem = (ContentItem)Model.ContentItem;
     TitlePart titlePart = contentItem.As<TitlePart>();
-    //string escapedContent = Newtonsoft.Json.JsonConvert.SerializeObject(titlePart.Title);    
-    }
-
-@{
     Layout.Title = Model.Title;
 }
 
 
 @if (AuthorizedFor(Permissions.EditContent) && Model.ContentItem.Id > 0)
 {
-
     using (Script.Foot())
     {
         <script type="text/javascript">
-            var tp =  giveMeATitlePart(@contentItem.Id, '@titlePart.Title', 'titlePart');
-            myIEPageVM.parts().push(tp);
+            var tp =  createTitlePart(@contentItem.Id, '@titlePart.Title', 'titlePart');
+            IEPageVM.parts().push(tp);
         </script>
     };
 
-    <div class="inline-editing-content-control" data-bind="visible: editorMode">
-        <ul class="actions-controls">
-            <li>
-                <i class="icon-pencil icon-border"
-                   data-bind="css: { iconeditdirty : partFromId(@contentItem.Id).isDirty }">
-                </i>
-            </li>
-            <li>
-                @Html.ItemEditLinkWithReturnUrl(T("Dashboard").Text, (ContentItem)Model.ContentItem)
-            </li>
+    @Display.ActionControls(contentItemId: @contentItem.Id)
 
-        </ul>
-    </div>
-
-    <h1 class="mce_TitlePart_@contentItem.Id" id="mce_TitlePart_@contentItem.Id">@Model.Title</h1>
+    <h1 class="mce_TitlePart_@contentItem.Id" id="mce_TitlePart_@contentItem.Id">
+        @Model.Title
+    </h1>
 
 
 }

@@ -1,0 +1,23 @@
+﻿<div class="inline-editing-content-control" data-bind="visible: editorMode">
+    <ul class="actions-controls">
+        <li>
+            <a href="#">
+                <i class="icon-th"></i>
+            </a>
+
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="icon-warning-sign"></i>
+            </a>
+            @*@Html.ItemEditLinkWithReturnUrl(T("Dashboard").Text, (ContentItem)Model.ContentItem)*@
+        </li>
+
+        <li data-bind="visible:partFromId(@Model.contentItemId).isDirty ">
+            <i class="icon-pencil iconeditdirty">
+            </i>
+        </li>
+
+    </ul>
+</div>

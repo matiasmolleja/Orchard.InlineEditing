@@ -9,10 +9,9 @@ function buildEditorForHtmlField(contentItemId, partName) {
         setup: function (editor) {
             editor.on('change', function (e) {
                 console.log('change event', e);
-                var part = getPartFromEditorId(e.target.id);
+                var part = getPartFromEditorSelector(e.target.id);
                 //todo: differentiate between bodyparts(format:html) and titleParts(format:text)
-                part.Contents(editor.getContent());
-                console.log('contents changed to:' + part.Contents());
+                part.Contents(editor.getContent());                
             })
         },
         menubar: false,
@@ -36,7 +35,7 @@ function buildEditorForTextField(contentItemId, partName) {
         setup: function (editor) {
             editor.on('change', function (e) {
                 console.log('change event', e);
-                var part = getPartFromEditorId(e.target.id);
+                var part = getPartFromEditorSelector(e.target.id);
                 //todo: differentiate between bodyparts(format:html) and titleParts(format:text)
                 part.Contents(editor.getContent({ format: 'text' }));
                 console.log('contents changed to:' + part.Contents());
@@ -58,41 +57,18 @@ function buildEditorForTextField(contentItemId, partName) {
 }
 
 
-function getPartFromEditorId(editorSelector) {
+function getPartFromEditorSelector(editorSelector) {
 
     var slices = editorSelector.split("_");
     var partType = slices[1].toString().toLowerCase();
     var editorId = slices[2];
     
     
-    for (var i = 0; i < myIEPageVM.parts().length; i++) {
+    for (var i = 0; i < IEPageVM.parts().length; i++) {
         
-        var p = myIEPageVM.parts()[i];
+        var p = IEPageVM.parts()[i];
         if ((p.partType().toString().toLowerCase() == partType.toString().toLowerCase()) && (p.contentItemId == editorId)) {
               return p;
         }
-
-    }
-    
-    //for (var i = 0; i < myIEPageVM.bodyParts().length; i++) {
-    //    var p = myIEPageVM.bodyParts()[i];
-    //    if (p.contentItemId==editorId) {
-    //        return p;
-    //    }
-    //}
-    
-    //for (var i = 0; i < myIEPageVM.titleParts().length; i++) {
-    //    var p = myIEPageVM.titleParts()[i];
-    //    if (p.contentItemId == editorId) {
-    //        return p;
-    //    }
-    //}
-
-    //for (var i = 0; i < myIEPageVM.widgetTitleParts().length; i++) {
-    //    var p = myIEPageVM.widgetTitleParts()[i];
-    //    if (p.contentItemId == editorId) {
-    //        return p;
-    //    }
-    //}
-
+    }    
 };

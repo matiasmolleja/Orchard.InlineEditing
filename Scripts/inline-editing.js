@@ -2,32 +2,19 @@
     function InlineEditingPageViewModel() {
         var self = this;
         self.editorMode = ko.observable(false);
+        self.isCollapsed = ko.observable(false);
         self.CurrentlyEditedItemId = ko.observable(0);
         self.antiForgeryToken = null;
         
         self.parts = ko.observableArray([]);
-
-        //self.aGivenPart = ko.computed giveMeABodyPart(56, 'passedContents', 'passedPartType');
-        self.myPart = ko.computed(function (data) {
-            console.log('computing' + data);
-            return ko.observable('my computed' + data );
-        });
 
         self.dirtyParts = ko.observableArray([]);
         self.isDirty = new ko.computed(function () {
             return self.dirtyParts().length > 0;
         });
 
-        self.updateSessionValuesUrl;
-        self.saveDraftActionUrl;
-
-        // logic to show and hide Action Buttons on the ui
-        self.showEditorIconForContentsPart = ko.computed(function () {
-            return (self.editorMode()); //&& (!self.contentsPart().isCurrentlyEditedItem());
-        });
-        self.showActionsButtonsForContentsPart = ko.computed(function () {
-            return (self.editorMode()); // && (self.contentsPart().isCurrentlyEditedItem());
-        });
+        self.updateSessionValuesUrl='';
+        self.saveDraftActionUrl='';
 
         self.toggleEditorMode = function () {            
             var newValue = false;
@@ -37,20 +24,20 @@
             self.editorMode(newValue);
         };
 
-
+        self.collapseBar = function () {
+            var newValue = !self.isCollapsed();
+            self.isCollapsed(newValue);
+        };
         
         self.saveEditedPage = function () {
-            console.log('trying to save the contents' + self.antiForgeryToken);
-            //var folderPath = $(this).data('media-path');
-            console.log( 'version : ' + tinyMCE.majorVersion);// + '.' + tinymce.minorVersion;
-
+        
             $.ajax({
                 type: "POST",
                 url: self.saveDraftActionUrl,
                 dataType: "json",
                 traditional: true,
                 data: {                    
-                    pageVM: ko.toJSON(myIEPageVM),
+                    pageVM: ko.toJSON(IEPageVM),
                     __RequestVerificationToken: self.antiForgeryToken
                 },
             }).done(function (result) {
@@ -84,7 +71,7 @@
                 self.addEditors();
             }
             else {
-                self.removeEditors();
+                self.removeEditors();                
             }
 
 
@@ -119,7 +106,6 @@
 
         // todo: the logic for creating an editor should reside on a function inside each part.(open to extension closed to modif).
         self.addEditors = function () {
-            console.log('adding editors');
             ko.utils.arrayForEach(self.parts(), function (item) {                
                 item.addEditor();                
             });                     
@@ -130,7 +116,6 @@
         };
 
         self.cleanAfterSaving = function () {
-            console.log('cleaning by saving');
             ko.utils.arrayForEach(self.parts(), function (item) {
                 item.cleanAfterSaving();
             });
@@ -154,14 +139,13 @@
     };
 
 
-var myIEPageVM = new InlineEditingPageViewModel();
+var IEPageVM = new InlineEditingPageViewModel();
 // Activates knockout.js
-ko.applyBindings(myIEPageVM);
+ko.applyBindings(IEPageVM);
 
 
 
 var Notify = function (MsgType, Message) {
-    console.log('notifiying...' + MsgType + ':' + Message);
     if (MsgType== 'error') {
         toastr.error(Message);
     }
@@ -170,7 +154,6 @@ var Notify = function (MsgType, Message) {
     }
     else if(MsgType == 'success')
     {
-        console.log('showing toastr');
         toastr.success(Message);
     }
     else {

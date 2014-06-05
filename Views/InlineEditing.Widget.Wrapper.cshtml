@@ -4,7 +4,6 @@
 
 @{
     var widgetPart = ((IContent)Model.ContentItem).As<WidgetPart>();
-    //string escapedContent = Newtonsoft.Json.JsonConvert.SerializeObject(widgetPart.Title);    
     var tag = Tag(Model, "article");    
     ContentItem contentItem = (ContentItem)Model.ContentItem;
 }
@@ -21,23 +20,12 @@
                 using (Script.Foot())
                 {
                     <script type="text/javascript">
-                        var wt =  giveMeAWidgetTitlePart(@contentItem.Id, '@widgetPart.Title', 'widgetTitlePart');
-                        myIEPageVM.parts().push(wt);
+                        var wt =  createWidgetTitlePart(@contentItem.Id, '@widgetPart.Title', 'widgetTitlePart');
+                        IEPageVM.parts().push(wt);
                     </script>
                 };
 
-                <div class="inline-editing-content-control" data-bind="visible: editorMode">
-                    <ul class="actions-controls">
-                        <li>
-                            <i class="icon-pencil icon-border"
-                               data-bind="css: { iconeditdirty : partFromId(@contentItem.Id).isDirty }">
-                            </i>
-                        </li>
-                        <li>
-                            @Html.ItemEditLinkWithReturnUrl(T("Dashboard").Text, (ContentItem)Model.ContentItem)
-                        </li>
-                    </ul>
-                </div>
+                @Display.ActionControls(contentItemId: @contentItem.Id)
 
                 <h1 class="mce_WidgetTitlePart_@contentItem.Id" id="mce_WidgetTitlePart_@contentItem.Id">@widgetPart.Title</h1>
 

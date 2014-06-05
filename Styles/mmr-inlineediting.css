@@ -1,19 +1,39 @@
-﻿.inline-editing-topbar{
+﻿
+.iconeditclean {
+    color: #343434;
+}
+.iconeditdirty{
+    color: #f15100;
+}
+
+.inline-editing-topbar{
    position:fixed;
    top:0;
    left:0;
-   width:100%;
-   height:40px;
-   background-color:#333333;
+   
+   height:50px;
+   /*background-color:#333333;*/
    z-index:10000;
-   color: #5F97AF;
    margin:0;
    padding:0;
+   font-family: Tahoma,"Helvetica Neue",Arial,Helvetica,sans-serif;
 }
 
+
+.collapsedtopbar
+{
+    width:320px;
+    background-color:transparent;
+}
+
+
+.expandedtopbar
+{
+   width:100%;
+   background-color:#333333;
+}
 ul#command-bar
 {
-    /*border:solid 1px green;*/
     list-style-type:none;
     margin:0;
     padding:0;
@@ -25,83 +45,101 @@ ul#command-bar li{
 }
 
 ul#command-bar i{
-    padding-right:6px;
+    /*padding-right:6px;*/
 }
 
 
 
+/*collapsed-topbar :isCollapsed , expanded-topbar : !isCollapsed()*/
 
 .inline-editing-topbar a:link,
-.inline-editing-topbar a:visited,
-.inline-editing-topbar a:active {
-    color: #AEC3CE;
+.inline-editing-topbar a:visited
+ {
+    background-color:#333333;
+    color: #fff;
     text-decoration: none;
     font-size:1.077em;
     display:block;
     float:left;
-    height:30px;
-    padding:5px 18px;
-    border-left: solid 1px #4c4f44;
+    height:26px;
+    padding:12px 18px;
+    border-right: solid 1px #000;
     line-height:24px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.50);
+    
+}
+.inline-editing-topbar a:hover{
     
 }
 .inline-editing-topbar a i
 {
-   margin-right:6px;
+   margin-right:4px;
 }
 
 
 .inline-editing-topbar a:hover
 {
-    background:#3A822E;
+    background:#484b40;
     color:#fff;
     text-decoration: none;
 }
 a:link.topbaractivelink, 
 a:visited.topbaractivelink ,
-a:hover.topbaractivelink,
 a:active .topbaractivelink {
     background:#3A822E;
     color:#fff;
     text-decoration: none;
 }
 
+.inline-editing-topbar a.collapse-button{
+    width:42px;
+}
+.inline-editing-topbar a i.icon-chevron-left {
+    padding-left:12px;
+}
 .inline-editing-topbar a#dashboard-link {    
-    background: url('images/orchardLogo.gif') no-repeat scroll 0% 0% transparent;
+    background: url('images/orchardLogo.gif') no-repeat scroll 32px 0% #333333;
     display: block;
-    height: 43px;
-    width:43px;
-    margin: -5px 0px 0px 5px;
+    width:60px;
     text-indent: -9999px;
-    width: 40px;
-    /*float:left;*/
-    border:none;
+    
+    
 }
 
-.inline-editing-content-control{
-    border:dotted 1px lightgray;
+li#infoarea-wrapper {
+    float:right;
+    height:50px;
+    color:#fff;
 }
-.inline-editing-content-control .actions-controls ul{
+ul#infoarea {
+    padding-top:12px;
+}
+
+
+.inline-editing-content-control{
+    /*border:dotted 1px lightgray;*/
+}
+.inline-editing-content-control ul.actions-controls {
     list-style-type:none;
     margin:0;
     padding:0;
+    border:#c2c2c2;
+    background-color:#fafafa;
+        margin:-43px 0px 0px 0px;
+    
 }
 
 .inline-editing-content-control .actions-controls li {
     display:inline;
     float:right;
+    border-left:#000;
 }
 .inline-editing-content-control .actions-controls{
-    /*list-style:none;
-    list-style-type:none;*/
     
     float:right;
-    /*border-top:solid 1px #808080;
-    border-left:solid 1px #808080;
-    border-right:solid 1px #808080;
-    border-bottom:none;*/
     padding:0;
-    margin:-23px 0px 0px 0px;
+    /*z-index:999999;*/
+
 
 }
 
@@ -109,14 +147,17 @@ a:active .topbaractivelink {
 
     .inline-editing-content-control .actions-controls a {
         display:block;
-        padding:5px;
+        padding:5px 8px;
         /*padding:0 5px;*/
         color:#343434;
+        border:solid 1px #e3e3e3;
+        
         
     }
     .inline-editing-content-control .actions-controls a:hover {
-        /*background-color: #343434;*/
-        color:#fff;
+        background-color: #ededed;
+        text-decoration:none;
+        /*color:#fff;*/
     }
 
     a.inline-editing-pen-icon:link,a.inline-editing-pen-icon:visited {
@@ -134,9 +175,28 @@ a.inline-editing-pen-icon:hover, a.inline-editing-pen-icon:active {
 }
 
 
-.iconeditclean {
-    color: #343434;
+
+a .badge{
+    position: absolute;
+    right: -10px;
+    top: -5px;
 }
-.iconeditdirty{
-    color: #f15100;
+
+.badge {
+    background-color: #999999;
+    border-radius: 10px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 10px;
+    padding: 3px 7px;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
 }
+.badge-warning {
+    background-color: #e4890b;
+}
+
