@@ -39,7 +39,7 @@ namespace Mmr.InlineEditing.Controllers
 {
     [OrchardFeature("Mmr.InlineEditing")]
     [ValidateInput(false)]
-    public class InlineEditingController : Controller , IUpdateModel
+    public class InlineEditingController : Controller 
     {
 
         private readonly IContentManager _contentManager;
@@ -199,16 +199,16 @@ namespace Mmr.InlineEditing.Controllers
             return this.RedirectLocal(returnUrl, () => RedirectToAction("List"));
         }
 
-        //todo: remove this, IUpdater is not needed at this moment.
-        public void AddModelError(string key, LocalizedString errorMessage)
-        {
-            ModelState.AddModelError(key, errorMessage.ToString());
-        }
+        ////todo: remove this, IUpdater is not needed at this moment.
+        //public void AddModelError(string key, LocalizedString errorMessage)
+        //{
+        //    ModelState.AddModelError(key, errorMessage.ToString());
+        //}
 
-        public new bool TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties) where TModel : class
-        {
-            throw new NotImplementedException();
-        }
+        //public new bool TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties) where TModel : class
+        //{
+        //    throw new NotImplementedException();
+        //}
 
     }
 }
