@@ -46,7 +46,7 @@
                     var notification = result; // JSON.parse(result.responseText);
                     console.log('saved ok:' + notification.ErrorType + ':' + notification.ErrorMessage);
                     Notify(notification.ErrorType, notification.ErrorMessage);
-                    // reset everypart: content equals to initial content.
+                    // reset every part: content equals to initial content.
                     self.cleanAfterSaving();
                     //self.dirtyParts().removeAll();
                     console.log(notification.Message);
