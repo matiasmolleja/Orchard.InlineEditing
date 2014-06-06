@@ -22,22 +22,4 @@ namespace Mmr.InlineEditing.ViewModels
         public string PartType { get; set; }
         
     }
-    public class InlineEditingBodyPart
-    {
-        public int contentItemId { get; set; }
-        public string Contents { get; set; }
-    }
-
-    public class InlineEditingTitlePart
-    {
-        public int contentItemId { get; set; }
-        public string Contents { get; set; }
-    }
-
-
-    public class InlineEditingWidgetTitlePart
-    {
-        public int contentItemId { get; set; }
-        public string Contents { get; set; }
-    }
 }
