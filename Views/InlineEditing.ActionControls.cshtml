@@ -2,6 +2,7 @@
 
 @{
     ContentItem contentItem = (ContentItem)Model.ContentItem;
+    string partTypeName = Model.PartTypeName;
 }
 
 
@@ -14,10 +15,11 @@
 
         <li class="info"
             title="@("Modified")"
-            data-bind="visible:partFromId(@contentItem.Id).isDirty ">
+            data-bind="visible: partFromIdAndTypeName(@contentItem.Id, '@partTypeName').isDirty ">
             <i class="icon-pencil iconeditdirty">
             </i>
         </li>
+
 
     </ul>
 </div>

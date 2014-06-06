@@ -127,13 +127,15 @@
 
 
         // Utility functions 
-        self.partFromId = function (data) {
+        self.partFromIdAndTypeName = function (contentItemId, partTypeName) {
+            partTypeName = partTypeName.toLowerCase();
+            
             if (self.parts()[0] == undefined) {
-                return 'null';
+               return 'null';
             }
-            else {                
+            else {
                 return ko.utils.arrayFirst(self.parts(), function (item) {
-                    return data === item.contentItemId;
+                    return ((contentItemId == item.contentItemId) && (partTypeName == item.partType().toString().toLowerCase()));
                 });
             }
         };

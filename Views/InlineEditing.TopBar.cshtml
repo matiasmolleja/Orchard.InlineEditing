@@ -17,7 +17,7 @@
 
         // loading values into the ko viewmodel
         IEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
-        IEPageVM.saveDraftActionUrl = '@Url.Action("ChangeTextAjax", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+        IEPageVM.saveDraftActionUrl = '@Url.Action("UpdateParts", "InlineEditing", new { area = "Mmr.InlineEditing" })';
         IEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
 
 
@@ -95,5 +95,5 @@
     </ul>
 </div>
 
-@*This helps when debugging:
-    <pre data-bind="text: JSON.stringify(ko.toJS(IEPageVM), null, 2)"></pre> *@
+@*This helps when debugging:*@
+    <pre data-bind="text: JSON.stringify(ko.toJS(IEPageVM), null, 2)"></pre> 

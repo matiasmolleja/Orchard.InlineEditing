@@ -8,9 +8,7 @@ function buildEditorForHtmlField(contentItemId, partName) {
         inline: true,
         setup: function (editor) {
             editor.on('change', function (e) {
-                console.log('change event', e);
                 var part = getPartFromEditorSelector(e.target.id);
-                
                 part.Contents(editor.getContent({ format: 'html' }));
             }),
             editor.on('undo', function (e) {

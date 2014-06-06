@@ -67,7 +67,7 @@ namespace Mmr.InlineEditing.Controllers
 
 
         [HttpPost]
-        public JsonResult ChangeTextAjax(string pageVM)
+        public JsonResult UpdateParts(string pageVM)
         {
 
             //Thread.Sleep(1500); Debug.
@@ -81,7 +81,6 @@ namespace Mmr.InlineEditing.Controllers
                 var errorClientNotification = new { MsgType = "error", Message = T("The updates are not valid.") }; //success-info-warning-error
                 return Json(errorClientNotification);
             }
-
 
 
             foreach (var clientPart in updates.dirtyParts)
