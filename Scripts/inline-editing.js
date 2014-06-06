@@ -14,7 +14,7 @@
         });
 
         self.updateSessionValuesUrl='';
-        self.saveDraftActionUrl='';
+        self.updatePartsUrl = '';
 
         self.toggleEditorMode = function () {            
             var newValue = false;
@@ -33,7 +33,7 @@
         
             $.ajax({
                 type: "POST",
-                url: self.saveDraftActionUrl,
+                url: self.updatePartsUrl,
                 dataType: "json",
                 traditional: true,
                 data: {                    

@@ -17,7 +17,7 @@
 
         // loading values into the ko viewmodel
         IEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
-        IEPageVM.saveDraftActionUrl = '@Url.Action("UpdateParts", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+        IEPageVM.updateChangesUrl = '@Url.Action("UpdateParts", "InlineEditing", new { area = "Mmr.InlineEditing" })';
         IEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
 
 
