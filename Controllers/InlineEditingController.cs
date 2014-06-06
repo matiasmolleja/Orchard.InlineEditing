@@ -37,59 +37,52 @@ namespace Mmr.InlineEditing.Controllers
 {
     [OrchardFeature("Mmr.InlineEditing")]
     [ValidateInput(false)]
-    public class InlineEditingController : Controller 
+    public class InlineEditingController : Controller
     {
-
         private readonly IContentManager _contentManager;
-        private readonly IContentDefinitionManager _contentDefinitionManager;
-        private readonly ITransactionManager _transactionManager;
         private readonly ISiteService _siteService;
-        private readonly IWorkContextAccessor _wca;
         private readonly IHttpContextAccessor _hca;
 
         public InlineEditingController(
-            IWorkContextAccessor wca,
             IHttpContextAccessor hca,
             IOrchardServices orchardServices,
             IContentManager contentManager,
-            IContentDefinitionManager contentDefinitionManager,
             ITransactionManager transactionManager,
             ISiteService siteService,
-            IShapeFactory shapeFactory) {
-                _wca = wca;
-                _hca = hca;
-                Services = orchardServices;
-                _contentManager = contentManager;
-                _contentDefinitionManager = contentDefinitionManager;
-                _transactionManager = transactionManager;
-                _siteService = siteService;
-                T = NullLocalizer.Instance;
-                Logger = NullLogger.Instance;                
+            IShapeFactory shapeFactory)
+        {
+
+            _hca = hca;
+            Services = orchardServices;
+            _contentManager = contentManager;
+            _siteService = siteService;
+            T = NullLocalizer.Instance;
+            Logger = NullLogger.Instance;
         }
 
         public IOrchardServices Services { get; private set; }
         public Localizer T { get; set; }
         public ILogger Logger { get; set; }
 
-        
+
 
         [HttpPost]
         public JsonResult ChangeTextAjax(string pageVM)
         {
 
             //Thread.Sleep(1500); Debug.
-           InlineUpdatesViewModel updates= JsonConvert.DeserializeObject<InlineUpdatesViewModel>(pageVM);
+            InlineUpdatesViewModel updates = JsonConvert.DeserializeObject<InlineUpdatesViewModel>(pageVM);
 
-           List<ErrorInformation> errors = new List<ErrorInformation>();
+            List<ErrorInformation> errors = new List<ErrorInformation>();
             // todo: add more validation cases here...
-            if (updates==null)
+            if (updates == null)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 var errorClientNotification = new { MsgType = "error", Message = T("The updates are not valid.") }; //success-info-warning-error
                 return Json(errorClientNotification);
             }
 
-            
+
 
             foreach (var clientPart in updates.dirtyParts)
             {
@@ -98,7 +91,7 @@ namespace Mmr.InlineEditing.Controllers
                 if (ci == null)
                     errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
 
-                if (clientPart.PartType.ToLower()== "bodypart")
+                if (clientPart.PartType.ToLower() == "bodypart")
                 {
 
                     var part = ci.As<BodyPart>();
@@ -130,25 +123,25 @@ namespace Mmr.InlineEditing.Controllers
 
                     part.Title = clientPart.Contents;
                 }
-                
+
             }
 
-            if (errors.Count>0)
+            if (errors.Count > 0)
             {
                 Services.TransactionManager.Cancel();
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                
+
                 var errorClientNotification = new { MsgType = "error", Message = "FUNCIONA LA VALIDACION." }; //info-warning-error
 
                 return Json(errorClientNotification);
             }
-            
-            
+
+
             Response.StatusCode = (int)HttpStatusCode.OK;
             var msg = new ErrorInformation("success", "Your changes has been accepted", 0, "-");
             var successClientNotification = msg;
-               return Json(successClientNotification);        
-        
+            return Json(successClientNotification);
+
         }
 
 
@@ -162,18 +155,18 @@ namespace Mmr.InlineEditing.Controllers
                 Response.StatusCode = (int)HttpStatusCode.OK;
 
                 var successClientNotification = new { MsgType = "info", Message = "Your changes has been accepted" };
-                return Json(successClientNotification);                 
-        
+                return Json(successClientNotification);
+
             }
             catch (Exception ex)
-            {               
+            {
                 Logger.Error(ex, "Editor Mode can't be persisted.");
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 var errorClientNotification = new { MsgType = "warning", Message = T("Editor Mode can't be persisted.") }; //info-warning-error                
                 return Json(errorClientNotification);
 
             }
-            
+
         }
 
     }
