@@ -9,9 +9,10 @@
     string escapedContent = Newtonsoft.Json.JsonConvert.SerializeObject(bodyPart.Text);
 }
 
-
+@* Only show ActionControls and only attaches the part to the knockout viewmodel if the user has EditContent permissions*@
 @if (AuthorizedFor(Permissions.EditContent) && Model.ContentItem.Id > 0)
 {
+    // Each part attaches itself to the root Knockout viewModel
     using (Script.Foot())
     {
         <script type="text/javascript">
@@ -20,7 +21,8 @@
         </script>
     };
 
-    @Display.InlineEditing_ActionControls(contentItemId: @contentItem.Id)
+    // Injecting ActionControls shape
+    @Display.InlineEditing_ActionControls(ContentItem: @contentItem)
 
     <div class="inline-editing-body-control">
         <div class="mce_BodyPart_@contentItem.Id" id="mce_BodyPart_@contentItem.Id">

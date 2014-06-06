@@ -169,6 +169,7 @@
     <Content Include="Styles\font-awesome\css\font-awesome.css" />
     <Content Include="Styles\font-awesome\css\font-awesome.min.css" />
     <Content Include="Styles\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Styles\images\icon-dashboard.gif" />
     <Content Include="Styles\images\orchardLogo.gif" />
     <Content Include="Styles\mmr-inlineediting.css" />
     <Content Include="Styles\toastr.css" />

@@ -74,6 +74,21 @@
                 self.removeEditors();                
             }
 
+            self.updateSessionValues(newValue);
+            
+        });
+
+        self.addEditors = function () {
+            ko.utils.arrayForEach(self.parts(), function (item) {                
+                item.addEditor();                
+            });
+        };
+
+        self.removeEditors = function () {
+            tinymce.remove();
+        };
+
+        self.updateSessionValues = function (newValue) {
 
             //update session with editor mode. todo: check if it is better using cookies.
             $.ajax({
@@ -100,21 +115,7 @@
                 Notify(notification.MsgType, notification.Message);
                 console.log(notification.MsgType + ':' + notification.Message);
             });
-            
-
-        });
-
-        // todo: the logic for creating an editor should reside on a function inside each part.(open to extension closed to modif).
-        self.addEditors = function () {
-            ko.utils.arrayForEach(self.parts(), function (item) {                
-                item.addEditor();                
-            });                     
-
-        };
-        self.removeEditors = function () {
-            tinymce.remove();
-        };
-
+        }
         self.cleanAfterSaving = function () {
             ko.utils.arrayForEach(self.parts(), function (item) {
                 item.cleanAfterSaving();

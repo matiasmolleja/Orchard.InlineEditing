@@ -125,8 +125,8 @@ ul#infoarea {
     padding:0;
     border:#c2c2c2;
     background-color:#fafafa;
-        margin:-43px 0px 0px 0px;
-    
+    margin:-43px 0px 0px 0px;
+    z-index:80000;
 }
 
 .inline-editing-content-control .actions-controls li {
@@ -134,13 +134,19 @@ ul#infoarea {
     float:right;
     border-left:#000;
 }
+
 .inline-editing-content-control .actions-controls{
     
     float:right;
     padding:0;
-    /*z-index:999999;*/
+    
+}
 
 
+.inline-editing-content-control .actions-controls li.info {
+    padding:4px 9px;
+    border: 1px solid #E3E3E3;
+    border-right:none;
 }
 
 
@@ -153,6 +159,18 @@ ul#infoarea {
         border:solid 1px #e3e3e3;
         
         
+    }
+
+    .inline-editing-content-control .actions-controls .dashboard a {
+        background: url('images/icon-dashboard.gif') no-repeat scroll 8px 6px transparent;
+
+        text-indent: -9999px;
+        display:block;
+        width:16px;
+        height:18px;
+        
+
+
     }
     .inline-editing-content-control .actions-controls a:hover {
         background-color: #ededed;
@@ -199,4 +217,3 @@ a .badge{
 .badge-warning {
     background-color: #e4890b;
 }
-

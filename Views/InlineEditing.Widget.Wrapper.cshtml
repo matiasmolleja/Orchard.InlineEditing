@@ -4,7 +4,7 @@
 
 @{
     var widgetPart = ((IContent)Model.ContentItem).As<WidgetPart>();
-    var tag = Tag(Model, "article");    
+    var tag = Tag(Model, "article");
     ContentItem contentItem = (ContentItem)Model.ContentItem;
 }
 @tag.StartElement
@@ -14,9 +14,10 @@
     <header>
         @if ((widgetPart.RenderTitle && HasText(widgetPart.Title)))
         {
-
+            @* Only show ActionControls and only attaches the part to the knockout viewmodel if the user has EditContent permissions*@
             if (AuthorizedFor(Orchard.Core.Contents.Permissions.EditContent) && Model.ContentItem.Id > 0)
             {
+                // Each part attaches itself to the root Knockout viewModel
                 using (Script.Foot())
                 {
                     <script type="text/javascript">
@@ -25,7 +26,8 @@
                     </script>
                 };
 
-                @Display.InlineEditing_ActionControls(contentItemId: @contentItem.Id)
+                // Injecting ActionControls shape
+                @Display.InlineEditing_ActionControls(ContentItem: @contentItem)
 
                 <h1 class="mce_WidgetTitlePart_@contentItem.Id" id="mce_WidgetTitlePart_@contentItem.Id">@widgetPart.Title</h1>
 

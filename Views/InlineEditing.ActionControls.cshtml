@@ -1,20 +1,20 @@
-﻿<div class="inline-editing-content-control" data-bind="visible: editorMode">
+﻿@using Orchard.ContentManagement;
+
+@{
+    ContentItem contentItem = (ContentItem)Model.ContentItem;
+}
+
+
+<div class="inline-editing-content-control" data-bind="visible: editorMode">
     <ul class="actions-controls">
-        <li>
-            <a href="#">
-                <i class="icon-th"></i>
-            </a>
-
+        <li class="dashboard"
+            title="@T("Edit in Dashboard")">
+            @Html.ItemEditLinkWithReturnUrl(T("Edit in Dashboard").Text, contentItem)
         </li>
 
-        <li>
-            <a href="#">
-                <i class="icon-warning-sign"></i>
-            </a>
-            @*@Html.ItemEditLinkWithReturnUrl(T("Dashboard").Text, (ContentItem)Model.ContentItem)*@
-        </li>
-
-        <li data-bind="visible:partFromId(@Model.contentItemId).isDirty ">
+        <li class="info"
+            title="@("Modified")"
+            data-bind="visible:partFromId(@contentItem.Id).isDirty ">
             <i class="icon-pencil iconeditdirty">
             </i>
         </li>

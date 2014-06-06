@@ -5,6 +5,8 @@
     self.Contents = ko.observable(passedContents);    
     self.InitialContents = ko.observable(passedContents);
     self.isDirty = ko.computed(function () {
+        //console.log('checking if they are the same')
+        //console.log(self.Contents() + 'is the same than' + self.InitialContents());
         var newval = (self.Contents() !== self.InitialContents())
         return newval;
     });
@@ -26,7 +28,11 @@
     self.cleanAfterSaving = function () {
         var c = self.Contents();
         self.InitialContents(c);
-    }
+    };
+    self.returnToInitial = function () {
+        var c = self.InitialContents();
+        self.Contents(c);
+    };
 };
 
 function createBodyPart(passedItemId, passedContents, passedPartType) {

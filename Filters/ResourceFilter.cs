@@ -68,7 +68,9 @@ namespace Mmr.InlineEditing.Filters
 
             //_resourceManager.Include("style", "Mmr.InlineEditing.Style").AtHead();
             _resourceManager.Require("script", "Mmr.InlineEditing.InitTiny").AtFoot();
+            
 
+            
             _resourceManager.Require("script", "jQueryColorBox").AtFoot();
             _resourceManager.Require("stylesheet", "jQueryColorBox");
 

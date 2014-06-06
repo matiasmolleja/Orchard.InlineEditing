@@ -33,6 +33,7 @@ using System.Web.Mvc;
 // Todo: pencil icon in actions is not nice.
 // Todo: changing the body of the widget set the title as isDirty.
 // Todo: dashboard actions in actions control is not working.
+// Todo: camelCase all properties in javascript. Now the casing is not consistent.
 
 namespace Mmr.InlineEditing.Controllers
 {

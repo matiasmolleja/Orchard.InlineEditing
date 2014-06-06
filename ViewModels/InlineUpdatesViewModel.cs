@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Orchard.Environment.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace Mmr.InlineEditing.ViewModels
 {
+    [OrchardFeature("Mmr.InlineEditing")]
     public class InlineUpdatesViewModel
     {
         public bool EditorMode { get; set; }
