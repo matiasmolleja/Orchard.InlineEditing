@@ -71,6 +71,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\inline-editing-helpers.js" />
     <Content Include="Scripts\inline-editing-parts-factory.js" />
     <Content Include="Scripts\inline-editing.js" />
     <Content Include="Scripts\init-tiny.js" />

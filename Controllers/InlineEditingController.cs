@@ -21,18 +21,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 
-// Todo: enable localization through the use of T()
-// Todo: limit scope of my scripts as explained in Dojo Course.
-// Todo: minify css and script files (don't forget the tinyMce MediaLibrary plugin).
-// Todo: check different themes.
-// Todo: warning when switching off editorMode if unsaved changes.
-// Todo: manage error cases for each submited part , rather than as a whole.
-// Todo: add ui hint to buttons.
-// Todo: localization on the client javascript.
-// Todo: pencil icon in actions is not nice.
-// Todo: changing the body of the widget set the title as isDirty.
-// Todo: camelCase all properties in javascript. Now the casing is not consistent.
-
 namespace Mmr.InlineEditing.Controllers
 {
     [OrchardFeature("Mmr.InlineEditing")]
@@ -130,7 +118,7 @@ namespace Mmr.InlineEditing.Controllers
                 Services.TransactionManager.Cancel();
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-                var errorClientNotification = new { MsgType = "error", Message = "FUNCIONA LA VALIDACION." }; //info-warning-error
+                var errorClientNotification = new { MsgType = "error", Message = "Sorry.An error has ocurred." }; //info-warning-error
 
                 return Json(errorClientNotification);
             }
@@ -140,7 +128,6 @@ namespace Mmr.InlineEditing.Controllers
             var msg = new ErrorInformation("success", "Your changes has been accepted", 0, "-");
             var successClientNotification = msg;
             return Json(successClientNotification);
-
         }
 
 

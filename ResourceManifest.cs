@@ -2,6 +2,7 @@
 
 namespace Mmr.InlineEditing
 {
+    // Define our scripts and styles in the Orchard's Way.
     public class ResourceManifest : IResourceManifestProvider
     {
         public void BuildManifests(ResourceManifestBuilder builder)
@@ -12,15 +13,22 @@ namespace Mmr.InlineEditing
             manifest
                 .DefineStyle("Mmr.InlineEditing.Style")
                 .SetUrl("mmr-inlineediting.css");
+            
             manifest
                 .DefineScript("Mmr.InlineEditing.InlineEditing")
                 .SetUrl("inline-editing.js")
                 .SetDependencies("jQuery");
+            
             manifest
                 .DefineScript("Mmr.InlineEditing.PartsFactory")
                 .SetUrl("inline-editing-parts-factory.js")
                 .SetDependencies("jQuery");
 
+            manifest
+                .DefineScript("Mmr.InlineEditing.Helpers")
+                .SetUrl("inline-editing-helpers.js")
+                .SetDependencies("jQuery");
+            
 
             // TinyMce 4.0.26 init and styles.
             // At the thime of writing Orchard still uses version 3.5. For inline editing I preferred a newer version.

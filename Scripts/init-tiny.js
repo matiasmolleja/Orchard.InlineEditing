@@ -1,11 +1,9 @@
-﻿//if (mediaLibraryEnabled) {
-    mediaLibrary = "medialibrary";
-//}
-
-function buildEditorForHtmlField(contentItemId, partName) {
+﻿function buildEditorForHtmlField(contentItemId, partName) {
     tinymce.init({
         selector: ".mce_" + partName + "_" + contentItemId,
         inline: true,
+        convert_urls: false,
+        relative_urls:false,
         setup: function (editor) {
             editor.on('change', function (e) {
                 var part = getPartFromEditorSelector(e.target.id);
@@ -14,6 +12,10 @@ function buildEditorForHtmlField(contentItemId, partName) {
             editor.on('undo', function (e) {
                 editor.fire('change');                
             }),
+            editor.on('remove', function (e) {
+                var part = getPartFromEditorSelector(e.target.id);
+                editor.setContent(part.Contents());                
+            }),
             editor.on('init', function (e) {
                 var part = getPartFromEditorSelector(e.target.id);
                 // What we get from server is different than what tinyMCE encodes.
@@ -21,9 +23,8 @@ function buildEditorForHtmlField(contentItemId, partName) {
                 var encoded = editor.getContent({ format: 'html' })
                 part.Contents(encoded);
                 part.InitialContents(encoded);
-                
-            })
 
+            })
         },
         menubar: false,
         plugins: [
@@ -46,14 +47,15 @@ function buildEditorForTextField(contentItemId, partName) {
         inline: true,
         setup: function (editor) {
             editor.on('change', function (e) {
-                console.log('change event', e);
                 var part = getPartFromEditorSelector(e.target.id);
-                //todo: differentiate between bodyparts(format:html) and titleParts(format:text)
-                part.Contents(editor.getContent({ format: 'text' }));
-                console.log('contents changed to:' + part.Contents());
+                part.Contents(editor.getContent({ format: 'text' }));                
             }),
             editor.on('undo', function (e) {
                 editor.fire('change');
+            }),
+            editor.on('remove', function (e) {
+                var part = getPartFromEditorSelector(e.target.id);
+                editor.setContent(part.Contents());                
             })
         },
         menubar: false,

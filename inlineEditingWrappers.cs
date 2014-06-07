@@ -7,6 +7,7 @@ using System.Web;
 
 namespace Mmr.InlineEditing
 {
+    // We use this to attach our wrappers to the parts that will be editable: body, title, and widget title
     public class inlineEditingWrappers :IShapeTableProvider
     {
         public void Discover(ShapeTableBuilder builder)

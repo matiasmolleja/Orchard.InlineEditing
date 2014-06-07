@@ -2,15 +2,12 @@
 using Orchard.DisplayManagement;
 using Orchard.Environment.Extensions;
 using Orchard.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using Orchard.Security;
+using System.Web.Mvc;
 
 namespace Mmr.InlineEditing.Filters
 {
+    // We use this filter as a clean way of inserting our top bar into the layout.
     [OrchardFeature("Mmr.InlineEditing")]
     public class InlineEditingTopBarFilter : FilterProvider, IResultFilter
     {
@@ -30,12 +27,13 @@ namespace Mmr.InlineEditing.Filters
 
         public void OnResultExecuting(ResultExecutingContext filterContext)
         {
+            // First we make some checks before inserting our top bar.
             if(filterContext.Result as ViewResult == null)  return;
             if (Orchard.UI.Admin.AdminFilter.IsApplied(filterContext.RequestContext)) return;
             if (filterContext.Result is PartialViewResult) return;
             if (!_authorizer.Authorize(Orchard.Core.Contents.Permissions.EditContent)) return;           
 
-
+            // Here we insert our topbar into the body.
             _wca.GetContext(filterContext).Layout.Zones["Body"].Add(_shapeFactory.Create("InlineEditing_TopBar"), ":before");
 
         }

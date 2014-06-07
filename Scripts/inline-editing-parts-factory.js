@@ -5,8 +5,6 @@
     self.Contents = ko.observable(passedContents);    
     self.InitialContents = ko.observable(passedContents);
     self.isDirty = ko.computed(function () {
-        //console.log('checking if they are the same')
-        //console.log(self.Contents() + 'is the same than' + self.InitialContents());
         var newval = (self.Contents() !== self.InitialContents())
         return newval;
     });
@@ -18,7 +16,6 @@
             if (indexof == -1) {
                 ko.utils.arrayPushAll(IEPageVM.dirtyParts(), [self]);
             }
-
         }
         else {
             ko.utils.arrayRemoveItem(IEPageVM.dirtyParts(), self);

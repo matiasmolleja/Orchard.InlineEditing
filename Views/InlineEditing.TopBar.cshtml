@@ -56,8 +56,10 @@
 <div class="inline-editing-topbar" data-bind="css:{ collapsedtopbar :isCollapsed , expandedtopbar : !isCollapsed() }">
     <ul id="command-bar">
 
-        <li>
-            <a href="#" data-bind="click:collapseBar" class="collapse-button">
+        <li data-bind="visible: !isCollapsed()">
+            <a href="#"
+               title="@T("Collapse toolbar")"
+               data-bind="click:collapseBar" class="collapse-button">
                 <i class="icon-chevron-left"></i>
             </a>
         </li>
@@ -65,23 +67,32 @@
         <li>
             <a href="@Url.Action("Index", "Admin", new { area = "Dashboard" })" id="dashboard-link">ss</a>
         </li>
+        <li data-bind="visible: isCollapsed">
+            <a href="#"
+               title="@T("Expand toolbar")"
+               data-bind="click:collapseBar" class="collapse-button">
+                <i class="icon-chevron-right" data-bind="visible: isCollapsed"></i>
+            </a>
+        </li>
 
         <li data-bind="visible:!isCollapsed()">
             <a href="#"
                id="editorModeLink"
+               title="@T("Toggle Editor Mode")"
                data-bind="click:toggleEditorMode , css: { topbaractivelink : editorMode}">
-                <i class="icon-pencil"></i> Editor Mode
+                <i class="icon-pencil"></i> @T("Editor Mode")
             </a>
         </li>
 
         <li data-bind="visible:!isCollapsed()">
             <a href="#"
+               title="@T("Update Changes")"
                data-bind="click: saveEditedPage , visible: isDirty">
-                <i id="icon-save" class="icon-save"></i>Save
+                <i id="icon-save" class="icon-save"></i>@T("Save")
             </a>
         </li>
-        
-    
+
+
         <li id="infoarea-wrapper" data-bind="visible:!isCollapsed()">
             <ul id="infoarea">
                 <li data-bind="visible: isDirty" title="@T(" changed parts")">
@@ -96,4 +107,4 @@
 </div>
 
 @*This helps when debugging:
-    <pre data-bind="text: JSON.stringify(ko.toJS(IEPageVM), null, 2)"></pre>  *@
+    <pre data-bind="text: JSON.stringify(ko.toJS(IEPageVM), null, 2)"></pre>*@
