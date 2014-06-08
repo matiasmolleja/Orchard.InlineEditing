@@ -1,67 +1,72 @@
-﻿function ClientPart(passedItemId, passedContents, passedPartType) {
-    var self = this;
-    self.partType = ko.observable(passedPartType);
-    self.contentItemId = passedItemId;
-    self.Contents = ko.observable(passedContents);    
-    self.InitialContents = ko.observable(passedContents);
-    self.isDirty = ko.computed(function () {
-        var newval = (self.Contents() !== self.InitialContents())
-        return newval;
-    });
+﻿(function (inlineEditing, $, undefined) {
 
-    self.isDirty.subscribe(function (newValue) {
 
-        if (newValue == true) {
-            var indexof = IEPageVM.dirtyParts().indexOf(self);
-            if (indexof == -1) {
-                ko.utils.arrayPushAll(IEPageVM.dirtyParts(), [self]);
+    function ClientPart(passedItemId, passedContents, passedPartType) {
+        var self = this;
+        self.partType = ko.observable(passedPartType);
+        self.contentItemId = passedItemId;
+        self.Contents = ko.observable(passedContents);
+        self.InitialContents = ko.observable(passedContents);
+        self.isDirty = ko.computed(function () {
+            var newval = (self.Contents() !== self.InitialContents())
+            return newval;
+        });
+
+        self.isDirty.subscribe(function (newValue) {
+
+            if (newValue == true) {
+                var indexof = inlineEditing.IEPageVM.dirtyParts().indexOf(self);
+                if (indexof == -1) {
+                    ko.utils.arrayPushAll(inlineEditing.IEPageVM.dirtyParts(), [self]);
+                }
             }
-        }
-        else {
-            ko.utils.arrayRemoveItem(IEPageVM.dirtyParts(), self);
-        }
-        IEPageVM.dirtyParts.valueHasMutated();
-    });
-    self.cleanAfterSaving = function () {
-        var c = self.Contents();
-        self.InitialContents(c);
-    };
-    self.returnToInitial = function () {
-        var c = self.InitialContents();
-        self.Contents(c);
-    };
-};
-
-function createBodyPart(passedItemId, passedContents, passedPartType) {
-
-    var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
-
-    clientPart.addEditor = function () {
-        buildEditorForHtmlField(clientPart.contentItemId, "BodyPart");
+            else {
+                ko.utils.arrayRemoveItem(inlineEditing.IEPageVM.dirtyParts(), self);
+            }
+            inlineEditing.IEPageVM.dirtyParts.valueHasMutated();
+        });
+        self.cleanAfterSaving = function () {
+            var c = self.Contents();
+            self.InitialContents(c);
+        };
+        self.returnToInitial = function () {
+            var c = self.InitialContents();
+            self.Contents(c);
+        };
     };
 
-    return clientPart;
-};
+    inlineEditing.createBodyPart =  function (passedItemId, passedContents, passedPartType) {
 
-function createTitlePart(passedItemId, passedContents, passedPartType) {
+        var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
 
-    var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
+        clientPart.addEditor = function () {
+            inlineEditing.buildEditorForHtmlField(clientPart.contentItemId, "BodyPart");
+        };
 
-    clientPart.addEditor = function () {
-        buildEditorForTextField(clientPart.contentItemId, "TitlePart");
+        return clientPart;
     };
 
-    return clientPart;
-};
+    inlineEditing.createTitlePart= function (passedItemId, passedContents, passedPartType) {
 
+        var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
 
-function createWidgetTitlePart(passedItemId, passedContents, passedPartType) {
+        clientPart.addEditor = function () {
+            inlineEditing.buildEditorForTextField(clientPart.contentItemId, "TitlePart");
+        };
 
-    var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
-
-    clientPart.addEditor = function () {
-        buildEditorForTextField(clientPart.contentItemId, "WidgetTitlePart");
+        return clientPart;
     };
 
-    return clientPart;
-};
+
+    inlineEditing.createWidgetTitlePart = function (passedItemId, passedContents, passedPartType) {
+
+        var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
+
+        clientPart.addEditor = function () {
+            inlineEditing.buildEditorForTextField(clientPart.contentItemId, "WidgetTitlePart");
+        };
+
+        return clientPart;
+    }
+
+}(window.inlineEditing = window.inlineEditing || {}, jQuery));

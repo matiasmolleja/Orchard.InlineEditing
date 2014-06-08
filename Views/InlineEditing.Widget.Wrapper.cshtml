@@ -21,8 +21,8 @@
                 using (Script.Foot())
                 {
                     <script type="text/javascript">
-                        var wt =  createWidgetTitlePart(@contentItem.Id, '@widgetPart.Title', 'WidgetTitlePart');
-                        IEPageVM.parts().push(wt);
+                        var wt =  inlineEditing.createWidgetTitlePart(@contentItem.Id, '@widgetPart.Title', 'WidgetTitlePart');
+                        inlineEditing.IEPageVM.parts().push(wt);
                     </script>
                 };
 

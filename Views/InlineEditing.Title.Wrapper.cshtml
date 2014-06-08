@@ -16,8 +16,8 @@
     using (Script.Foot())
     {
         <script type="text/javascript">
-            var tp =  createTitlePart(@contentItem.Id, '@titlePart.Title', 'TitlePart');
-            IEPageVM.parts().push(tp);
+            var tp =  inlineEditing.createTitlePart(@contentItem.Id, '@titlePart.Title', 'TitlePart');
+            inlineEditing.IEPageVM.parts().push(tp);
         </script>
     };
 

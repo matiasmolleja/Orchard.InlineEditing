@@ -16,8 +16,8 @@
     using (Script.Foot())
     {
         <script type="text/javascript">
-            var bp =  createBodyPart(@contentItem.Id, '@escapedContent', 'BodyPart');
-            IEPageVM.parts().push(bp);
+            var bp =  inlineEditing.createBodyPart(@contentItem.Id, '@escapedContent', 'BodyPart');
+            inlineEditing.IEPageVM.parts().push(bp);
         </script>
     };
 
