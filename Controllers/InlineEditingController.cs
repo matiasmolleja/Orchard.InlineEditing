@@ -111,7 +111,7 @@ namespace Mmr.InlineEditing.Controllers
                 {
                     var part = ci.As<WidgetPart>();
 
-                    if (part != null)
+                    if (part == null)
                     {
                         clientPart.ErrorMessage = T("{0}:{1} Content item can not be null", clientPart.PartType, clientPart.contentItemId.ToString()).ToString();                         
                     }
