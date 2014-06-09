@@ -20,6 +20,6 @@ namespace Mmr.InlineEditing.ViewModels
         public int contentItemId { get; set;  }
         public string Contents { get; set; }
         public string PartType { get; set; }
-        
+        public string ErrorMessage { get; set; }        
     }
 }

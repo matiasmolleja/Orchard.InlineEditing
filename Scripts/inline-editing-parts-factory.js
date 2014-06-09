@@ -25,7 +25,13 @@
             }
             inlineEditing.IEPageVM.dirtyParts.valueHasMutated();
         });
+
+        // After saving parts this function is called.
+        // The part only change to clean only if errorMessage == string
         self.cleanAfterSaving = function () {
+            if (self.errorMessage() != "") {
+                return;
+            }
             var c = self.Contents();
             self.InitialContents(c);
         };
@@ -33,6 +39,7 @@
             var c = self.InitialContents();
             self.Contents(c);
         };
+        self.errorMessage = ko.observable("");
     };
 
     inlineEditing.createBodyPart =  function (passedItemId, passedContents, passedPartType) {

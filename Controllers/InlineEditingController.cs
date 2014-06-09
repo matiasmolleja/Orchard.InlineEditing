@@ -2,9 +2,7 @@
 using Newtonsoft.Json;
 using Orchard;
 using Orchard.ContentManagement;
-using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Common.Models;
-using Orchard.Core.Contents;
 using Orchard.Core.Title.Models;
 using Orchard.Data;
 using Orchard.DisplayManagement;
@@ -12,14 +10,13 @@ using Orchard.Environment.Extensions;
 using Orchard.Localization;
 using Orchard.Logging;
 using Orchard.Mvc;
-using Orchard.Mvc.Extensions;
 using Orchard.Settings;
-using Orchard.UI.Notify;
 using Orchard.Widgets.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace Mmr.InlineEditing.Controllers
 {
@@ -60,12 +57,14 @@ namespace Mmr.InlineEditing.Controllers
 
             //Thread.Sleep(1500); Debug.
             InlineUpdatesViewModel updates = JsonConvert.DeserializeObject<InlineUpdatesViewModel>(pageVM);
+                        
+            List<InlineEditingPart> partsAfterUpdating = new List<InlineEditingPart>();
 
-            List<ErrorInformation> errors = new List<ErrorInformation>();
             // todo: add more validation cases here...
             if (updates == null)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                // todo: fix this. It wont work on the client.
                 var errorClientNotification = new { MsgType = "error", Message = T("The updates are not valid.") }; //success-info-warning-error
                 return Json(errorClientNotification);
             }
@@ -76,18 +75,23 @@ namespace Mmr.InlineEditing.Controllers
                 int contentItemId = (int)clientPart.contentItemId;
                 var ci = _contentManager.Get(contentItemId);
                 if (ci == null)
-                    errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
+                {
+                    clientPart.ErrorMessage = T("Content item can not be null").ToString();                    
+                }                    
 
                 if (clientPart.PartType.ToLower() == "bodypart")
                 {
-
+                    
                     var part = ci.As<BodyPart>();
-
+                    
                     if (part == null)
-                        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "BodyPart"));
-
-
-                    part.Text = clientPart.Contents;
+                    {
+                        clientPart.ErrorMessage = T("{0}:{1} Content item can not be null",  clientPart.PartType , clientPart.contentItemId.ToString()).ToString();                        
+                    }
+                    else
+                    {
+                        part.Text = clientPart.Contents;
+                    }
 
                 }
                 else if (clientPart.PartType.ToLower() == "titlepart")
@@ -95,32 +99,42 @@ namespace Mmr.InlineEditing.Controllers
                     var part = ci.As<TitlePart>();
 
                     if (part == null)
-                        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "TitlePart"));
-
-
-                    part.Title = clientPart.Contents;
+                    {
+                        clientPart.ErrorMessage = T("{0}:{1} Content item can not be null", clientPart.PartType, clientPart.contentItemId.ToString()).ToString();                        
+                    }
+                    else
+                    {
+                        part.Title = clientPart.Contents;
+                    }
                 }
                 else if (clientPart.PartType.ToLower() == "widgettitlepart")
                 {
                     var part = ci.As<WidgetPart>();
 
-                    if (part == null)
-                        errors.Add(new ErrorInformation("error", "content item can not be null", contentItemId, "WidgetTitlePart"));
-
-
-                    part.Title = clientPart.Contents;
+                    if (part != null)
+                    {
+                        clientPart.ErrorMessage = T("{0}:{1} Content item can not be null", clientPart.PartType, clientPart.contentItemId.ToString()).ToString();                         
+                    }
+                    else
+                    {
+                        part.Title = clientPart.Contents;
+                    }
                 }
+                
+                partsAfterUpdating.Add(clientPart);
 
             }
 
-            if (errors.Count > 0)
+
+            IEnumerable<InlineEditingPart> partsOnError = partsAfterUpdating.Where(p => p.ErrorMessage != string.Empty);
+            if (partsOnError.Count() > 0)
             {
-                Services.TransactionManager.Cancel();
+                // Removed when enabling  saving of only some of the parts of the bacth.
+                // Todo: see if we can enable and still have this partial updates ability.
+                // Services.TransactionManager.Cancel();
+                
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-
-                var errorClientNotification = new { MsgType = "error", Message = "Sorry.An error has ocurred." }; //info-warning-error
-
-                return Json(errorClientNotification);
+                return Json(partsAfterUpdating);
             }
 
 

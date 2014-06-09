@@ -66,9 +66,12 @@
             ko.utils.arrayForEach(self.parts(), function (item) {
                 item.cleanAfterSaving();
             });
-
-            self.dirtyParts([]);
-
+            var dirtyPartsAfterSaving = ko.utils.arrayFilter(self.dirtyParts(), function (item) {
+                return item.isDirty();
+            });
+            console.log('dirtypartsAfterSaving has ' + dirtyPartsAfterSaving.length + ' parts.');
+            self.dirtyParts(dirtyPartsAfterSaving);
+            console.log('dirtyparts has ' + self.dirtyParts().length + ' parts.');
         }
 
         self.resetToInitialValues = function () {
@@ -78,7 +81,12 @@
             self.dirtyParts([]);
         }
 
-
+        self.cancelChanges = function () {
+            ko.utils.arrayForEach(self.parts(), function (item) {
+                item.returnToInitial();
+            });
+            self.dirtyParts([]);
+        }
         // Collapse bar
         self.isCollapsed = ko.observable(false);
         self.collapseBar = function () {
@@ -125,8 +133,23 @@
 
                 }
             }).fail(function (result) {
-                var notification = JSON.parse(result.responseText);
-                inlineEditing.notify(notification.MsgType, notification.Message);
+
+                var returnedParts = JSON.parse(result.responseText);
+                
+                for (var i = 0; i < returnedParts.length; i++) {
+                    var returnedPart = returnedParts[i];
+                    var clientPartOnError = self.partFromIdAndTypeName(returnedPart.contentItemId, returnedPart.PartType);
+                    clientPartOnError.errorMessage(returnedPart.ErrorMessage);
+                    if (clientPartOnError.errorMessage() != "") {
+                        inlineEditing.notify('error', clientPartOnError.errorMessage());
+                    }
+                    else
+                    {
+                        inlineEditing.notify('success', clientPartOnError.partType() + ':' + clientPartOnError.contentItemId + ' was saved ok');
+                    }
+                }
+                self.cleanAfterSaving();
+
             });
 
         };
@@ -155,8 +178,6 @@
                 Notify(notification.MsgType, notification.Message);
             });
         }
-
-
     };
 
     // Main knokout viewmodel

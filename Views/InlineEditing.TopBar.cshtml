@@ -92,6 +92,14 @@
             </a>
         </li>
 
+        <li data-bind="visible:!isCollapsed()">
+            <a href="#"
+               title="@T("Cancel Changes")"
+               data-bind="click: cancelChanges , visible: isDirty">
+                <i id="icon-remove" class="icon-remove"></i>@T("Cancel")
+            </a>
+        </li>
+
 
         <li id="infoarea-wrapper" data-bind="visible:!isCollapsed()">
             <ul id="infoarea">
