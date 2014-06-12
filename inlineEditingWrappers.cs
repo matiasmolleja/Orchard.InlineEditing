@@ -1,4 +1,7 @@
 ﻿using Orchard;
+using Orchard.ContentManagement;
+using Orchard.Core.Common.Models;
+using Orchard.Core.Common.Settings;
 using Orchard.DisplayManagement.Descriptors;
 using System;
 using System.Collections.Generic;
@@ -17,8 +20,27 @@ namespace Mmr.InlineEditing
             {
                 if (!displaying.ShapeMetadata.DisplayType.Contains("Admin"))
                 {
-                    displaying.ShapeMetadata.Wrappers.Add("InlineEditing_Body_Wrapper");
+                    ContentItem contentItem = (ContentItem)displaying.Shape.ContentItem; // Model.ContentItem;
+                    BodyPart bodyPart = contentItem.As<BodyPart>();
+
+                    var typePartSettings = bodyPart.Settings.GetModel<BodyTypePartSettings>();
+                    var flavor = (typePartSettings != null && !string.IsNullOrWhiteSpace(typePartSettings.Flavor))
+                               ? typePartSettings.Flavor
+                               : bodyPart.PartDefinition.Settings.GetModel<BodyPartSettings>().FlavorDefault;
+
+                    if (flavor!="markdown")
+                    {
+                        displaying.ShapeMetadata.Wrappers.Add("InlineEditing_Body_Wrapper");
+                    }
+                    else
+                    {
+                        displaying.ShapeMetadata.Wrappers.Add("InlineEditing_BodyMarkdown_Wrapper");
+                    }
+
+
+                    
                 }
+
             });
 
             builder.Describe("Parts_Title").OnDisplaying(displaying =>

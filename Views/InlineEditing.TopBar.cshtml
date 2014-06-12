@@ -1,6 +1,6 @@
 ﻿@using Orchard.ContentManagement;
 @using Orchard.Core.Contents;
-
+@using Orchard.Mvc.Extensions;
 @{
     ContentItem contentItem = (ContentItem)Model.ContentItem;
 
@@ -9,6 +9,7 @@
     var isEditorModeEnabledForThisSession = HttpContext.Current.Session["editorMode"];
     if (isEditorModeEnabledForThisSession == null)
     { isEditorModeEnabledForThisSession = false; }
+    
 }
 
 @using (Script.Foot())
@@ -19,7 +20,8 @@
         inlineEditing.IEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
         inlineEditing.IEPageVM.updatePartsUrl = '@Url.Action("UpdateParts", "InlineEditing", new { area = "Mmr.InlineEditing" })';
         inlineEditing.IEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
-
+        inlineEditing.IEPageVM.BaseUrl = '@WorkContext.CurrentSite.BaseUrl' ; 
+        
 
         $(document).ready(function () {
 
@@ -27,6 +29,7 @@
 
             // this is needed to update UI on first load.
             inlineEditing.IEPageVM.parts.valueHasMutated();
+
         });
 
 
@@ -114,5 +117,5 @@
     </ul>
 </div>
 
-@*This helps when debugging:
-    <pre data-bind="text: JSON.stringify(ko.toJS(inlineEditing.IEPageVM), null, 2)"></pre>*@
+@*This helps when debugging:*@
+    <pre data-bind="text: JSON.stringify(ko.toJS(inlineEditing.IEPageVM), null, 2)"></pre>

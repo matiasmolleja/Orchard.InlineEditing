@@ -4,10 +4,36 @@
     function InlineEditingPageViewModel() {
         var self = this;
 
+        self.title = ko.observable('a title');
+        self.isOpen = ko.observable(false);
+        self.open = function (e) {
+            console.log(e);
+            //if (self.editorMode) {
+                self.isOpen(true);
+            //}
+            //$(".markdowndialog").bind("clickoutside", function (event) {
+            //    console.log('closing');
+            //    console.log('is open?');
+            //    if (inlineEditing.IEPageVM.isOpen()) {
+            //        console.log('si');
+            //        inlineEditing.IEPageVM.close();
+            //    }
+            //});
+
+            
+        }
+        self.close = function () {
+            self.isOpen(false);
+        }
+        
+
+        self.markdownString = ko.observable('initial markdown');
+
         // Vars Populated from topbar view on first load.
         self.antiForgeryToken = null;
         self.updateSessionValuesUrl = '';
         self.updatePartsUrl = '';
+        self.BaseUrl = '';
 
         // Editable Parts. Populated from each view on first load: body.wrapper, title.wrapper, widgettitle.wrapper
         self.parts = ko.observableArray([]);
@@ -46,20 +72,26 @@
                 self.addEditors();
             }
             else {
-                self.resetToInitialValues();
                 self.removeEditors();
+                self.resetToInitialValues();
+                
             }
             self.updateSessionValues(newValue);
         });
 
         self.addEditors = function () {
+            console.log('adding editors');
             ko.utils.arrayForEach(self.parts(), function (item) {
                 item.addEditor();
             });
         };
 
         self.removeEditors = function () {
-            tinymce.remove();
+            ko.utils.arrayForEach(self.parts(), function (item) {
+                item.removeEditor();
+            });
+
+            //tinymce.remove();
         };
 
         self.cleanAfterSaving = function () {
@@ -108,7 +140,6 @@
                 });
             }
         };
-
 
         // Server Calls
         self.saveEditedPage = function () {
@@ -180,10 +211,15 @@
         }
     };
 
+    
+
     // Main knokout viewmodel
     inlineEditing.IEPageVM = new InlineEditingPageViewModel();
+
     // Activates knockout.js
     ko.applyBindings(inlineEditing.IEPageVM);
+
+
 
 }(window.inlineEditing = window.inlineEditing || {}, jQuery));
 

@@ -2,10 +2,12 @@
 @using Orchard.Core.Contents;
 @using Orchard.Core.Common.Models;
 @using Newtonsoft.Json;
+@using Orchard.Core.Common.Settings;
 
-@{
+@{      
     ContentItem contentItem = (ContentItem)Model.ContentItem;
     BodyPart bodyPart = contentItem.As<BodyPart>();
+               
     string escapedContent = Newtonsoft.Json.JsonConvert.SerializeObject(bodyPart.Text);
 }
 
@@ -16,7 +18,7 @@
     using (Script.Foot())
     {
         <script type="text/javascript">
-            var bp =  inlineEditing.createBodyPart(@contentItem.Id, '@escapedContent', 'BodyPart');
+            var bp =  inlineEditing.createBodyPart(@contentItem.Id, '@escapedContent', 'BodyPart', 'html');
             inlineEditing.IEPageVM.parts().push(bp);
         </script>
     };
@@ -28,7 +30,8 @@
         <div class="mce_BodyPart_@contentItem.Id" id="mce_BodyPart_@contentItem.Id">
             @Model.Html
         </div>
-    </div>
+    </div>   
+
 }
 else
 {

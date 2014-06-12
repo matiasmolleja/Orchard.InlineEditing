@@ -42,13 +42,28 @@
         self.errorMessage = ko.observable("");
     };
 
-    inlineEditing.createBodyPart =  function (passedItemId, passedContents, passedPartType) {
+    inlineEditing.createBodyPart =  function (passedItemId, passedContents, passedPartType, flavor) {
 
         var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
 
-        clientPart.addEditor = function () {
-            inlineEditing.buildEditorForHtmlField(clientPart.contentItemId, "BodyPart");
-        };
+        console.log('passed part type is : ' + passedPartType + flavor);
+        if (flavor!= 'markdown') {
+            clientPart.addEditor = function () {
+                inlineEditing.buildEditorForHtmlField(clientPart.contentItemId, "BodyPart");
+            };
+            clientPart.removeEditor = function () {
+                inlineEditing.removeTinymceEditor(clientPart.contentItemId, "BodyPart");
+            }
+        }
+        else {
+            clientPart.addEditor = function () {
+                inlineEditing.BuildMarkDownEditorForBody(clientPart.contentItemId, "BodyPart");
+            };
+            clientPart.removeEditor = function () {
+                // This is not implemented. We don't need to remove a markdown editor,
+                // hidding it it's enough                
+            }
+        }
 
         return clientPart;
     };
@@ -61,6 +76,11 @@
             inlineEditing.buildEditorForTextField(clientPart.contentItemId, "TitlePart");
         };
 
+        clientPart.removeEditor = function () {
+            inlineEditing.removeTinymceEditor(clientPart.contentItemId, "TitlePart");
+        }
+
+
         return clientPart;
     };
 
@@ -72,6 +92,10 @@
         clientPart.addEditor = function () {
             inlineEditing.buildEditorForTextField(clientPart.contentItemId, "WidgetTitlePart");
         };
+
+        clientPart.removeEditor = function () {
+            inlineEditing.removeTinymceEditor(clientPart.contentItemId, "WidgetTitlePart");
+        }
 
         return clientPart;
     }

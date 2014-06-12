@@ -38,9 +38,6 @@
             valid_elements: "*[*]",
             // shouldn't be needed due to the valid_elements setting, but TinyMCE would strip script.src without it.
             extended_valid_elements: "script[type|defer|src|language]"
-
-
-
         });
     }
 
@@ -74,6 +71,13 @@
         });
     }
     
+    inlineEditing.removeTinymceEditor = function (contentItemId, partName) {
+
+        var ed = tinyMCE.get('mce_' + partName + '_' + contentItemId);
+        if (ed != null) {            
+            ed.remove();
+        };        
+    }
     function getPartFromEditorSelector(editorSelector) {
 
         var slices = editorSelector.split("_");

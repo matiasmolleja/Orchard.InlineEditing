@@ -68,7 +68,32 @@ namespace Mmr.InlineEditing
 
             manifest
                 .DefineStyle("Mmr.InlineEditing.toastr")
-                .SetUrl("toastr.css");            
+                .SetUrl("toastr.css");       
+     
+            //// Marked to include markDown to html edition. Markdown is used only while editing a part. What is retrieved and sent to the browser is always html.
+            //manifest
+            //    .DefineScript("Mmr.InlineEditing.Marked")
+            //    .SetUrl("marked/marked.min.js", "marked/lib/marked.js");
+            
+            manifest
+                .DefineScript("Mmr.InlineEditing.InitMarkdown")
+                .SetUrl("init-markdown.js")
+                .SetDependencies("jQuery");
+
+            manifest
+                .DefineScript("Mmr.InlineEditing.MmrMarkDownMediaLibrary")
+                .SetUrl("markdown/mmr-markdown-media-library.js")
+                .SetDependencies("jQuery");
+
+            manifest.DefineStyle("Mmr.InlineEditing.OrchardMarkdown")
+                .SetUrl("mmr-inline-editing-markdown.css");
+
+            //  Ben Alman's ClickOutside script. Used by markdown modal jquery ui dialog
+            // https://github.com/cowboy/jquery-outside-events
+            manifest.DefineScript("Mmr.InlineEditing.ClickOutside")
+                .SetUrl("jquery.ba-outside-events.min.js")
+                .SetDependencies("jQuery");
+
         }
     }
 }

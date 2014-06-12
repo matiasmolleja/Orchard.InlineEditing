@@ -1,0 +1,132 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Core.Contents;
+@using Orchard.Core.Common.Models;
+@using Newtonsoft.Json;
+@using Orchard.Core.Common.Settings;
+@using Orchard.Environment.Descriptor.Models
+
+
+@* Only show ActionControls and only attaches the part to the knockout viewmodel if the user has EditContent permissions*@
+@if (AuthorizedFor(Permissions.EditContent) && Model.ContentItem.Id > 0)
+{
+    ContentItem contentItem = (ContentItem)Model.ContentItem;
+    BodyPart bodyPart = contentItem.As<BodyPart>();
+
+    string escapedContent = Newtonsoft.Json.JsonConvert.SerializeObject(bodyPart.Text);
+
+    //Markdown_Editor
+    Script.Require("Markdown_Editor").AtFoot(); //Before: OrchardMarkdown Markdown_Editor
+    Style.Require("Mmr.InlineEditing.OrchardMarkdown").AtFoot();
+    Script.Require("Mmr.InlineEditing.ClickOutside").AtFoot();
+
+
+    var shellDescriptor = WorkContext.Resolve<ShellDescriptor>();
+    var mediaLibraryEnabled = shellDescriptor.Features.Any(x => x.Name == "Orchard.MediaLibrary");
+
+
+    if (mediaLibraryEnabled)
+    {
+        Style.Require("jQueryColorBox").AtFoot();
+        Script.Require("Mmr.InlineEditing.MmrMarkDownMediaLibrary").AtFoot();
+        Script.Require("jQueryColorBox").AtFoot();
+    }
+    else
+    {   // todo : enable or deprecate mediapicker?
+        Script.Require("OrchardMarkdown-MediaPicker");
+    }
+
+
+    // Each part attaches itself to the root Knockout viewModel
+    using (Script.Foot())
+    {
+        <script type="text/javascript">
+            var bp =  inlineEditing.createBodyPart(@contentItem.Id, '@escapedContent', 'BodyPart', 'markdown');
+            inlineEditing.IEPageVM.parts().push(bp);
+
+            var part  = inlineEditing.IEPageVM.partFromIdAndTypeName(@contentItem.Id, 'BodyPart');
+
+
+            // Markdown Editor
+            var isFirstLoad = true;
+            var mdconverter = Markdown.getSanitizingConverter();
+            mdconverter.hooks.chain("preConversion", function (text) {
+                if (isFirstLoad) {
+                    part.InitialContents(text);
+                    isFirstLoad = false;
+                }
+                part.Contents(text);
+                //console.log('preconversion' + text);
+                return text ;
+
+            });
+
+            var mdEditor = new Markdown.Editor(mdconverter, "@("-bodypart" + @contentItem.Id)");
+
+            //console.log('we are going to run editor 2');
+            mdEditor.run();
+
+
+            // jQuery UI Dialog for markdown editor.
+            $(document).ready(function () {
+                var options = {
+                    autoOpen: false,
+                    title: 'mytitle',
+                    dialogClass: 'mddialog',
+                    title: 'markDownEditor',
+                    width:600,
+                    height:500
+
+                };
+                $(".contentdialog").dialog(options);
+
+                $(".md-opener").click( function () {
+                    if (inlineEditing.IEPageVM.editorMode()) {
+                        console.log('editor mode is : ' + inlineEditing.IEPageVM.editorMode());
+                        $(".contentdialog").dialog("open");
+                    }    
+                } );
+            });
+
+
+        </script>
+    };
+
+    // Injecting ActionControls shape
+    @Display.InlineEditing_ActionControls(ContentItem: @contentItem, PartTypeName: "BodyPart")
+
+    <div class="inline-editing-body-control md-opener">
+        <div id="@("wmd-preview-bodypart" + @contentItem.Id)" class="wmd-panel wmd-preview" >
+            @Model.Html
+        </div>
+    </div>
+    
+    
+    <div id="mardowndialog" class="contentdialog">
+
+        @*// todo: repair Model.AddMediaPath*@
+        <div class="wmd-editor-box">
+            <div id="@("wmd-button-bar-bodypart" + @contentItem.Id)" class="wmd-button-bar"></div>
+            <div class="text-area-wrapper">
+
+                @Html.TextArea("Text", bodyPart.Text,
+                new Dictionary<string, object> {
+                    {"id", "wmd-input" + "-" + "bodypart" + @contentItem.Id },
+                    { "class", "wmd-input markdown-dialog" },
+                    { "data-mediapicker-uploadpath", Model.AddMediaPath },
+                    { "data-mediapicker-title", T("Insert/Update Media") } })
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+}
+else
+{
+    @Model.Html
+}
