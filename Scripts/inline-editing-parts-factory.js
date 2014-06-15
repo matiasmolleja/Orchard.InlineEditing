@@ -57,11 +57,12 @@
         }
         else {
             clientPart.addEditor = function () {
-                inlineEditing.BuildMarkDownEditorForBody(clientPart.contentItemId, "BodyPart");
+                inlineEditing.BuildMarkDownEditorForBody(clientPart.contentItemId, "BodyPart", clientPart, inlineEditing.IEPageVM.BaseUrl, true);
             };
             clientPart.removeEditor = function () {
-                // This is not implemented. We don't need to remove a markdown editor,
-                // hidding it it's enough                
+                inlineEditing.RemoveMarkDownEditor(clientPart);
+                //inlineEditing.rmd();
+                
             }
         }
 

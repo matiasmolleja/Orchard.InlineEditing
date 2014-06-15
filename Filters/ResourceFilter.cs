@@ -53,7 +53,7 @@ namespace Mmr.InlineEditing.Filters
             _resourceManager.Require("stylesheet", "Mmr.FontAwesome.321");
             _resourceManager.Require("script", "Mmr.InlineEditing.toastr");
             _resourceManager.Require("stylesheet", "Mmr.InlineEditing.toastr");
-            //_resourceManager.Require("script", "Mmr.InlineEditing.Marked");
+            
             _resourceManager.Require("script", "Mmr.InlineEditing.InitMarkdown");
 
 

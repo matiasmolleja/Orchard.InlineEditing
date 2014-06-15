@@ -7,7 +7,7 @@
         self.title = ko.observable('a title');
         self.isOpen = ko.observable(false);
         self.open = function (e) {
-            console.log(e);
+            //console.log(e);
             //if (self.editorMode) {
                 self.isOpen(true);
             //}
@@ -27,6 +27,7 @@
         }
         
 
+
         self.markdownString = ko.observable('initial markdown');
 
         // Vars Populated from topbar view on first load.
@@ -34,6 +35,9 @@
         self.updateSessionValuesUrl = '';
         self.updatePartsUrl = '';
         self.BaseUrl = '';
+        
+        //Settings
+        self.dialogPrefixClassSetting = 'dialog';
 
         // Editable Parts. Populated from each view on first load: body.wrapper, title.wrapper, widgettitle.wrapper
         self.parts = ko.observableArray([]);
@@ -87,6 +91,7 @@
         };
 
         self.removeEditors = function () {
+            console.log('removingdddd editors');
             ko.utils.arrayForEach(self.parts(), function (item) {
                 item.removeEditor();
             });
@@ -111,6 +116,13 @@
                 item.returnToInitial();
             });
             self.dirtyParts([]);
+
+            ko.utils.arrayForEach(self.parts(), function (item) {
+
+                //console.log('initial contents ' + item.InitialContents());
+                //console.log('contents ' + item.Contents());
+                
+            });
         }
 
         self.cancelChanges = function () {
