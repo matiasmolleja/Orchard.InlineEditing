@@ -9,6 +9,13 @@
     font-family: Tahoma,"Helvetica Neue",Arial,Helvetica,sans-serif;
 }
 
+/* Themes using bootstrap sets 'box-sizing:border-box' We don´t want this.  */
+.inline-editing-topbar *, .inline-editing-topbar *:before, .inline-editing-topbar *:after,
+.inline-editing-content-control  *, .inline-editing-content-control *:before, .inline-editing-content-control *:after
+{ 
+    box-sizing: content-box;
+}
+
 
 ul#command-bar {
     list-style-type: none;
