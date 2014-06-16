@@ -82,8 +82,8 @@ namespace Mmr.InlineEditing
 
             //  Ben Alman's ClickOutside script. Used by markdown modal jquery ui dialog
             // https://github.com/cowboy/jquery-outside-events
-            manifest.DefineScript("Mmr.InlineEditing.ClickOutside")
-                .SetUrl("jquery.ba-outside-events.min.js")
+            manifest.DefineScript("Mmr.InlineEditing.Dropit")
+                .SetUrl("dropit/dropit.js")
                 .SetDependencies("jQuery");
 
         }

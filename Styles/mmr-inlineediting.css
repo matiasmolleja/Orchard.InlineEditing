@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     font-family: Tahoma,"Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-size:14px;
 }
 
 /* Themes using bootstrap sets 'box-sizing:border-box' We don´t want this.  */
@@ -30,7 +31,7 @@ ul#command-bar {
     }
 
 
-/* COLLAPSE TOP BAR */
+/* COLLAPSIBLE TOP BAR */
 .collapsedtopbar {
     width: 320px;
     background-color: transparent;
@@ -54,6 +55,7 @@ ul#command-bar {
 .inline-editing-topbar a i.icon-chevron-left {
     padding-left: 12px;
 }
+
 
 
 /* LINKS IN TOP BAR */
@@ -106,12 +108,56 @@ a:active .topbaractivelink {
 li#infoarea-wrapper {
     float: right;
     height: 50px;
-    color: #fff;
+    color: #fff;   
 }
 
 ul#infoarea {
-    padding-top: 12px;
+    padding-top: 12px;    
 }
+
+ul#infoarea li{
+    display:inline;
+    padding:0;
+    margin:0;
+}
+
+
+
+/* DROPIT FOR USER INFO AREA */
+/* These styles assume you are using ul and li */
+.dropit {
+    list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.dropit .dropit-trigger {
+     position: relative;
+     border-left:solid 1px red;    
+}
+
+.dropit .dropit-trigger > a {
+     margin-left:10px;
+     border-left:solid 1px #000;    
+}
+
+.dropit .dropit-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;  /* dropdown left or right */
+    z-index: 1000;
+    display: none;
+    min-width: 170px;
+    width:170px;
+    list-style: none;
+	padding: 0;
+	margin: 50px 0px 0px -100px;
+}
+.dropit .dropit-submenu a {
+   display:block;
+   border-bottom:solid 1px #000;
+   width:170px;
+}
+.dropit .dropit-open .dropit-submenu { display: block;}
 
 
 /*  BUTTONS BAR FOR EACH EDITABLE PART */

@@ -25,8 +25,12 @@
 
         $(document).ready(function () {
 
-            inlineEditing.IEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
+            //action: 'click', // The open action for the trigger
+            //submenuEl: 'ul', // The submenu element
+            //triggerEl: 'a', // The trigger element
 
+            $('#inline-user').dropit({ triggerParentEl: 'nav' });
+            inlineEditing.IEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
             // this is needed to update UI on first load.
             inlineEditing.IEPageVM.parts.valueHasMutated();
 
@@ -103,27 +107,46 @@
             </a>
         </li>
 
-        <li>
-            <a href="#"
-               title="ldkfjal">
-                <i class="icon-remove"></i> aqui el usuario
-            </a>
 
+        <li style="float:right;">
+            @Display.InlineEditing_UserMenu()
         </li>
-
 
         <li id="infoarea-wrapper" data-bind="visible:!isCollapsed()">
             <ul id="infoarea">
-                <li data-bind="visible: isDirty" title="@T(" changed parts")">
+                <li title="@T(" changed parts")" data-bind="visible: isDirty()">
                     <i class="icon-pencil"></i>
                     <span class="badge badge-warning"
                           data-bind="text: dirtyParts().length"></span>
+                    
                 </li>
+
+                    
+                
             </ul>
+               
         </li>
 
     </ul>
+    @*<ul class="dlkafl">
+        <li>
+            <ul class="inline-user">
+                <li>
+                    <a href="#">Dropdown</a>
+                    <ul>
+                        <li><a href="#">Some Action 1</a></li>
+                        <li><a href="#">Some Action 2</a></li>
+                        <li><a href="#">Some Action 3</a></li>
+                        <li><a href="#">Some Action 4</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        
+    </ul>*@   
+    
 </div>
 
-@*This helps when debugging:*@
-    <pre data-bind="text: JSON.stringify(ko.toJS(inlineEditing.IEPageVM), null, 2)"></pre>
+
+@*This helps when debugging:
+    <pre data-bind="text: JSON.stringify(ko.toJS(inlineEditing.IEPageVM), null, 2)"></pre>*@

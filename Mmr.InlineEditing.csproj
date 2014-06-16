@@ -76,6 +76,9 @@
     <Content Include="Content\Images\grippie.png" />
     <Content Include="Content\Images\wmd-buttons.png" />
     <Content Include="license.txt" />
+    <Content Include="Scripts\dropit\dropit.css" />
+    <Content Include="Scripts\dropit\dropit.js" />
+    <Content Include="Scripts\dropit\license.txt" />
     <Content Include="Scripts\init-markdown.js" />
     <Content Include="Scripts\inline-editing-helpers.js" />
     <Content Include="Scripts\inline-editing-parts-factory.js" />
