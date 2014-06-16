@@ -98,31 +98,30 @@ blockquote {
 
 
 /* Prompt for hyperlinks */
-.mddialog .wmd-prompt-background
+.wmd-prompt-background
 {
 	background-color: Black;
     
 }
 
-.mddialog .wmd-prompt-dialog
+.wmd-prompt-dialog
 {
 	border: 1px solid #999999;
 	background-color: #F5F5F5;
     z-index:9999;
 }
 
-.mddialog .wmd-prompt-dialog > div {
+.wmd-prompt-dialog > div {
 	font-size: 0.8em;
 	font-family: arial, helvetica, sans-serif;
 }
 
-
-.mddialog .wmd-prompt-dialog > form > input[type="text"] {
+.wmd-prompt-dialog > form > input[type="text"] {
 	border: 1px solid #999999;
 	color: black;
 }
 
-.mddialog .wmd-prompt-dialog > form > input[type="button"]{
+.wmd-prompt-dialog > form > input[type="button"]{
 	border: 1px solid #888888;
 	font-family: trebuchet MS, helvetica, sans-serif;
 	font-size: 0.8em;

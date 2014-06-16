@@ -11,8 +11,10 @@
 }
 
 /* Themes using bootstrap sets 'box-sizing:border-box' We don´t want this.  */
+
 .inline-editing-topbar *, .inline-editing-topbar *:before, .inline-editing-topbar *:after,
-.inline-editing-content-control  *, .inline-editing-content-control *:before, .inline-editing-content-control *:after
+.inline-editing-content-control  *, .inline-editing-content-control *:before, .inline-editing-content-control *:after,
+.mddialog *, .mddialog *:before, .mddialog *:after
 { 
     box-sizing: content-box;
 }
