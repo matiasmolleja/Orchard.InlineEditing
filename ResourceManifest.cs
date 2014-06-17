@@ -74,18 +74,21 @@ namespace Mmr.InlineEditing
             manifest
                 .DefineScript("Mmr.InlineEditing.InitMarkdown")
                 .SetUrl("init-markdown.js")
-                .SetDependencies("jQuery");
+                .SetDependencies("jQueryUI");
 
 
             manifest.DefineStyle("Mmr.InlineEditing.OrchardMarkdown")
                 .SetUrl("mmr-inline-editing-markdown.css");
 
-            //  Ben Alman's ClickOutside script. Used by markdown modal jquery ui dialog
-            // https://github.com/cowboy/jquery-outside-events
             manifest.DefineScript("Mmr.InlineEditing.Dropit")
                 .SetUrl("dropit/dropit.js")
                 .SetDependencies("jQuery");
 
+            manifest.DefineScript("Mmr.InlineEditing.DialogExtend")
+                .SetUrl("dialogextend/jquery.dialogextend.1_0_1.pack.js", "dialogextend/jquery.dialogextend.1_0_1.js")
+                .SetDependencies("jQueryUI");
+
+            
         }
     }
 }

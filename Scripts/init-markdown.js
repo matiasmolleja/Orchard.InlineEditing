@@ -138,6 +138,40 @@
         });
     };
 
+    // Initializes dialog with extension from:
+    // https://code.google.com/p/jquery-dialogextend/
+    var BuildExtendedMarkDownDialog = function (contentItemId) {
+
+        // jQuery UI Dialog for markdown editor.
+        $(document).ready(function () {
+            var options = {
+                autoOpen: false,
+                title: 'MarkDown Edi',
+                dialogClass: 'mddialog',
+                title: 'markDownEditor',
+                width: 600,
+                height: 500,
+                zIndex: 900 //If we don't set this or set it to a very high value, the insert hyperlink dialog will be hidden by our own dialog.
+
+            };
+
+            var dclass = '.dialog-bodyPart-' + contentItemId;
+            $(dclass).dialog(options)
+            .dialogExtend({
+                "maximize" : true,
+                "dblclick" : "maximize",
+                "icons" : { "maximize" : "ui-icon-arrow-4-diag" }
+            });
+            ;
+
+            $(".md-opener").click(function () {
+                if (inlineEditing.IEPageVM.editorMode()) {
+                    console.log('editor mode is : ' + inlineEditing.IEPageVM.editorMode());
+                    $(dclass).dialog("open");
+                }
+            });
+        });
+    }
 
     // Removing the editor. Called when Editor Mode is turned off
     inlineEditing.RemoveMarkDownEditor = function (part) {

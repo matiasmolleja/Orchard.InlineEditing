@@ -56,6 +56,7 @@ namespace Mmr.InlineEditing.Filters
             _resourceManager.Require("script", "Mmr.InlineEditing.toastr");
             _resourceManager.Require("stylesheet", "Mmr.InlineEditing.toastr");
             _resourceManager.Require("script", "Mmr.InlineEditing.Dropit");
+            _resourceManager.Require("script", "Mmr.InlineEditing.DialogExtend");
 
             //manifest.DefineScript("Markdown_Converter").SetUrl("Markdown.Converter.min.js", "Markdown.Converter.js");
             //manifest.DefineScript("Markdown_Sanitizer").SetUrl("Markdown.Sanitizer.min.js", "Markdown.Sanitizer.js").SetDependencies("Markdown_Converter");
