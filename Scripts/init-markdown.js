@@ -117,7 +117,7 @@
         $(document).ready(function () {
             var options = {
                 autoOpen: false,
-                title: 'MarkDown Edi',
+                modal:true,
                 dialogClass: 'mddialog',
                 title: 'markDownEditor',                
                 width: 600,
