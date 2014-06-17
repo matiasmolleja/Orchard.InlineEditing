@@ -40,6 +40,11 @@
             self.Contents(c);
         };
         self.errorMessage = ko.observable("");
+
+        self.isEmpty = ko.computed(function () {
+            var returnvalue = (!self.Contents() || 0 === self.Contents().length);
+            return returnvalue;
+        })
     };
 
     inlineEditing.createBodyPart =  function (passedItemId, passedContents, passedPartType, flavor) {

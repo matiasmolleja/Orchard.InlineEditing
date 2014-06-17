@@ -58,8 +58,12 @@
         <div id="@("wmd-preview-bodypart" + @contentItem.Id)" class="wmd-panel wmd-preview" >
             @Model.Html
         </div>
+        
     </div>
-
+    <div class="md-opener"
+         data-bind="visible: partFromIdAndTypeName(@contentItem.Id,'BodyPart').isEmpty">
+        <a href="#" title="@T("click here to edit content")"> @T("click here to edit your content")</a>
+    </div>
     @*This is the dialog that opens and contains the markdown editor. *@
     <div class="@("dialog-bodyPart-" + contentItem.Id.ToString())" style="display:none;">
 
