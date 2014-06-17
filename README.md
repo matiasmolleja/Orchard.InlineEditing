@@ -4,6 +4,8 @@ To achieve this the module uses knockout and ajax so the user experience is very
 
 Right now it works with body, title and widget title parts.
 
+For body parts the module shows a Markdown editor or a TinyMCE editor depending on what flavor the body has.
+
 To use it, simply enable the module,  log in with an user account that has edit permissions and use the top bar.
 
 Once you enable Editor Mode in the top bar you can edit contents.
