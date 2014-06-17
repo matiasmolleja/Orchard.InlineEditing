@@ -26,7 +26,10 @@
         $(document).ready(function () {
 
             $('.highlighter').mouseenter(function () {
-                $(this).effect('highlight', { color: '#c7e7c2' }, 'slow');
+                if (inlineEditing.IEPageVM.editorMode()) {
+                    $(this).effect('highlight', { color: '#c7e7c2' }, 'slow');
+                }
+                
             });
             $('#inline-user').dropit({ triggerParentEl: 'nav' });
             inlineEditing.IEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
