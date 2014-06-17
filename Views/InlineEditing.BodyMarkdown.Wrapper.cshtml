@@ -54,16 +54,20 @@
      "Id" and "class" attribs in the inner div is the way to attach the dialog and markdown editor to this preview.
      This divs acts too as the dialog-opener through its click event
     *@
-    <div class="inline-editing-body-control md-opener">
-        <div id="@("wmd-preview-bodypart" + @contentItem.Id)" class="wmd-panel wmd-preview" >
+    <div class="inline-editing-body-control md-opener highlighter">
+        <div id="@("wmd-preview-bodypart" + @contentItem.Id)" class="wmd-panel wmd-preview">
             @Model.Html
         </div>
-        
+        <a href="#"
+           title="@T("click here to edit content")"
+           data-bind="visible: partFromIdAndTypeName(@contentItem.Id,'BodyPart').isEmpty">
+            @T("click here to edit your content")
+        </a>
+
     </div>
-    <div class="md-opener"
-         data-bind="visible: partFromIdAndTypeName(@contentItem.Id,'BodyPart').isEmpty">
-        <a href="#" title="@T("click here to edit content")"> @T("click here to edit your content")</a>
-    </div>
+
+
+
     @*This is the dialog that opens and contains the markdown editor. *@
     <div class="@("dialog-bodyPart-" + contentItem.Id.ToString())" style="display:none;">
 

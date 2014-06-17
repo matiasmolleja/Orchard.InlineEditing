@@ -25,10 +25,9 @@
 
         $(document).ready(function () {
 
-            //action: 'click', // The open action for the trigger
-            //submenuEl: 'ul', // The submenu element
-            //triggerEl: 'a', // The trigger element
-
+            $('.highlighter').mouseenter(function () {
+                $(this).effect('highlight', { color: '#c7e7c2' }, 'slow');
+            });
             $('#inline-user').dropit({ triggerParentEl: 'nav' });
             inlineEditing.IEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
             // this is needed to update UI on first load.
