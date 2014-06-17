@@ -1,36 +1,35 @@
 ﻿/* This is a default for blockquotes, just to make it visible.
     Feel free to change*/
 blockquote {
-	border-left: 2px dotted #888;
-	padding-left: 5px;
-	background: #d0f0ff;
+    border-left: 2px dotted #888;
+    padding-left: 5px;
+    background: #d0f0ff;
 }
 
-/* We use the .mddialog class to isolate changes that we made here from other
+/* We use the ".mddialog" selector to isolate changes that we made here from other
     jQuery Dialogs or PageDown plugins that the website could have */
+
 /* Button Bar */
-.mddialog .wmd-button-bar 
-{
-    	width: 100%;
-	background-color: #fff; 
-}
-.mddialog .wmd-button-row 
-{
-	position: relative; 
-    margin:0;
-	padding: 0px;  
-	height: 20px;
+.mddialog .wmd-button-bar {
+    width: 100%;
+    background-color: #fff;
 }
 
-.mddialog .wmd-spacer
-{
-	width: 1px; 
-	height: 20px; 
-	margin-left: 14px;
-	position: absolute;
-	background-color: Silver;
-	display: inline-block; 
-	list-style: none;
+.mddialog .wmd-button-row {
+    position: relative;
+    margin: 0;
+    padding: 0px;
+    height: 20px;
+}
+
+.mddialog .wmd-spacer {
+    width: 1px;
+    height: 20px;
+    margin-left: 14px;
+    position: absolute;
+    background-color: Silver;
+    display: inline-block;
+    list-style: none;
 }
 
 .mddialog .wmd-button {
@@ -44,110 +43,102 @@ blockquote {
     cursor: pointer;
 }
 
-.mddialog .wmd-button > span {
-    background-image: url(images/wmd-buttons.png);
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-}
+    .mddialog .wmd-button > span {
+        background-image: url(images/wmd-buttons.png);
+        background-repeat: no-repeat;
+        background-position: 0px 0px;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+    }
 
-.mddialog .wmd-spacer1
-{
+.mddialog .wmd-spacer1 {
     left: 50px;
 }
-.mddialog .wmd-spacer2
-{
+
+.mddialog .wmd-spacer2 {
     left: 175px;
 }
-.mddialog .wmd-spacer3
-{
+
+.mddialog .wmd-spacer3 {
     left: 300px;
 }
 
 
 /* Input Text Area */
-.mddialog .wmd-input 
-{ 
-	height: 300px;
-	width: 100%;
-	background-color: #ddd;
-	border:0;    
+.mddialog .wmd-input {
+    height: 300px;
+    width: 100%;
+    background-color: #ddd;
+    border: 0;
 }
 
 
 .mddialog div.text-area-wrapper {
-  position: absolute;
-  left: 0px; 
-  top: 20px;
-  right: 6px; 
-  bottom: 7px;
-  border:0; 
+    position: absolute;
+    left: 0px;
+    top: 20px;
+    right: 6px;
+    bottom: 7px;
+    border: 0;
 }
 
 .mddialog textarea.markdown-dialog {
-  width: 100%;
-  height: 100%  !important;
-  margin: 0; /* don't want to add to container size */
-  border: 0; /* don't want to add to container size */
-  resize:none;
-  
+    width: 100%;
+    height: 100% !important;
+    margin: 0; /* don't want to add to container size */
+    border: 0; /* don't want to add to container size */
+    resize: none;
 }
-
 
 
 /* Prompt for hyperlinks */
-.wmd-prompt-background
-{
-	background-color: Black;
-    
+.wmd-prompt-background {
+    background-color: Black;
 }
 
-.wmd-prompt-dialog
-{
-	border: 1px solid #999999;
-	background-color: #F5F5F5;
-    z-index:9999;
+.wmd-prompt-dialog {
+    border: 1px solid #999999;
+    background-color: #F5F5F5;
+    z-index: 9999;
 }
 
-.wmd-prompt-dialog > div {
-	font-size: 0.8em;
-	font-family: arial, helvetica, sans-serif;
-}
+    .wmd-prompt-dialog > div {
+        font-size: 0.8em;
+        font-family: arial, helvetica, sans-serif;
+    }
 
-.wmd-prompt-dialog > form > input[type="text"] {
-	border: 1px solid #999999;
-	color: black;
-}
+    .wmd-prompt-dialog > form > input[type="text"] {
+        border: 1px solid #999999;
+        color: black;
+    }
 
-.wmd-prompt-dialog > form > input[type="button"]{
-	border: 1px solid #888888;
-	font-family: trebuchet MS, helvetica, sans-serif;
-	font-size: 0.8em;
-	font-weight: bold;
-}
-
+    .wmd-prompt-dialog > form > input[type="button"] {
+        border: 1px solid #888888;
+        font-family: trebuchet MS, helvetica, sans-serif;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
 
 
 
 /* customizing jquery UI dialog */
 
 .mddialog.ui-dialog .ui-dialog-content {
-
     padding: 0;
-
 }
 
 .mddialog.ui-widget-content {
-    background: url("images/ui-bg_flat_75_ffffff_40x100.png") repeat-x scroll 50% 50% #FFFFFF;
+    background: #FFFFFF;
     border: 1px solid #c2c2c2;
     color: #222222;
 }
+
 .mddialog.ui-widget {
     font-family: Tahoma,"Helvetica Neue",Arial,Helvetica,sans-serif;
     font-size: 12px;
 }
+
 .mddialog.ui-dialog {
     left: 0;
     overflow: hidden;
@@ -157,33 +148,35 @@ blockquote {
     width: 300px;
 }
 
-
 .mddialog .ui-widget-header {
-    background:none #333;
+    background: none #333;
     border: 1px solid #AAAAAA;
     color: #fff;
-    font-weight: bold;    
-    font-weight:100;  
+    font-weight: bold;
+    font-weight: 100;
 }
 
 .mddialog.ui-corner-all, .mddialog .ui-corner-all, .mddialog.ui-corner-bottom, .mddialog.ui-corner-right, .mddialog.ui-corner-br {
     border-bottom-right-radius: 0px;
 }
+
 .mddialog.ui-corner-all, .mddialog .ui-corner-all, .mddialog.ui-corner-bottom, .mddialog.ui-corner-left, .mddialog.ui-corner-bl {
     border-bottom-left-radius: 0px;
 }
+
 .mddialog.ui-corner-all, .mddialog .ui-corner-all, .mddialog.ui-corner-top, .mddialog.ui-corner-right, .mddialog.ui-corner-tr {
     border-top-right-radius: 0px;
 }
+
 .mddialog.ui-corner-all, .mddialog .ui-corner-all, .mddialog.ui-corner-top, .mddialog.ui-corner-left, .mddialog.ui-corner-tl {
     border-top-left-radius: 0px;
 }
 
 .mddialog .ui-dialog-titlebar {
     padding: 6px 0px 6px 10px;
-    height:18px;
+    height: 18px;
     position: relative;
-    border:none;
+    border: none;
 }
 
 .mddialog .ui-dialog-titlebar-close {
@@ -197,16 +190,17 @@ blockquote {
     border-left: 1px #000 solid;
 }
 
-.mddialog .ui-state-hover .ui-icon, .mddialog ui-state-focus .ui-icon{
-    background-color:#484B40!important;
+.mddialog .ui-state-hover .ui-icon, .mddialog ui-state-focus .ui-icon {
+    background-color: #484B40 !important;
     /*margin:0!important;
     padding:0!important;
     border: 0px none!important;*/
 }
+
 .mddialog .ui-dialog-titlebar-close span {
     display: block;
-    width:30px;
-    height:30px;
+    width: 30px;
+    height: 30px;
     margin: 0;
 }
 
@@ -219,6 +213,5 @@ blockquote {
 .mddialog .ui-state-focus,
 .mddialog .ui-widget-content .ui-state-focus,
 .mddialog .ui-widget-header .ui-state-focus {
-     border: 0;
-
+    border: 0;
 }
