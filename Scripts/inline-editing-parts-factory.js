@@ -47,6 +47,14 @@
         })
     };
 
+    
+    // People who wants to extend genericClientPart to enable inline editing in its own parts should call this method.
+    // Then simply add new properties to it, as we do in this same file.
+    inlineEditing.createGenericClientPart  = function (passedItemId, passedContents, passedPartType) {
+        return new ClientPart(passedItemId, passedContents, passedPartType)
+    };
+
+
     inlineEditing.createBodyPart =  function (passedItemId, passedContents, passedPartType, flavor) {
 
         var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
@@ -66,8 +74,6 @@
             };
             clientPart.removeEditor = function () {
                 inlineEditing.RemoveMarkDownEditor(clientPart);
-                //inlineEditing.rmd();
-                
             }
         }
 
@@ -89,7 +95,6 @@
 
         return clientPart;
     };
-
 
     inlineEditing.createWidgetTitlePart = function (passedItemId, passedContents, passedPartType) {
 
