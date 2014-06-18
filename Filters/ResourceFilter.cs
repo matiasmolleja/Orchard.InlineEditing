@@ -35,39 +35,29 @@ namespace Mmr.InlineEditing.Filters
             if (!_authorizer.Authorize(Orchard.Core.Contents.Permissions.EditContent)) return;
             
             // Load our scripts and styles. Defined in ResourceManifest.
+            // Dependencies
             _resourceManager.Require("script", "Mmr.InlineEditing.Knockout-2.3.0").AtFoot();
             _resourceManager.Require("script", "jQueryUI").AtFoot();
-            _resourceManager.Require("style", "jquerystyle");
-            _resourceManager.Require("stylesheet", "jQueryUI_Orchard");
             _resourceManager.Require("script", "Mmr.InlineEditing.Tiny").AtFoot();
-            
+            _resourceManager.Require("script", "Mmr.InlineEditing.toastr").AtFoot();
+            _resourceManager.Require("script", "Mmr.InlineEditing.Dropit").AtFoot();
+            _resourceManager.Require("script", "Mmr.InlineEditing.DialogExtend").AtFoot();
+            _resourceManager.Require("script", "Mmr.InlineEditing.ClickOutside").AtFoot();
+
+            // Inline Editing Logic
             _resourceManager.Require("script", "Mmr.InlineEditing.PartsFactory").AtFoot();
             _resourceManager.Require("script", "Mmr.InlineEditing.Helpers").AtFoot();
             _resourceManager.Require("script", "Mmr.InlineEditing.InlineEditing").AtFoot();
-            _resourceManager.Require("stylesheet", "Mmr.InlineEditing.Style");
             _resourceManager.Require("script", "Mmr.InlineEditing.InitTiny").AtFoot();
-            _resourceManager.Require("script", "Mmr.InlineEditing.InitMarkdown");
-
+            _resourceManager.Require("script", "Mmr.InlineEditing.InitMarkdown").AtFoot();
             
-            _resourceManager.Require("script", "jQueryColorBox").AtFoot();
-            _resourceManager.Require("stylesheet", "jQueryColorBox");
-            
+            // Styles
+            _resourceManager.Require("stylesheet", "Mmr.InlineEditing.Style");
+            _resourceManager.Require("stylesheet", "jQueryUI_Orchard");
             _resourceManager.Require("stylesheet", "Mmr.FontAwesome.321");
-            _resourceManager.Require("script", "Mmr.InlineEditing.toastr");
-            _resourceManager.Require("stylesheet", "Mmr.InlineEditing.toastr");
-            _resourceManager.Require("script", "Mmr.InlineEditing.Dropit");
-            _resourceManager.Require("script", "Mmr.InlineEditing.DialogExtend");
+            _resourceManager.Require("stylesheet", "Mmr.InlineEditing.toastr");           
 
-            //manifest.DefineScript("Markdown_Converter").SetUrl("Markdown.Converter.min.js", "Markdown.Converter.js");
-            //manifest.DefineScript("Markdown_Sanitizer").SetUrl("Markdown.Sanitizer.min.js", "Markdown.Sanitizer.js").SetDependencies("Markdown_Converter");
-            //manifest.DefineScript("Markdown_Editor").SetUrl("Markdown.Editor.min.js", "Markdown.Editor.js").SetDependencies("Markdown_Sanitizer");
-            //manifest.DefineScript("Resizer").SetUrl("jquery.textarearesizer.min.js", "jquery.textarearesizer.js").SetDependencies("jQuery");
 
-            //manifest.DefineScript("OrchardMarkdown").SetUrl("orchard-markdown.min.js", "orchard-markdown.js").SetDependencies("Resizer", "Markdown_Editor");
-            //manifest.DefineStyle("OrchardMarkdown").SetUrl("admin-markdown.css");
-
-            //manifest.DefineScript("OrchardMarkdown-MediaPicker").SetUrl("orchard-markdown-media-picker.min.js", "orchard-markdown-media-picker.js");
-            //manifest.DefineScript("OrchardMarkdown-MediaLibrary").SetUrl("orchard-markdown-media-library.min.js", "orchard-markdown-media-library.js");
         }
 
 

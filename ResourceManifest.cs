@@ -84,10 +84,16 @@ namespace Mmr.InlineEditing
                 .SetUrl("dropit/dropit.js")
                 .SetDependencies("jQuery");
 
+
             manifest.DefineScript("Mmr.InlineEditing.DialogExtend")
                 .SetUrl("dialogextend/jquery.dialogextend.1_0_1.pack.js", "dialogextend/jquery.dialogextend.1_0_1.js")
                 .SetDependencies("jQueryUI");
 
+            // https://github.com/coheractio/jQuery-UI-Dialog-ClickOutside
+            manifest.DefineScript("Mmr.InlineEditing.ClickOutside")
+                .SetUrl("clickoutside/jquery.ui.dialog-clickoutside.js")
+                .SetDependencies("jQueryUI");
+            
             
         }
     }

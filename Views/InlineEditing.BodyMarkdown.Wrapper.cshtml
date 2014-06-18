@@ -44,7 +44,6 @@
             inlineEditing.IEPageVM.parts().push(bp);
         </script>
     };
-
     
     // Injecting ActionControls shape
     @Display.InlineEditing_ActionControls(ContentItem: @contentItem, PartTypeName: "BodyPart")
@@ -58,18 +57,17 @@
         <div id="@("wmd-preview-bodypart" + @contentItem.Id)" class="wmd-panel wmd-preview">
             @Model.Html
         </div>
-        <a href="#"
-           title="@T("click here to edit content")"
-           data-bind="visible: partFromIdAndTypeName(@contentItem.Id,'BodyPart').isEmpty">
-            @T("click here to edit your content")
-        </a>
-
     </div>
 
+    <a href="#"
+       title="@T("click here to edit content")"
+       data-bind="visible: partFromIdAndTypeName(@contentItem.Id,'TitlePart').isEmpty">
+        @T("click here to add content")
+    </a>
 
 
     @*This is the dialog that opens and contains the markdown editor. *@
-    <div class="@("dialog-bodyPart-" + contentItem.Id.ToString())" style="display:none;">
+    <div class="@("dialog-bodyPart-" + contentItem.Id.ToString()) closer" style="display:none;">
 
         @* todo: repair Model.AddMediaPath*@
         <div class="wmd-editor-box">
@@ -91,8 +89,6 @@
         </div>
 
     </div>
-
-
 
 }
 else

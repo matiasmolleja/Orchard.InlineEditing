@@ -4,41 +4,13 @@
     function InlineEditingPageViewModel() {
         var self = this;
 
-        self.title = ko.observable('a title');
-        self.isOpen = ko.observable(false);
-        self.open = function (e) {
-            //console.log(e);
-            //if (self.editorMode) {
-                self.isOpen(true);
-            //}
-            //$(".markdowndialog").bind("clickoutside", function (event) {
-            //    console.log('closing');
-            //    console.log('is open?');
-            //    if (inlineEditing.IEPageVM.isOpen()) {
-            //        console.log('si');
-            //        inlineEditing.IEPageVM.close();
-            //    }
-            //});
-
-            
-        }
-        self.close = function () {
-            self.isOpen(false);
-        }
-        
-
-
-        self.markdownString = ko.observable('initial markdown');
-
         // Vars Populated from topbar view on first load.
         self.antiForgeryToken = null;
         self.updateSessionValuesUrl = '';
         self.updatePartsUrl = '';
         self.BaseUrl = '';
-        
-        //Settings
-        self.dialogPrefixClassSetting = 'dialog';
 
+        
         // Editable Parts. Populated from each view on first load: body.wrapper, title.wrapper, widgettitle.wrapper
         self.parts = ko.observableArray([]);
 
@@ -84,19 +56,15 @@
         });
 
         self.addEditors = function () {
-            console.log('adding editors');
             ko.utils.arrayForEach(self.parts(), function (item) {
                 item.addEditor();
             });
         };
 
         self.removeEditors = function () {
-            console.log('removingdddd editors');
             ko.utils.arrayForEach(self.parts(), function (item) {
                 item.removeEditor();
-            });
-
-            //tinymce.remove();
+            });            
         };
 
         self.cleanAfterSaving = function () {
@@ -106,9 +74,7 @@
             var dirtyPartsAfterSaving = ko.utils.arrayFilter(self.dirtyParts(), function (item) {
                 return item.isDirty();
             });
-            console.log('dirtypartsAfterSaving has ' + dirtyPartsAfterSaving.length + ' parts.');
-            self.dirtyParts(dirtyPartsAfterSaving);
-            console.log('dirtyparts has ' + self.dirtyParts().length + ' parts.');
+            self.dirtyParts(dirtyPartsAfterSaving);            
         }
 
         self.resetToInitialValues = function () {
@@ -118,10 +84,7 @@
             self.dirtyParts([]);
 
             ko.utils.arrayForEach(self.parts(), function (item) {
-
-                //console.log('initial contents ' + item.InitialContents());
-                //console.log('contents ' + item.Contents());
-                
+               
             });
         }
 

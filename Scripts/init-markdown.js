@@ -1,8 +1,8 @@
 ﻿(function (inlineEditing, $, undefined) {
-    
+
     // Builds Inline Editor for body with a markdown flavor. 
     inlineEditing.BuildMarkDownEditorForBody = function (contentItemId, partName, part, baseUrl, resettingToInitial) {
-        
+
         // Step One: Build Editor
         BuildMarkDownEditor(partName, part, baseUrl, resettingToInitial);
 
@@ -11,7 +11,7 @@
 
     };
 
-    
+
     // Initializes a markdown editor. Most of the code is for enabling Orchard Media Library.
     var BuildMarkDownEditor = function (partName, part, baseUrl, resettingToInitial) {
 
@@ -23,9 +23,9 @@
         var mdconverter = Markdown.getSanitizingConverter();
 
         mdconverter.hooks.chain("preConversion", function (text) {
-            
+
             if (isFirstLoad) {
-                
+
                 part.InitialContents(text);
                 isFirstLoad = false;
             }
@@ -34,7 +34,7 @@
             return text;
 
         });
-        
+
         var editor = new Markdown.Editor(mdconverter, idPostfix);
 
         editor.hooks.set("insertImageDialog",
@@ -110,20 +110,23 @@
         editor.run();
 
     };
-    
+
     // Initializes the jQuery UI dialog that will contain the editor.
     var BuildMarkDownDialog = function (contentItemId) {
         // jQuery UI Dialog for markdown editor.
         $(document).ready(function () {
+
+            //If we don't set zIndex or set it to a very high value, the insert hyperlink dialog will be hidden by our own dialog.
             var options = {
                 autoOpen: false,
                 modal:true,
                 dialogClass: 'mddialog',
-                title: 'markDownEditor',                
+                title: 'markDownEditor',
                 width: 600,
                 height: 500,
-                zIndex: 900 //If we don't set this or set it to a very high value, the insert hyperlink dialog will be hidden by our own dialog.
-
+                zIndex: 900,
+                clickOutside: true,
+                clickOutsideTrigger: ".md-opener"
             };
 
             var dclass = '.dialog-bodyPart-' + contentItemId;
@@ -131,7 +134,6 @@
 
             $(".md-opener").click(function () {
                 if (inlineEditing.IEPageVM.editorMode()) {
-                    console.log('editor mode is : ' + inlineEditing.IEPageVM.editorMode());
                     $(dclass).dialog("open");
                 }
             });
@@ -158,9 +160,9 @@
             var dclass = '.dialog-bodyPart-' + contentItemId;
             $(dclass).dialog(options)
             .dialogExtend({
-                "maximize" : true,
-                "dblclick" : "maximize",
-                "icons" : { "maximize" : "ui-icon-arrow-4-diag" }
+                "maximize": true,
+                "dblclick": "maximize",
+                "icons": { "maximize": "ui-icon-arrow-4-diag" }
             });
             ;
 
@@ -178,8 +180,8 @@
 
         var mdconverter = Markdown.getSanitizingConverter();
 
-        $('#wmd-preview-bodypart' + part.contentItemId).html(mdconverter.makeHtml( part.InitialContents()));
-        $('#wmd-input-bodypart' + part.contentItemId).val( part.InitialContents());
+        $('#wmd-preview-bodypart' + part.contentItemId).html(mdconverter.makeHtml(part.InitialContents()));
+        $('#wmd-input-bodypart' + part.contentItemId).val(part.InitialContents());
 
         $('.dialog-bodyPart-' + part.contentItemId).dialog("close");
         $('.dialog-bodyPart-' + part.contentItemId).dialog("destroy");

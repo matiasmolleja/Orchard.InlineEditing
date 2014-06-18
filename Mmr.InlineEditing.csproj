@@ -76,6 +76,7 @@
     <Content Include="Content\Images\grippie.png" />
     <Content Include="Content\Images\wmd-buttons.png" />
     <Content Include="license.txt" />
+    <Content Include="Scripts\clickoutside\jquery.ui.dialog-clickoutside.js" />
     <Content Include="Scripts\dialogextend\jquery.dialogextend.1_0_1.js" />
     <Content Include="Scripts\dialogextend\jquery.dialogextend.1_0_1.pack.js" />
     <Content Include="Scripts\dropit\dropit.css" />
