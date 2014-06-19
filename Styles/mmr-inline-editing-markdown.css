@@ -174,38 +174,78 @@ blockquote {
 
 .mddialog .ui-dialog-titlebar {
     padding: 6px 0px 6px 10px;
-    height: 18px;
+    /*height: 18px;*/
     position: relative;
     border: none;
 }
 
-.mddialog .ui-dialog-titlebar-close {
-    height: 30px;
+.mddialog .ui-dialog-titlebar-close,
+.mddialog .ui-dialog-titlebar-maximize,
+.mddialog .ui-dialog-titlebar-restore {
+    /*height: 30px;
     margin: -15px 0 0;
     padding: 0;
     position: absolute;
-    right: 0px;
     top: 50%;
     width: 30px;
-    border-left: 1px #000 solid;
+    border-left: 1px red solid;*/
+}
+.mddialog .ui-dialog-titlebar-close{
+    /*height: 30px;
+    margin: -13px 0 0;
+    padding: 0;
+    position: absolute;
+    right: 20px;
+    border: 1px red solid;
+    top: 50%;
+    width: 30px;
+    border-left: 1px #000 solid;*/
+}
+.mddialog .ui-dialog-titlebar-maximize {
+    /*right: 40px!important;
+    border: 1px red solid;
+    border: 1px red solid;*/
 }
 
+.mddialog .ui-dialog-titlebar-restore {
+    /*right: 40px!important;*/
+}
+
+/*.mddialog .ui-state-default, .mddialog .ui-widget-content .ui-state-default, .mddialog .ui-widget-header .ui-state-default {
+    background-color: transparent;
+    background-image:none; 
+    border: 0;
+    color: #555555;
+    font-weight: normal;
+}*/
+
 .mddialog .ui-state-hover .ui-icon, .mddialog ui-state-focus .ui-icon {
-    background-color: #484B40 !important;
-    /*margin:0!important;
+    /*background-color: #484B40 !important;
+    margin:0!important;
     padding:0!important;
     border: 0px none!important;*/
 }
 
-.mddialog .ui-dialog-titlebar-close span {
+/*.mddialog .ui-dialog-titlebar-close span {
     display: block;
     width: 30px;
     height: 30px;
     margin: 0;
+}*/
+.mddialog .ui-dialog-titlebar-buttonpane span {
+    /*display: block;
+    width: 30px;
+    height: 30px;
+    margin: 0;*/
 }
-
-.mddialog .ui-widget-header .ui-icon {
-    background: url("images/icon-close-dialog.gif") no-repeat 6px 5px;
+.mddialog .ui-widget-header .ui-icon-closethick {
+    /*background: url("images/icon-close-dialog.gif") no-repeat 6px 5px;*/
+}
+.mddialog .ui-widget-header .ui-icon-extlink {
+    /*background: url("images/icon-maxim-dialog.gif") no-repeat 6px 5px;*/
+}
+.mddialog .ui-widget-header .ui-icon-newwin {
+    /*background: url("images/icon-restore-dialog.gif") no-repeat 6px 5px;*/
 }
 
 /* Close button should not have a border */
@@ -213,5 +253,5 @@ blockquote {
 .mddialog .ui-state-focus,
 .mddialog .ui-widget-content .ui-state-focus,
 .mddialog .ui-widget-header .ui-state-focus {
-    border: 0;
+    /*border: 1px solid green;*/
 }

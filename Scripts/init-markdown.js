@@ -115,11 +115,12 @@
     var BuildMarkDownDialog = function (contentItemId) {
         // jQuery UI Dialog for markdown editor.
         $(document).ready(function () {
+            //,
 
             //If we don't set zIndex or set it to a very high value, the insert hyperlink dialog will be hidden by our own dialog.
             var options = {
                 autoOpen: false,
-                modal:true,
+                modal: true,
                 dialogClass: 'mddialog',
                 title: 'markDownEditor',
                 width: 600,
@@ -128,9 +129,20 @@
                 clickOutside: true,
                 clickOutsideTrigger: ".md-opener"
             };
+            // dialog-extend options
+            var dialogExtendOptions = {
+                'closable': true,
+                'maximizable': true,
+                'dblclick': 'maximize',
+                'icons' : {
+                   'close' : 'ui-icon-circle-close',
+                   'maximize' : 'ui-icon-circle-plus',                
+                   'restore' : 'ui-icon-bullet'
+                }
+            };
 
             var dclass = '.dialog-bodyPart-' + contentItemId;
-            $(dclass).dialog(options);
+            $(dclass).dialog(options).dialogExtend(dialogExtendOptions);
 
             $(".md-opener").click(function () {
                 if (inlineEditing.IEPageVM.editorMode()) {

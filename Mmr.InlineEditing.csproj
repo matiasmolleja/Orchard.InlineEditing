@@ -77,8 +77,7 @@
     <Content Include="Content\Images\wmd-buttons.png" />
     <Content Include="license.txt" />
     <Content Include="Scripts\clickoutside\jquery.ui.dialog-clickoutside.js" />
-    <Content Include="Scripts\dialogextend\jquery.dialogextend.1_0_1.js" />
-    <Content Include="Scripts\dialogextend\jquery.dialogextend.1_0_1.pack.js" />
+    <Content Include="Scripts\dialogextend\inline.jquery.dialogextend.js" />
     <Content Include="Scripts\dropit\dropit.css" />
     <Content Include="Scripts\dropit\dropit.js" />
     <Content Include="Scripts\dropit\license.txt" />
@@ -186,8 +185,11 @@
     <Content Include="Styles\font-awesome\css\font-awesome.css" />
     <Content Include="Styles\font-awesome\css\font-awesome.min.css" />
     <Content Include="Styles\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Styles\images\icon-close-dialog-old.gif" />
     <Content Include="Styles\images\icon-dashboard.gif" />
     <Content Include="Styles\images\grippie.png" />
+    <Content Include="Styles\images\icon-maxim-dialog.gif" />
+    <Content Include="Styles\images\icon-restore-dialog.gif" />
     <Content Include="Styles\images\orchardLogo.gif" />
     <Content Include="Styles\mmr-inline-editing-markdown.css" />
     <Content Include="Styles\mmr-inlineediting.css" />

@@ -80,14 +80,16 @@ namespace Mmr.InlineEditing
             manifest.DefineStyle("Mmr.InlineEditing.OrchardMarkdown")
                 .SetUrl("mmr-inline-editing-markdown.css");
 
+            // https://github.com/gilbitron/Dropit
             manifest.DefineScript("Mmr.InlineEditing.Dropit")
                 .SetUrl("dropit/dropit.js")
                 .SetDependencies("jQuery");
 
-
+            // https://github.com/ROMB/jquery-dialogextend
             manifest.DefineScript("Mmr.InlineEditing.DialogExtend")
-                .SetUrl("dialogextend/jquery.dialogextend.1_0_1.pack.js", "dialogextend/jquery.dialogextend.1_0_1.js")
-                .SetDependencies("jQueryUI");
+                .SetUrl("dialogextend/inline.jquery.dialogextend.js")
+                .SetDependencies("jQueryUI");            
+
 
             // https://github.com/coheractio/jQuery-UI-Dialog-ClickOutside
             manifest.DefineScript("Mmr.InlineEditing.ClickOutside")
