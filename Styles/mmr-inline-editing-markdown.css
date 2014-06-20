@@ -120,6 +120,10 @@ blockquote {
         font-weight: bold;
     }
 
+/* settting colorbox index so that it appears over the markdown dialog */
+#colorbox{
+    z-index:10004!important;    
+}
 
 
 /* customizing jquery UI dialog */

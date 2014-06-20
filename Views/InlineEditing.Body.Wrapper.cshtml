@@ -3,6 +3,8 @@
 @using Orchard.Core.Common.Models;
 @using Newtonsoft.Json;
 @using Orchard.Core.Common.Settings;
+@using Orchard.Environment.Descriptor.Models;
+
 
 @{      
     ContentItem contentItem = (ContentItem)Model.ContentItem;
@@ -14,6 +16,21 @@
 @* Only show ActionControls and only attaches the part to the knockout viewmodel if the user has EditContent permissions*@
 @if (AuthorizedFor(Permissions.EditContent) && Model.ContentItem.Id > 0)
 {
+    // Media Library or Media Picker?
+    var shellDescriptor = WorkContext.Resolve<ShellDescriptor>();
+    var mediaLibraryEnabled = shellDescriptor.Features.Any(x => x.Name == "Orchard.MediaLibrary");
+
+    if (mediaLibraryEnabled)
+    {
+        Style.Require("jQueryColorBox").AtFoot();
+        Script.Require("jQueryColorBox").AtFoot();
+    }
+    else
+    {   // todo : enable or deprecate mediapicker?
+        Script.Require("OrchardMarkdown-MediaPicker");
+    }
+
+    
     // Each part attaches itself to the root Knockout viewModel
     using (Script.Foot())
     {
