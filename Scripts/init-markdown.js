@@ -30,7 +30,7 @@
                 isFirstLoad = false;
             }
             part.Contents(text);
-            //console.log('preconversion' + text);
+            
             return text;
 
         });

@@ -2,12 +2,6 @@
 
     inlineEditing.insertImageHook = function (callback, idPostfix) {
 
-        console.log(idPostfix);
-        console.log('callback:');
-        console.log(callback);
-        //var idPostfix = $(this).attr('id').substr('wmd-input'.length);
-        console.log('idpostfix es : ' + idPostfix);
-
         // see if there's an image selected that they intend on editing
         var wmd = $('#wmd-input' + idPostfix);
         var editImage, content = wmd.selection ? wmd.selection.createRange().text : null;
@@ -27,8 +21,7 @@
             height: "90%",
             onLoad: function () {
                 // hide the scrollbars from the main window
-                $('html, body').css('overflow', 'hidden');
-                console.log('mymodule is logging');
+                $('html, body').css('overflow', 'hidden');            
             },
             onClosed: function () {
                 $('html, body').css('overflow', '');
