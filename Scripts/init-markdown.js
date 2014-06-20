@@ -1,13 +1,13 @@
 ﻿(function (inlineEditing, $, undefined) {
 
     // Builds Inline Editor for body with a markdown flavor. 
-    inlineEditing.BuildMarkDownEditorForBody = function (contentItemId, partName, part, baseUrl, resettingToInitial) {
+    inlineEditing.BuildMarkDownEditorForBody = function (partName, part, baseUrl, resettingToInitial) {
 
         // Step One: Build Editor
         BuildMarkDownEditor(partName, part, baseUrl, resettingToInitial);
 
         //Step Two: Build jQuery UI Dialog
-        BuildMarkDownDialog(contentItemId, part);
+        BuildMarkDownDialog(part);
 
     };
 
@@ -69,8 +69,12 @@
 
                         var selectedData = $.colorbox.selectedData;
 
-                        if (selectedData == null) // Dialog cancelled, do nothing
-                            return;
+                        // Dialog cancelled, do nothing
+                        if (selectedData == null) {
+                            callback();
+                            return false;
+                        }
+                            
 
                         var newContent = '';
                         for (var i = 0; i < selectedData.length; i++) {
@@ -111,11 +115,10 @@
     };
 
     // Initializes the jQuery UI dialog that will contain the editor.
-    var BuildMarkDownDialog = function (contentItemId, part) {
+    var BuildMarkDownDialog = function (part) {
         // jQuery UI Dialog for markdown editor.
         $(document).ready(function () {
-            //,
-
+            
             //If we don't set zIndex or set it to a very high value, the insert hyperlink dialog will be hidden by our own dialog.
             var options = {
                 autoOpen: false,
@@ -124,9 +127,7 @@
                 title: 'markDownEditor',
                 width: 600,
                 height: 500,
-                zIndex: 9997,                
-                clickOutside: true,
-                clickOutsideTrigger: ".md-opener"
+                zIndex: 9997
             };
             // dialog-extend options
             var dialogExtendOptions = {
@@ -140,7 +141,7 @@
                 }
             };
 
-            var dclass = '.dialog-bodyPart-' + contentItemId;
+            var dclass = '.dialog-bodyPart-' + part.contentItemId;
             $(dclass).dialog(options).dialogExtend(dialogExtendOptions);
 
             $(".md-opener").click(function () {
