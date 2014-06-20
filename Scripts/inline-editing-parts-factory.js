@@ -69,7 +69,7 @@
         }
         else {
             clientPart.addEditor = function () {
-                inlineEditing.BuildMarkDownEditorForBody(clientPart.contentItemId, "BodyPart", clientPart, inlineEditing.IEPageVM.BaseUrl, true);
+                inlineEditing.BuildMarkDownEditorForBody("BodyPart", clientPart, inlineEditing.IEPageVM.BaseUrl, true);
             };
             clientPart.removeEditor = function () {
                 inlineEditing.RemoveMarkDownEditor(clientPart);
