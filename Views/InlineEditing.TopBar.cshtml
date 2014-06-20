@@ -110,7 +110,7 @@
         </li>
 
 
-        <li style="float:right;">
+        <li id="inline-user-wrapper" data-bind="visible:!isCollapsed()">
             @Display.InlineEditing_UserMenu()
         </li>
 
@@ -130,25 +130,9 @@
         </li>
 
     </ul>
-    @*<ul class="dlkafl">
-        <li>
-            <ul class="inline-user">
-                <li>
-                    <a href="#">Dropdown</a>
-                    <ul>
-                        <li><a href="#">Some Action 1</a></li>
-                        <li><a href="#">Some Action 2</a></li>
-                        <li><a href="#">Some Action 3</a></li>
-                        <li><a href="#">Some Action 4</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        
-    </ul>*@   
     
 </div>
 
 
-@*This helps when debugging:
-    <pre data-bind="text: JSON.stringify(ko.toJS(inlineEditing.IEPageVM), null, 2)"></pre>*@
+This helps when debugging:
+    <pre data-bind="text: JSON.stringify(ko.toJS(inlineEditing.IEPageVM), null, 2)"></pre>

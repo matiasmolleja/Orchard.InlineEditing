@@ -83,16 +83,12 @@
             });
             self.dirtyParts([]);
 
-            ko.utils.arrayForEach(self.parts(), function (item) {
-               
-            });
         }
 
         self.cancelChanges = function () {
-            ko.utils.arrayForEach(self.parts(), function (item) {
-                item.returnToInitial();
-            });
-            self.dirtyParts([]);
+            self.resetToInitialValues();
+            self.removeEditors();
+            self.addEditors();
         }
         // Collapse bar
         self.isCollapsed = ko.observable(false);

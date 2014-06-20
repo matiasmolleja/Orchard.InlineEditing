@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     height: 50px;
-    z-index: 10000;
+    z-index: 9996;
     margin: 0;
     padding: 0;
     font-family: Tahoma,"Helvetica Neue",Arial,Helvetica,sans-serif;
@@ -123,10 +123,12 @@ ul#infoarea li{
     margin:0;
 }
 
+/* USER INFO AREA */
 
+#inline-user-wrapper {
+    float:right;
+}
 
-/* DROPIT FOR USER INFO AREA */
-/* These styles assume you are using ul and li */
 .dropit {
     list-style: none;
 	padding: 0;

@@ -94,12 +94,24 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.ba-outside-events.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.3.0.js" />
+    <Content Include="Scripts\markdown\Markdown.Converter.js" />
+    <Content Include="Scripts\markdown\Markdown.Converter.min.js">
+      <DependentUpon>Markdown.Converter.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\markdown\Markdown.Editor - Copy.min.js">
+      <DependentUpon>Markdown.Editor.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\markdown\Markdown.Editor.js" />
+    <Content Include="Scripts\markdown\Markdown.Sanitizer.js" />
+    <Content Include="Scripts\markdown\Markdown.Sanitizer.min.js">
+      <DependentUpon>Markdown.Sanitizer.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\markdown\Readme.txt" />
     <Content Include="Scripts\tinymce\changelog.txt" />
     <Content Include="Scripts\tinymce\license.txt" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
@@ -233,6 +245,15 @@
     <Content Include="Views\InlineEditing.ActionControls.cshtml" />
     <Content Include="Views\InlineEditing.BodyMarkdown.Wrapper.cshtml" />
     <Content Include="Views\InlineEditing.UserMenu.cshtml" />
+    <Content Include="Scripts\markdown\Markdown.Editor - Copy.min.js.map">
+      <DependentUpon>Markdown.Editor.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\markdown\Markdown.Converter.min.js.map">
+      <DependentUpon>Markdown.Converter.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\markdown\Markdown.Sanitizer.min.js.map">
+      <DependentUpon>Markdown.Sanitizer.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\InlineEditingController.cs" />

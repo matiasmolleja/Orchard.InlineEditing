@@ -27,29 +27,42 @@ namespace Mmr.InlineEditing
             manifest
                 .DefineScript("Mmr.InlineEditing.Helpers")
                 .SetUrl("inline-editing-helpers.js")
-                .SetDependencies("jQuery");
+                .SetDependencies("jQuery");            
             
+            manifest
+                .DefineScript("Mmr.InlineEditing.InitTiny")
+                .SetUrl("init-tiny.js")
+                .SetDependencies("jQuery");
 
-            // TinyMce 4.0.26 init and styles.
+            manifest
+                .DefineScript("Mmr.InlineEditing.InitMarkdown")
+                .SetUrl("init-markdown.js")
+                .SetDependencies("jQueryUI");
+
+
+            manifest.DefineStyle("Mmr.InlineEditing.OrchardMarkdown")
+                .SetUrl("mmr-inline-editing-markdown.css");
+
+            manifest.DefineScript("Mmr.InlineEditing.Markdown_Converter").SetUrl("markdown/Markdown.Converter.js");
+            manifest.DefineScript("Mmr.InlineEditing.Markdown_Sanitizer").SetUrl("markdown/Markdown.Sanitizer.js").SetDependencies("Markdown_Converter");
+            manifest.DefineScript("Mmr.InlineEditing.Markdown_Editor").SetUrl("markdown/Markdown.Editor.js").SetDependencies("Markdown_Sanitizer");
+
+
+            // External Dependencies
+
+            // Knockout to enable the kind of responsive UI I'm looking for.
+            manifest
+                .DefineScript("Mmr.InlineEditing.Knockout-2.3.0")
+                .SetUrl("knockout-2.3.0.js")
+                .SetDependencies("jQuery");
+
             // At the thime of writing Orchard still uses version 3.5. For inline editing I preferred a newer version.
             // So until Orchard updates its version of TinyMce there will be two versions: 
             // the older one for the Dashboard and the new one for inline editing in the frontend.
             // I wrote a new version of the MediaLibrary TinyMce plugin in order to enable media items insertion.
             manifest
-                .DefineScript("Mmr.InlineEditing.InitTiny")
-                .SetUrl("init-tiny.js")
-                .SetDependencies("jQuery");
-            
-            manifest
                 .DefineScript("Mmr.InlineEditing.Tiny")
                 .SetUrl("tinymce/tinymce.min.js")
-                .SetDependencies("jQuery");
-
-            
-            // Knockout to enable the kind of responsive UI I'm looking for.
-            manifest
-                .DefineScript("Mmr.InlineEditing.Knockout-2.3.0")
-                .SetUrl("knockout-2.3.0.js")
                 .SetDependencies("jQuery");
 
 
@@ -61,6 +74,7 @@ namespace Mmr.InlineEditing
 
             // Toastr is used for notifications. The module uses JQuery Ajax calls to update the UI and I can't find
             // an easy way of using Orchard Framework notifications without reloading the page.
+            // https://github.com/CodeSeven/toastr
             manifest
                 .DefineScript("Mmr.InlineEditing.toastr")
                 .SetUrl("toastr.min.js")
@@ -70,27 +84,21 @@ namespace Mmr.InlineEditing
                 .DefineStyle("Mmr.InlineEditing.toastr")
                 .SetUrl("toastr.css");       
      
-            
-            manifest
-                .DefineScript("Mmr.InlineEditing.InitMarkdown")
-                .SetUrl("init-markdown.js")
-                .SetDependencies("jQueryUI");
 
-
-            manifest.DefineStyle("Mmr.InlineEditing.OrchardMarkdown")
-                .SetUrl("mmr-inline-editing-markdown.css");
-
+            // TopBar Dropdown
             // https://github.com/gilbitron/Dropit
             manifest.DefineScript("Mmr.InlineEditing.Dropit")
                 .SetUrl("dropit/dropit.js")
                 .SetDependencies("jQuery");
 
+            // Dialogextend to allow markdown jquery ui dialog be maximized
             // https://github.com/ROMB/jquery-dialogextend
             manifest.DefineScript("Mmr.InlineEditing.DialogExtend")
                 .SetUrl("dialogextend/inline.jquery.dialogextend.js")
                 .SetDependencies("jQueryUI");            
 
 
+            // Clickoutside to allow disabling markdown jquery ui dialog by clicking outside.
             // https://github.com/coheractio/jQuery-UI-Dialog-ClickOutside
             manifest.DefineScript("Mmr.InlineEditing.ClickOutside")
                 .SetUrl("clickoutside/jquery.ui.dialog-clickoutside.js")

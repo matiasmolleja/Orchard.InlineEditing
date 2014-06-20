@@ -59,7 +59,6 @@
 
         var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
 
-        console.log('passed part type is : ' + passedPartType + flavor);
         if (flavor!= 'markdown') {
             clientPart.addEditor = function () {
                 inlineEditing.buildEditorForHtmlField(clientPart.contentItemId, "BodyPart");
@@ -76,6 +75,7 @@
                 inlineEditing.RemoveMarkDownEditor(clientPart);
             }
         }
+
 
         return clientPart;
     };
