@@ -96,14 +96,6 @@ namespace Mmr.InlineEditing
             manifest.DefineScript("Mmr.InlineEditing.DialogExtend")
                 .SetUrl("dialogextend/inline.jquery.dialogextend.js")
                 .SetDependencies("jQueryUI");            
-
-
-            // Clickoutside to allow disabling markdown jquery ui dialog by clicking outside.
-            // https://github.com/coheractio/jQuery-UI-Dialog-ClickOutside
-            manifest.DefineScript("Mmr.InlineEditing.ClickOutside")
-                .SetUrl("clickoutside/jquery.ui.dialog-clickoutside.js")
-                .SetDependencies("jQueryUI");
-            
             
         }
     }

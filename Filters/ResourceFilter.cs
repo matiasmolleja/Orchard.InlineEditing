@@ -42,8 +42,7 @@ namespace Mmr.InlineEditing.Filters
             _resourceManager.Require("script", "Mmr.InlineEditing.toastr").AtFoot();
             _resourceManager.Require("script", "Mmr.InlineEditing.Dropit").AtFoot();
             _resourceManager.Require("script", "Mmr.InlineEditing.DialogExtend").AtFoot();
-            _resourceManager.Require("script", "Mmr.InlineEditing.ClickOutside").AtFoot();
-
+            
             // Inline Editing Logic
             _resourceManager.Require("script", "Mmr.InlineEditing.PartsFactory").AtFoot();
             _resourceManager.Require("script", "Mmr.InlineEditing.Helpers").AtFoot();
