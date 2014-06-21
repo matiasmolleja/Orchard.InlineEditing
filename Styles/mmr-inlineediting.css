@@ -20,13 +20,13 @@
 }
 
 
-ul#command-bar {
+ul.command-bar {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-    ul#command-bar li {
+    ul.command-bar li {
         display: inline;
         margin: 0;
         padding: 0;

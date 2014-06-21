@@ -19,7 +19,7 @@
         self.dirtyParts = ko.observableArray([]);
         self.isDirty = new ko.computed(function () {
             return self.dirtyParts().length > 0;
-        });
+        }).extend({ throttle: 500 });;
 
 
         // EditorMode On/Off
@@ -92,7 +92,7 @@
         }
         // Collapse bar
         self.isCollapsed = ko.observable(false);
-        self.collapseBar = function () {
+        self.toggleCollapseBar = function () {
             var newValue = !self.isCollapsed();
             self.isCollapsed(newValue);
         };

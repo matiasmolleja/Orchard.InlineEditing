@@ -1,5 +1,16 @@
 ﻿(function (inlineEditing, $, undefined) {
 
+    ko.bindingHandlers.visibleFade = {
+        init: function (element, valueAccessor) {
+            var value = valueAccessor();
+            $(element).toggle(value);
+        },
+        update: function (element, valueAccessor) {
+            var value = valueAccessor();
+            value ?  $(element).fadeIn() : $(element).fadeOut() ;
+        }
+    };
+
     inlineEditing.insertImageHook = function (callback, idPostfix) {
 
         // see if there's an image selected that they intend on editing

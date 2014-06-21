@@ -9,7 +9,7 @@
     var isEditorModeEnabledForThisSession = HttpContext.Current.Session["editorMode"];
     if (isEditorModeEnabledForThisSession == null)
     { isEditorModeEnabledForThisSession = false; }
-    
+
 }
 
 @using (Script.Foot())
@@ -20,8 +20,8 @@
         inlineEditing.IEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
         inlineEditing.IEPageVM.updatePartsUrl = '@Url.Action("UpdateParts", "InlineEditing", new { area = "Mmr.InlineEditing" })';
         inlineEditing.IEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
-        inlineEditing.IEPageVM.BaseUrl = '@WorkContext.CurrentSite.BaseUrl' ; 
-        
+        inlineEditing.IEPageVM.BaseUrl = '@WorkContext.CurrentSite.BaseUrl';
+
 
         $(document).ready(function () {
 
@@ -29,7 +29,7 @@
                 if (inlineEditing.IEPageVM.editorMode()) {
                     $(this).effect('highlight', { color: '#c7e7c2' }, 'slow');
                 }
-                
+
             });
             $('#inline-user').dropit({ triggerParentEl: 'nav' });
             inlineEditing.IEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
@@ -61,14 +61,29 @@
 }
 
 
-
-<div class="inline-editing-topbar" data-bind="css:{ collapsedtopbar :isCollapsed , expandedtopbar : !isCollapsed() }">
-    <ul id="command-bar">
-
-        <li data-bind="visible: !isCollapsed()">
+<div class="inline-editing-topbar collapsedtopbar" >
+    <ul class="command-bar">
+        <li>
             <a href="#"
                title="@T("Collapse toolbar")"
-               data-bind="click:collapseBar" class="collapse-button">
+               data-bind="click:toggleCollapseBar" class="collapse-button">
+                <i class="icon-chevron-right"></i>                
+            </a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "Admin", new { area = "Dashboard" })" id="dashboard-link">ss</a>
+        </li>
+    </ul>
+</div>
+
+<div class="inline-editing-topbar expandedtopbar" data-bind="visibleFade: !isCollapsed()">
+    <ul class="command-bar">
+
+        <li>
+            <a href="#"
+               title="@T("Collapse toolbar")"
+               data-bind="click:toggleCollapseBar" class="collapse-button">
                 <i class="icon-chevron-left"></i>
             </a>
         </li>
@@ -76,15 +91,7 @@
         <li>
             <a href="@Url.Action("Index", "Admin", new { area = "Dashboard" })" id="dashboard-link">ss</a>
         </li>
-        <li data-bind="visible: isCollapsed">
-            <a href="#"
-               title="@T("Expand toolbar")"
-               data-bind="click:collapseBar" class="collapse-button">
-                <i class="icon-chevron-right" data-bind="visible: isCollapsed"></i>
-            </a>
-        </li>
-
-        <li data-bind="visible:!isCollapsed()">
+        <li>
             <a href="#"
                id="editorModeLink"
                title="@T("Toggle Editor Mode")"
@@ -93,44 +100,37 @@
             </a>
         </li>
 
-        <li data-bind="visible:!isCollapsed()">
+        <li>
             <a href="#"
                title="@T("Update Changes")"
-               data-bind="click: saveEditedPage , visible: isDirty">
+               data-bind="click: saveEditedPage , visibleFade: isDirty()">
                 <i id="icon-save" class="icon-save"></i>@T("Save")
             </a>
         </li>
 
-        <li data-bind="visible:!isCollapsed()">
+        <li>
             <a href="#"
                title="@T("Cancel Changes")"
-               data-bind="click: cancelChanges , visible: isDirty">
+               data-bind="click: cancelChanges , visibleFade: isDirty()">
                 <i id="icon-remove" class="icon-remove"></i>@T("Cancel")
             </a>
         </li>
 
 
-        <li id="inline-user-wrapper" data-bind="visible:!isCollapsed()">
+        <li id="inline-user-wrapper">
             @Display.InlineEditing_UserMenu()
         </li>
 
-        <li id="infoarea-wrapper" data-bind="visible:!isCollapsed()">
+        <li id="infoarea-wrapper">
             <ul id="infoarea">
-                <li title="@T(" changed parts")" data-bind="visible: isDirty()">
+                <li title="@T(" changed parts")" data-bind="visibleFade: isDirty()">
                     <i class="icon-pencil"></i>
                     <span class="badge badge-warning"
                           data-bind="text: dirtyParts().length"></span>
-                    
                 </li>
-
-                    
-                
             </ul>
-               
         </li>
-
     </ul>
-    
 </div>
 
 
