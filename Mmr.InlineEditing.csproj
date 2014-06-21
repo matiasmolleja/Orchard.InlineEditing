@@ -78,8 +78,8 @@
     <Content Include="license.txt" />
     <Content Include="Scripts\clickoutside\jquery.ui.dialog-clickoutside.js" />
     <Content Include="Scripts\dialogextend\inline.jquery.dialogextend.js" />
+    <Content Include="Scripts\dropit\inline-dropit.js" />
     <Content Include="Scripts\dropit\dropit.css" />
-    <Content Include="Scripts\dropit\dropit.js" />
     <Content Include="Scripts\dropit\license.txt" />
     <Content Include="Scripts\init-markdown.js" />
     <Content Include="Scripts\inline-editing-helpers.js" />

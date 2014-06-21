@@ -87,8 +87,9 @@ namespace Mmr.InlineEditing
 
             // TopBar Dropdown
             // https://github.com/gilbitron/Dropit
+            // The original script has been modified to enable fading of dropdown, hence the change in the name of the file.
             manifest.DefineScript("Mmr.InlineEditing.Dropit")
-                .SetUrl("dropit/dropit.js")
+                .SetUrl("dropit/inline-dropit.js")
                 .SetDependencies("jQuery");
 
             // Dialogextend to allow markdown jquery ui dialog be maximized

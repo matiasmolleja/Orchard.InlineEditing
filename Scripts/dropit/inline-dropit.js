@@ -5,8 +5,9 @@
 * Copyright 2012, Dev7studios
 * Free to use and abuse under the MIT license.
 * http://www.opensource.org/licenses/mit-license.php
+*
+*  Small change to fade showing of the dropdown for inline Editing.
 */
-
 ; (function ($) {
 
     $.fn.dropit = function (method) {
@@ -42,7 +43,9 @@
 
                         // Open this menu
                         settings.beforeShow.call(this);
-                        $(this).parents(settings.triggerParentEl).addClass('dropit-open').find(settings.submenuEl).show();
+                        //ModifiedForInlineEditing:
+                        // Original Line: $(this).parents(settings.triggerParentEl).addClass('dropit-open').find(settings.submenuEl).show();
+                        $(this).parents(settings.triggerParentEl).addClass('dropit-open').find(settings.submenuEl).fadeIn();
                         settings.afterShow.call(this);
 
                         return false;
