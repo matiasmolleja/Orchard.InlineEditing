@@ -2,11 +2,16 @@
 @if (WorkContext.CurrentUser != null)
 {
     <div id="inline-user" data-bind="visible:!isCollapsed()">
-        @* We use nav here instead of a div because of a unwanted behavior in dropit *@
+        @* We use nav here instead of a div because of a unwanted behavior in dropit.
+            It hides the full top bar instead of hiding the submenu only. *@
         <nav>
             <a href="#"><i class="icon-user"></i>@Html.ItemDisplayText(WorkContext.CurrentUser)</a>
-            <ul>
-                <li>@Html.ActionLink(T("Sign Out").ToString(), "LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl }, new { rel = "nofollow" })</li>
+            <ul>               
+                <li>
+                    <a href="@Url.Action("LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })" rel="nofollow">
+                        <i class="icon-signout"></i>  Sign Out
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
