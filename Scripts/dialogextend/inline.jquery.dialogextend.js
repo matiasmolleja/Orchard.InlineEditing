@@ -359,8 +359,8 @@
 
       // newHeight = $(window).height() - 11;
       // newWidth = $(window).width() - 11;
-      newHeight = $(window).height() - 61;
-      newWidth = $(window).width();
+      newHeight = $(window).height() - 11;
+      newWidth = $(window).width() - 11;
       this._trigger("beforeMaximize");
       if (this._state !== "normal") {
         this._restore();
@@ -375,7 +375,7 @@
         "height": newHeight,
         "width": newWidth,
         "position": {
-          my: "left top+51",
+          my: "left top",
           at: "left top"
         }
       });
