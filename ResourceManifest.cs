@@ -50,7 +50,7 @@ namespace Mmr.InlineEditing
 
             // External Dependencies
 
-            // Knockout to enable the kind of responsive UI I'm looking for.
+            // Knockout
             manifest
                 .DefineScript("Mmr.InlineEditing.Knockout-2.3.0")
                 .SetUrl("knockout-2.3.0.js")

@@ -15,24 +15,30 @@
     // Initializes a markdown editor. Most of the code is for enabling Orchard Media Library.
     var BuildMarkDownEditor = function (partName, part, baseUrl, resettingToInitial) {
 
-        // todo remove parameter contentItemId, id is already on part.
+        var mdconverter = Markdown.getSanitizingConverter();
+
         //Markdown Editor
         var idPostfix = '-bodypart' + part.contentItemId;
 
         var isFirstLoad = true;
-        var mdconverter = Markdown.getSanitizingConverter();
+
 
         mdconverter.hooks.chain("preConversion", function (text) {
-
             if (isFirstLoad) {
-
                 part.InitialContents(text);
                 isFirstLoad = false;
             }
             part.Contents(text);
-            
+
+
             return text;
 
+        });
+        mdconverter.hooks.chain("postConversion", function (text) {
+
+            part.htmlFromMdown(text);
+
+            return text;
         });
 
         var editor = new Markdown.Editor(mdconverter, idPostfix);
@@ -74,7 +80,7 @@
                             callback();
                             return false;
                         }
-                            
+
 
                         var newContent = '';
                         for (var i = 0; i < selectedData.length; i++) {
@@ -116,15 +122,17 @@
 
     // Initializes the jQuery UI dialog that will contain the editor.
     var BuildMarkDownDialog = function (part) {
+        console.log('build markdown editor');
         // jQuery UI Dialog for markdown editor.
         $(document).ready(function () {
-            
+
+
             //If we don't set zIndex or set it to a very high value, the insert hyperlink dialog will be hidden by our own dialog.
             var options = {
                 autoOpen: false,
                 modal: true,
                 dialogClass: 'mddialog',
-                title: 'markDownEditor',
+                title: 'Markdown Editor',
                 width: 600,
                 height: 500,
                 zIndex: 9997
@@ -134,10 +142,10 @@
                 'closable': true,
                 'maximizable': true,
                 'dblclick': 'maximize',
-                'icons' : {
-                   'close' : 'ui-icon-circle-close',
-                   'maximize' : 'ui-icon-circle-plus',                
-                   'restore' : 'ui-icon-bullet'
+                'icons': {
+                    'close': 'ui-icon-fa-remove',
+                    'maximize': 'ui-icon-fa-plus',
+                    'restore': 'ui-icon-fa-minus'
                 }
             };
 
@@ -154,15 +162,13 @@
 
     // Removing the editor. Called when Editor Mode is turned off
     inlineEditing.RemoveMarkDownEditor = function (part) {
-
+        console.log('removing editor');
         var mdconverter = Markdown.getSanitizingConverter();
 
         $('#wmd-preview-bodypart' + part.contentItemId).html(mdconverter.makeHtml(part.InitialContents()));
         $('#wmd-input-bodypart' + part.contentItemId).val(part.InitialContents());
 
         $('.dialog-bodyPart-' + part.contentItemId).dialog("close");
-        $('.dialog-bodyPart-' + part.contentItemId).dialog("destroy");
-        
     };
 
 }(window.inlineEditing = window.inlineEditing || {}, jQuery));

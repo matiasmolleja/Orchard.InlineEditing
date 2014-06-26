@@ -1,5 +1,6 @@
 ﻿// This is the same markdownEditor that Orchard backend uses, but with a few tweaks needed by InlineEditing.
-// Changes are marked with comment "Changed by InlineEditing"
+// Changes are marked with comment "inline editing changes"
+
 // needs Markdown.Converter.js at the moment
 
 (function () {

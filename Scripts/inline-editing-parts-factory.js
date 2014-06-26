@@ -56,10 +56,10 @@
 
 
     inlineEditing.createBodyPart =  function (passedItemId, passedContents, passedPartType, flavor) {
-
         var clientPart = new ClientPart(passedItemId, passedContents, passedPartType);
 
-        if (flavor!= 'markdown') {
+        if (flavor != 'markdown') {
+
             clientPart.addEditor = function () {
                 inlineEditing.buildEditorForHtmlField(clientPart.contentItemId, "BodyPart");
             };
@@ -68,6 +68,15 @@
             }
         }
         else {
+            
+            
+            // Add a new property in bodymarkdown to bind the dialog editor content to the actual bodypart div.
+            clientPart.htmlFromMdown = ko.observable('');
+            
+            // prepulating htmlFromMdown. Needed before we load the markdown dialog with its editor.
+            var cnv = Markdown.getSanitizingConverter();
+            clientPart.htmlFromMdown(cnv.makeHtml(clientPart.InitialContents()));
+
             clientPart.addEditor = function () {
                 inlineEditing.BuildMarkDownEditorForBody("BodyPart", clientPart, inlineEditing.IEPageVM.BaseUrl, true);
             };
@@ -91,7 +100,6 @@
         clientPart.removeEditor = function () {
             inlineEditing.removeTinymceEditor(clientPart.contentItemId, "TitlePart");
         }
-
 
         return clientPart;
     };

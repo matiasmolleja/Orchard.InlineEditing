@@ -71,12 +71,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Admin\Images\grippie.png" />
-    <Content Include="Content\Admin\Images\wmd-buttons.png" />
-    <Content Include="Content\Images\grippie.png" />
-    <Content Include="Content\Images\wmd-buttons.png" />
     <Content Include="license.txt" />
-    <Content Include="Scripts\clickoutside\jquery.ui.dialog-clickoutside.js" />
     <Content Include="Scripts\dialogextend\inline.jquery.dialogextend.js" />
     <Content Include="Scripts\dropit\inline-dropit.js" />
     <Content Include="Scripts\dropit\dropit.css" />
@@ -87,9 +82,6 @@
     <Content Include="Scripts\inline-editing.js" />
     <Content Include="Scripts\init-tiny.js" />
     <Content Include="packages.config" />
-    <Content Include="Content\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -192,14 +184,16 @@
     <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Styles\font-awesome\css\font-awesome-ie7.css" />
-    <Content Include="Styles\font-awesome\css\font-awesome-ie7.min.css" />
-    <Content Include="Styles\font-awesome\css\font-awesome.css" />
-    <Content Include="Styles\font-awesome\css\font-awesome.min.css" />
-    <Content Include="Styles\font-awesome\font\fontawesome-webfont.svg" />
-    <Content Include="Styles\images\icon-close-dialog-old.gif" />
+    <Content Include="Styles\font-awesome\font-awesome\css\font-awesome-ie7.min.css" />
+    <Content Include="Styles\font-awesome\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome-ie7.css" />
+    <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome-ie7.min.css" />
+    <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome.css" />
+    <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Styles\font-awesome\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Styles\images\icon-close-dialog.gif" />
     <Content Include="Styles\images\icon-dashboard.gif" />
-    <Content Include="Styles\images\grippie.png" />
     <Content Include="Styles\images\icon-maxim-dialog.gif" />
     <Content Include="Styles\images\icon-restore-dialog.gif" />
     <Content Include="Styles\images\orchardLogo.gif" />
@@ -220,10 +214,26 @@
     <Content Include="Module.txt" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\InlineEditing.TopBar.cshtml" />
-    <Content Include="Styles\font-awesome\font\fontawesome-webfont.eot" />
-    <Content Include="Styles\font-awesome\font\fontawesome-webfont.ttf" />
-    <Content Include="Styles\font-awesome\font\fontawesome-webfont.woff" />
-    <Content Include="Styles\font-awesome\font\FontAwesome.otf" />
+    <Content Include="Views\InlineEditing.ActionControls.cshtml" />
+    <Content Include="Views\InlineEditing.BodyMarkdown.Wrapper.cshtml" />
+    <Content Include="Views\InlineEditing.UserMenu.cshtml" />
+    <Content Include="Scripts\markdown\Markdown.Editor - Copy.min.js.map">
+      <DependentUpon>Markdown.Editor.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\markdown\Markdown.Converter.min.js.map">
+      <DependentUpon>Markdown.Converter.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\markdown\Markdown.Sanitizer.min.js.map">
+      <DependentUpon>Markdown.Sanitizer.js</DependentUpon>
+    </Content>
+    <Content Include="Styles\font-awesome\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="Styles\font-awesome\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="Styles\font-awesome\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="Styles\font-awesome\font-awesome\font\FontAwesome.otf" />
+    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\FontAwesome.otf" />
     <Content Include="Styles\font-awesome\less\bootstrap.less" />
     <Content Include="Styles\font-awesome\less\core.less" />
     <Content Include="Styles\font-awesome\less\extras.less" />
@@ -242,18 +252,6 @@
     <Content Include="Styles\font-awesome\scss\_mixins.scss" />
     <Content Include="Styles\font-awesome\scss\_path.scss" />
     <Content Include="Styles\font-awesome\scss\_variables.scss" />
-    <Content Include="Views\InlineEditing.ActionControls.cshtml" />
-    <Content Include="Views\InlineEditing.BodyMarkdown.Wrapper.cshtml" />
-    <Content Include="Views\InlineEditing.UserMenu.cshtml" />
-    <Content Include="Scripts\markdown\Markdown.Editor - Copy.min.js.map">
-      <DependentUpon>Markdown.Editor.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\markdown\Markdown.Converter.min.js.map">
-      <DependentUpon>Markdown.Converter.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\markdown\Markdown.Sanitizer.min.js.map">
-      <DependentUpon>Markdown.Sanitizer.js</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\InlineEditingController.cs" />

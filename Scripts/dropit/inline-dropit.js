@@ -7,6 +7,7 @@
 * http://www.opensource.org/licenses/mit-license.php
 *
 *  Small change to fade showing of the dropdown for inline Editing.
+* Changed Lines are identified with a comment "inline editing changes" in this file.
 */
 ; (function ($) {
 
@@ -43,7 +44,7 @@
 
                         // Open this menu
                         settings.beforeShow.call(this);
-                        //ModifiedForInlineEditing:
+                        //inline editing changes:
                         // Original Line: $(this).parents(settings.triggerParentEl).addClass('dropit-open').find(settings.submenuEl).show();
                         $(this).parents(settings.triggerParentEl).addClass('dropit-open').find(settings.submenuEl).fadeIn();
                         settings.afterShow.call(this);

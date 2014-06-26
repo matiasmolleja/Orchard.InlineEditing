@@ -67,7 +67,7 @@ ul.command-bar {
     background-color: #333333;
     color: #fff;
     text-decoration: none;
-    font-size: 1.077em;
+    font-size: 14px; /*1.077em;*/
     display: block;
     float: left;
     height: 26px;
@@ -75,6 +75,7 @@ ul.command-bar {
     border-right: solid 1px #000;
     line-height: 24px;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.50);
+
 }
 
 

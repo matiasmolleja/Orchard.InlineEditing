@@ -80,7 +80,6 @@
         return true;
     };
 
-
     // Helper to unify toastr notifications through the UI
     inlineEditing.notify = function (MsgType, Message) {
         if (MsgType == 'error') {

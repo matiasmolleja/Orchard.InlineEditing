@@ -25,21 +25,22 @@
 
         $(document).ready(function () {
 
+            @* higlight parts *@
             $('.highlighter').mouseenter(function () {
                 if (inlineEditing.IEPageVM.editorMode()) {
                     $(this).effect('highlight', { color: '#c7e7c2' }, 'slow');
                 }
-
             });
+
+            @* user dropdown *@
             $('#inline-user').dropit({ triggerParentEl: 'nav' });
             inlineEditing.IEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
-            // this is needed to update UI on first load.
+            @* this is needed to update UI on first load *@
             inlineEditing.IEPageVM.parts.valueHasMutated();
-
         });
 
 
-        // spinner for ajax calls
+        @* spinner for ajax calls *@
         $(document)
           .ajaxStart(function () {
               $("#icon-save").removeClass("icon-save");
@@ -50,24 +51,23 @@
               $("#icon-save").addClass("icon-save");
           });
 
-        // unsaved changes warning
+        @* warning: unsaved changes*@
         $(window).bind('beforeunload', function () {
             if (inlineEditing.IEPageVM.isDirty()) {
                 return "@T("You have unsaved changes.Are you sure you want to leave?")";
             }
-
         });
     </script>
 }
 
-
-<div class="inline-editing-topbar collapsedtopbar" >
+@* This divs only shows when topbar is collapsed *@
+<div class="inline-editing-topbar collapsedtopbar">
     <ul class="command-bar">
         <li>
             <a href="#"
                title="@T("Collapse toolbar")"
                data-bind="click:toggleCollapseBar" class="collapse-button">
-                <i class="icon-chevron-right"></i>                
+                <i class="icon-chevron-right"></i>
             </a>
         </li>
 
@@ -77,9 +77,10 @@
     </ul>
 </div>
 
+@* This divs only shows when topbar is expanded *@
 <div class="inline-editing-topbar expandedtopbar" data-bind="visibleFade: !isCollapsed()">
     <ul class="command-bar">
-
+        @* Togle Collapse *@
         <li>
             <a href="#"
                title="@T("Collapse toolbar")"
@@ -88,9 +89,12 @@
             </a>
         </li>
 
+        @* Dashboard *@
         <li>
             <a href="@Url.Action("Index", "Admin", new { area = "Dashboard" })" id="dashboard-link">ss</a>
         </li>
+
+        @* Toggle Editor Mode *@
         <li>
             <a href="#"
                id="editorModeLink"
@@ -100,6 +104,7 @@
             </a>
         </li>
 
+        @* Save Button *@
         <li>
             <a href="#"
                title="@T("Update Changes")"
@@ -108,19 +113,21 @@
             </a>
         </li>
 
+        @* Cancel Button *@
         <li>
             <a href="#"
-               title="@T("Cancel Changes")"
+               title="@T(" cancel changes")"
                data-bind="click: cancelChanges , visibleFade: isDirty()">
                 <i id="icon-remove" class="icon-remove"></i>@T("Cancel")
             </a>
         </li>
 
-
+        @* User Info *@
         <li id="inline-user-wrapper">
             @Display.InlineEditing_UserMenu()
         </li>
 
+        @* Changes Info *@
         <li id="infoarea-wrapper">
             <ul id="infoarea">
                 <li title="@T(" changed parts")" data-bind="visibleFade: isDirty()">
@@ -133,6 +140,6 @@
     </ul>
 </div>
 
-
 @*This helps when debugging:
     <pre data-bind="text: JSON.stringify(ko.toJS(inlineEditing.IEPageVM), null, 2)"></pre>*@
+

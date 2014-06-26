@@ -12,19 +12,19 @@
     // Retrieving BodyPart
     ContentItem contentItem = (ContentItem)Model.ContentItem;
     BodyPart bodyPart = contentItem.As<BodyPart>();
-    
+
     // escaping content(newlines etc) before including it into our viewmodel.
-    string escapedContent = Newtonsoft.Json.JsonConvert.SerializeObject(bodyPart.Text);
+    string escapedContent = Newtonsoft.Json.JsonConvert.SerializeObject(bodyPart.Text).Trim('"');
 
     //Markdown_Editor
     Script.Require("Mmr.InlineEditing.Markdown_Editor").AtFoot();
-    Style.Require("Mmr.InlineEditing.OrchardMarkdown").AtFoot();    
+    Style.Require("Mmr.InlineEditing.OrchardMarkdown").AtFoot();
 
 
     // Media Library or Media Picker?
     var shellDescriptor = WorkContext.Resolve<ShellDescriptor>();
     var mediaLibraryEnabled = shellDescriptor.Features.Any(x => x.Name == "Orchard.MediaLibrary");
-    
+
     if (mediaLibraryEnabled)
     {
         Style.Require("jQueryColorBox").AtFoot();
@@ -44,52 +44,71 @@
             inlineEditing.IEPageVM.parts().push(bp);
         </script>
     };
-    
+
     // Injecting ActionControls shape
     @Display.InlineEditing_ActionControls(ContentItem: @contentItem, PartTypeName: "BodyPart")
 
     @*
-     Preview of Markdown body. 
-     "Id" and "class" attribs in the inner div is the way to attach the dialog and markdown editor to this preview.
-     This divs acts too as the dialog-opener through its click event
+        Preview of Markdown body.
+        This divs acts too as the dialog-opener through its click event
     *@
     <div class="inline-editing-body-control md-opener highlighter">
-        <div id="@("wmd-preview-bodypart" + @contentItem.Id)" class="wmd-panel wmd-preview">
+        @*  Todo: htmlFromMdown is an observable with the html resulting from markdown editor.
+            It is updated on postConversion hook of the markdown converter.
+            But I can't use directly here. I need a workaround function bindHtmlFromMd  *@
+        <div data-bind="html : bindHtmlFromMd(partFromIdAndTypeName(@contentItem.Id, 'BodyPart'))"
+             class="wmd-panel wmd-preview">
             @Model.Html
         </div>
+
     </div>
 
     <a href="#"
        title="@T("click here to edit content")"
-       data-bind="visible: partFromIdAndTypeName(@contentItem.Id,'TitlePart').isEmpty">
+       data-bind="visible: partFromIdAndTypeName(@contentItem.Id,'BodyPart').isEmpty">
         @T("click here to add content")
     </a>
 
-
     @*This is the dialog that opens and contains the markdown editor. *@
-    <div class="@("dialog-bodyPart-" + contentItem.Id.ToString()) closer" style="display:none;">
+    <div class="@("dialog-bodyPart-" + contentItem.Id.ToString()) mddialog-closer" style="display:none;">
 
         @* todo: repair Model.AddMediaPath*@
         <div class="wmd-editor-box">
-    
-            @* pagedown button bar*@
-            <div id="@("wmd-button-bar-bodypart" + @contentItem.Id)" class="wmd-button-bar"></div>
-            
-    
-            @* this div is needed to provide the resize behaviour of the text area inside the dialog*@
-            <div class="text-area-wrapper"> 
 
+            <div>
+                @* pagedown button bar *@
+                <div id="@("wmd-button-bar-bodypart" + @contentItem.Id)" class="wmd-button-bar"></div>
+                @* preview button *@
+                <a class="preview-button"
+                   href="#"
+                   data-bind=" click: toggleMddialogPreview, css : { 'selected-button' : mddialogPreviewEnabled}"><i class="icon-eye-open"> </i>Preview</a>
+            </div>
+
+
+            @* this div is needed to provide the resize behaviour of the text area inside the dialog*@
+            <div class="text-area-wrapper">
                 @Html.TextArea("Text", bodyPart.Text,
                 new Dictionary<string, object> {
                     {"id", "wmd-input" + "-" + "bodypart" + @contentItem.Id },
                     { "class", "wmd-input markdown-dialog" },
                     { "data-mediapicker-uploadpath", Model.AddMediaPath },
+                    {"data-bind", "style: { width : mddialogPreviewEnabled() ? '50%' : '100%' }"},
                     { "data-mediapicker-title", T("Insert/Update Media") } })
+
+
+                <div id="@("wmd-preview-bodypart" + @contentItem.Id)"
+                     class="wmd-panel wmd-preview inside-dialog-preview"
+                     data-bind="visible: mddialogPreviewEnabled"></div>
+            </div>
+
+            <div class="bottom-button-bar ">
+                <a href="#"
+                   data-bind="click:closeMarkdownDialog"
+                   title="@T("Close Dialog")"
+                   class="bottom-close">@T("Close")</a>
             </div>
         </div>
-
     </div>
-
 }
 else
 {

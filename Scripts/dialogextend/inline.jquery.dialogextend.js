@@ -1,4 +1,8 @@
-(function() {
+//https://code.google.com/p/jquery-dialogextend/
+
+// Modified two lines to change to real maximumsize.
+// Changed Lines are identified with a comment "inline editing changes" in this file.
+(function () {
   var $;
 
   $ = jQuery;
@@ -356,11 +360,12 @@
     },
     maximize: function() {
       var newHeight, newWidth;
-
-      // newHeight = $(window).height() - 11;
+      // Inline editing changes
+      // Original Lines:
+      //newHeight = $(window).height() - 11;
       // newWidth = $(window).width() - 11;
-      newHeight = $(window).height() - 11;
-      newWidth = $(window).width() - 11;
+      newHeight = $(window).height(); 
+      newWidth = $(window).width(); 
       this._trigger("beforeMaximize");
       if (this._state !== "normal") {
         this._restore();

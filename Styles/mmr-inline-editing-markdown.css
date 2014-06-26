@@ -10,9 +10,41 @@ blockquote {
     jQuery Dialogs or PageDown plugins that the website could have */
 
 /* Button Bar */
+
 .mddialog .wmd-button-bar {
-    width: 100%;
+    /*width: 100%;*/
     background-color: #fff;
+    float:left;
+    padding-top:20px;
+}
+a.preview-button:link,
+a.preview-button:visited {
+    display:block;
+    float:right;
+    height:27px;
+    border:solid 1px #000;
+    font-family: Tahoma,"Helvetica Neue",Arial,Helvetica,sans-serif;
+    margin:0px;
+    background-color:#333333;
+    color:#fff;
+    padding:6px 15px 7px 15px;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 24px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.50);    
+}
+a.preview-button i {
+    margin-right: 4px;
+}
+a.preview-button:hover {
+    background-color:#484b40;
+    text-decoration:none;
+}
+a.selected-button:link,
+a.selected-button:visited,
+a.selected-button:hover
+{
+    background-color:green ;
 }
 
 .mddialog .wmd-button-row {
@@ -21,7 +53,13 @@ blockquote {
     padding: 0px;
     height: 20px;
 }
-
+.mddialog-inline-buttonbar{
+    width: 100%;
+    background-color: #fff;
+    height:20px;
+    margin:0;
+    padding:0;
+}
 .mddialog .wmd-spacer {
     width: 1px;
     height: 20px;
@@ -77,20 +115,63 @@ blockquote {
 .mddialog div.text-area-wrapper {
     position: absolute;
     left: 0px;
-    top: 20px;
-    right: 6px;
-    bottom: 7px;
-    border: 0;
+    top: 40px;
+    right: 0px;
+    bottom: 41px;
+    border: none;
 }
 
 .mddialog textarea.markdown-dialog {
-    width: 100%;
     height: 100% !important;
     margin: 0; /* don't want to add to container size */
     border: 0; /* don't want to add to container size */
     resize: none;
+    float:left;
+    padding:0;
 }
 
+
+.inside-dialog-preview {
+    width:50%;
+    background-color: lightgray;
+    height:100% !important;
+    float:right;
+    margin:0;
+    padding:0;
+    border:0;
+    overflow:auto;
+}
+
+/* close Button */
+.mddialog .bottom-button-bar {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border: none;
+    height:40px;
+    background-color:#333333;
+}
+.mddialog a.bottom-close:link,
+.mddialog a.bottom-close:visited  {
+    display:block;
+    height:26px;
+    float:right;
+    margin-right:0px;
+    background-color:#333333;
+    color:#fff;
+    padding:6px 18px 7px 18px;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 24px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.50);
+    border-left: solid 1px #000;
+    
+}
+.mddialog a.bottom-close:hover {
+    background-color:#484b40;
+    text-decoration:none;
+}
 
 /* Prompt for hyperlinks */
 .wmd-prompt-background {
@@ -130,6 +211,7 @@ blockquote {
 
 .mddialog.ui-dialog .ui-dialog-content {
     padding: 0;
+    margin:0;
 }
 
 .mddialog.ui-widget-content {
@@ -150,14 +232,19 @@ blockquote {
     position: absolute;
     top: 0;
     width: 300px;
+    border: 1px solid #333 !important;
+}
+.mddialog.ui-dialog .ui-dialog-title {
+    font-size:14px;
+    padding-top:6px;
 }
 
 .mddialog .ui-widget-header {
-    background: none #333;
-    border: 1px solid #AAAAAA;
+    background: none #d0f0ff;
     color: #fff;
     font-weight: bold;
     font-weight: 100;
+    height:29px;
 }
 
 .mddialog.ui-corner-all, .mddialog .ui-corner-all, .mddialog.ui-corner-bottom, .mddialog.ui-corner-right, .mddialog.ui-corner-br {
@@ -178,78 +265,30 @@ blockquote {
 
 .mddialog .ui-dialog-titlebar {
     padding: 6px 0px 6px 10px;
-    /*height: 18px;*/
     position: relative;
     border: none;
+    background-color:#333;
 }
 
 .mddialog .ui-dialog-titlebar-close,
 .mddialog .ui-dialog-titlebar-maximize,
 .mddialog .ui-dialog-titlebar-restore {
-    /*height: 30px;
-    margin: -15px 0 0;
-    padding: 0;
-    position: absolute;
-    top: 50%;
-    width: 30px;
-    border-left: 1px red solid;*/
+    background: none #333;
+    width:50px !important;
+    top:-15px !important;
+    border:none !important;
+    height:45px !important;
+    position: absolute !important;
+    border-left: solid 1px black !important;
+    padding:0;
 }
 .mddialog .ui-dialog-titlebar-close{
-    /*height: 30px;
-    margin: -13px 0 0;
-    padding: 0;
-    position: absolute;
-    right: 20px;
-    border: 1px red solid;
-    top: 50%;
-    width: 30px;
-    border-left: 1px #000 solid;*/
-}
-.mddialog .ui-dialog-titlebar-maximize {
-    /*right: 40px!important;
-    border: 1px red solid;
-    border: 1px red solid;*/
+    right:-4px!important;
 }
 
+.mddialog .ui-dialog-titlebar-maximize,
 .mddialog .ui-dialog-titlebar-restore {
-    /*right: 40px!important;*/
-}
-
-/*.mddialog .ui-state-default, .mddialog .ui-widget-content .ui-state-default, .mddialog .ui-widget-header .ui-state-default {
-    background-color: transparent;
-    background-image:none; 
-    border: 0;
-    color: #555555;
-    font-weight: normal;
-}*/
-
-.mddialog .ui-state-hover .ui-icon, .mddialog ui-state-focus .ui-icon {
-    /*background-color: #484B40 !important;
-    margin:0!important;
-    padding:0!important;
-    border: 0px none!important;*/
-}
-
-/*.mddialog .ui-dialog-titlebar-close span {
-    display: block;
-    width: 30px;
-    height: 30px;
-    margin: 0;
-}*/
-.mddialog .ui-dialog-titlebar-buttonpane span {
-    /*display: block;
-    width: 30px;
-    height: 30px;
-    margin: 0;*/
-}
-.mddialog .ui-widget-header .ui-icon-closethick {
-    /*background: url("images/icon-close-dialog.gif") no-repeat 6px 5px;*/
-}
-.mddialog .ui-widget-header .ui-icon-extlink {
-    /*background: url("images/icon-maxim-dialog.gif") no-repeat 6px 5px;*/
-}
-.mddialog .ui-widget-header .ui-icon-newwin {
-    /*background: url("images/icon-restore-dialog.gif") no-repeat 6px 5px;*/
+    right:47px!important;
 }
 
 /* Close button should not have a border */
@@ -257,5 +296,20 @@ blockquote {
 .mddialog .ui-state-focus,
 .mddialog .ui-widget-content .ui-state-focus,
 .mddialog .ui-widget-header .ui-state-focus {
-    /*border: 1px solid green;*/
+    background-color:#484b40;    
+}
+
+.mddialog .ui-icon-fa-plus {    
+    background: url("images/icon-maxim-dialog.gif") no-repeat 0 0 transparent !important;
+    margin:14px 0px 0px 16px !important;
+}
+
+.mddialog .ui-icon-fa-minus {    
+    background: url("images/icon-restore-dialog.gif") no-repeat 0 0 transparent !important;
+    margin:14px 0px 0px 16px !important;
+}
+
+.mddialog .ui-icon-fa-remove {    
+    background: url("images/icon-close-dialog.gif") no-repeat 0 0 transparent !important;
+    margin:14px 0px 0px 16px !important;
 }
