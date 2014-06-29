@@ -184,6 +184,10 @@
     <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Styles\font-awesome\css\font-awesome-ie7.css" />
+    <Content Include="Styles\font-awesome\css\font-awesome-ie7.min.css" />
+    <Content Include="Styles\font-awesome\css\font-awesome.css" />
+    <Content Include="Styles\font-awesome\css\font-awesome.min.css" />
     <Content Include="Styles\font-awesome\font-awesome\css\font-awesome-ie7.min.css" />
     <Content Include="Styles\font-awesome\font-awesome\css\font-awesome.min.css" />
     <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome-ie7.css" />
@@ -192,6 +196,7 @@
     <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome.min.css" />
     <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\fontawesome-webfont.svg" />
     <Content Include="Styles\font-awesome\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Styles\font-awesome\font\fontawesome-webfont.svg" />
     <Content Include="Styles\images\icon-close-dialog.gif" />
     <Content Include="Styles\images\icon-dashboard.gif" />
     <Content Include="Styles\images\icon-maxim-dialog.gif" />
@@ -252,6 +257,10 @@
     <Content Include="Styles\font-awesome\scss\_mixins.scss" />
     <Content Include="Styles\font-awesome\scss\_path.scss" />
     <Content Include="Styles\font-awesome\scss\_variables.scss" />
+    <Content Include="Styles\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="Styles\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="Styles\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="Styles\font-awesome\font\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\InlineEditingController.cs" />
