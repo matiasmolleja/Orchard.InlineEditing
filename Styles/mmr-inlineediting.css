@@ -23,11 +23,11 @@
 ul.command-bar {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 0;    
+    min-width:660px;
 }
 
-    ul.command-bar li {
-        display: inline;
+    ul.command-bar li {        
         margin: 0;
         padding: 0;
     }
