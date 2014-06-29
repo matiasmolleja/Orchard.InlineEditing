@@ -62,17 +62,13 @@
 
 @* This divs only shows when topbar is collapsed *@
 <div class="inline-editing-topbar collapsedtopbar">
-    <ul class="command-bar">
+    <ul class="command-bar" >
         <li>
             <a href="#"
                title="@T("Collapse toolbar")"
                data-bind="click:toggleCollapseBar" class="collapse-button">
                 <i class="icon-chevron-right"></i>
             </a>
-        </li>
-
-        <li>
-            <a href="@Url.Action("Index", "Admin", new { area = "Dashboard" })" id="dashboard-link">ss</a>
         </li>
     </ul>
 </div>
