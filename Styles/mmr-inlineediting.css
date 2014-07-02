@@ -35,10 +35,29 @@ ul.command-bar {
 
 /* COLLAPSIBLE TOP BAR */
 .collapsedtopbar {
-    width: 320px;
-    /*background-color: transparent;*/
-    opacity:0.5;
+    /*width: 320px;*/
+    background-color: transparent;
+    /*opacity:0.5;*/
 }
+
+    .collapsedtopbar a {
+        opacity: 0.5;
+        -webkit-transition: opacity 0.5s ease-in-out;
+        -moz-transition: opacity 0.3s ease-in-out;
+        -ms-transition: opacity 0.3s ease-in-out;
+        -o-transition: opacity 0.3s ease-in-out;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+        .collapsedtopbar a:hover {
+            opacity: 1;
+            background-color: #333333 !important;
+            /*-webkit-transition: opacity 0.5s ease-in-out;
+            -moz-transition: opacity 0.5s ease-in-out;
+            -ms-transition: opacity 0.5s ease-in-out;
+            -o-transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out;*/
+        }
 
 
 .expandedtopbar {
@@ -76,7 +95,11 @@ ul.command-bar {
     border-right: solid 1px #000;
     line-height: 24px;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.50);
-
+    -webkit-transition: background 0.5s ease-in-out;
+    -moz-transition: background 0.3s ease-in-out;
+    -ms-transition: background 0.3s ease-in-out;
+    -o-transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out;
 }
 
 
