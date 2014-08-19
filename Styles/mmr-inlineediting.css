@@ -35,28 +35,21 @@ ul.command-bar {
 
 /* COLLAPSIBLE TOP BAR */
 .collapsedtopbar {
-    /*width: 320px;*/
     background-color: transparent;
-    /*opacity:0.5;*/
 }
 
     .collapsedtopbar a {
         opacity: 0.5;
-        -webkit-transition: opacity 0.5s ease-in-out;
-        -moz-transition: opacity 0.3s ease-in-out;
-        -ms-transition: opacity 0.3s ease-in-out;
-        -o-transition: opacity 0.3s ease-in-out;
-        transition: opacity 0.3s ease-in-out;
+        -webkit-transition: opacity 0.5s ease-in-out !Important;
+        -moz-transition: opacity 0.3s ease-in-out !Important;
+        -ms-transition: opacity 0.3s ease-in-out !Important;
+        -o-transition: opacity 0.3s ease-in-out !Important;
+        transition: opacity 0.3s ease-in-out !Important;
     }
 
         .collapsedtopbar a:hover {
             opacity: 1;
             background-color: #333333 !important;
-            /*-webkit-transition: opacity 0.5s ease-in-out;
-            -moz-transition: opacity 0.5s ease-in-out;
-            -ms-transition: opacity 0.5s ease-in-out;
-            -o-transition: opacity 0.5s ease-in-out;
-            transition: opacity 0.5s ease-in-out;*/
         }
 
 
@@ -77,7 +70,6 @@ ul.command-bar {
 .inline-editing-topbar a i.icon-chevron-left {
     padding-left: 4px;
 }
-
 
 
 /* LINKS IN TOP BAR */

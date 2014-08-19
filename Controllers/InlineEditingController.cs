@@ -146,23 +146,24 @@ namespace Mmr.InlineEditing.Controllers
 
 
         [HttpPost]
-        public JsonResult UpdateSessionValues(bool editorMode)
+        public JsonResult UpdateSessionValues(bool editorMode, bool isCollapsed)
         {
             try
             {
                 _hca.Current().Session["editorMode"] = editorMode;
+                _hca.Current().Session["isCollapsed"] = isCollapsed;
 
                 Response.StatusCode = (int)HttpStatusCode.OK;
 
-                var successClientNotification = new { MsgType = "info", Message = "Your changes has been accepted" };
+                var successClientNotification = new { MsgType = "info", Message = "Your session values has been updated." };
                 return Json(successClientNotification);
 
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "Editor Mode can't be persisted.");
+                Logger.Error(ex, "Session values can't be persisted.");
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                var errorClientNotification = new { MsgType = "warning", Message = T("Editor Mode can't be persisted.") }; //info-warning-error                
+                var errorClientNotification = new { MsgType = "warning", Message = T("Session values can't be persisted.") }; //info-warning-error                
                 return Json(errorClientNotification);
 
             }

@@ -122,7 +122,7 @@
 
     // Initializes the jQuery UI dialog that will contain the editor.
     var BuildMarkDownDialog = function (part) {
-        console.log('build markdown editor');
+
         // jQuery UI Dialog for markdown editor.
         $(document).ready(function () {
 
@@ -162,7 +162,6 @@
 
     // Removing the editor. Called when Editor Mode is turned off
     inlineEditing.RemoveMarkDownEditor = function (part) {
-        console.log('removing editor');
         var mdconverter = Markdown.getSanitizingConverter();
 
         $('#wmd-preview-bodypart' + part.contentItemId).html(mdconverter.makeHtml(part.InitialContents()));

@@ -4,11 +4,14 @@
 @{
     ContentItem contentItem = (ContentItem)Model.ContentItem;
 
-    // Retrieving if we are in EditorMode from Session. Maybe it is better using cookies.
-    // Saving has been done before through an ajax call in the ko viewModel updateSessionValues
+    // Retrieving session values. Maybe it is better using cookies.
+    // Saving has been done before through an ajax call in the ko viewModel updateSessionValues function
+    
     var isEditorModeEnabledForThisSession = HttpContext.Current.Session["editorMode"];
-    if (isEditorModeEnabledForThisSession == null)
-    { isEditorModeEnabledForThisSession = false; }
+    if (isEditorModeEnabledForThisSession == null) { isEditorModeEnabledForThisSession = false; }
+
+    var isCollapsedValueForThisSession = HttpContext.Current.Session["isCollapsed"];
+    if (isCollapsedValueForThisSession == null) { isCollapsedValueForThisSession = false; }
 
 }
 
@@ -16,52 +19,57 @@
 {
     <script type="text/javascript">
 
-        // loading values into the ko viewmodel
-        inlineEditing.IEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
-        inlineEditing.IEPageVM.updatePartsUrl = '@Url.Action("UpdateParts", "InlineEditing", new { area = "Mmr.InlineEditing" })';
-        inlineEditing.IEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
-        inlineEditing.IEPageVM.BaseUrl = '@WorkContext.CurrentSite.BaseUrl';
+    // loading values into the ko viewmodel
+    inlineEditing.IEPageVM.antiForgeryToken = '@Html.AntiForgeryTokenValueOrchard()';
+    inlineEditing.IEPageVM.updatePartsUrl = '@Url.Action("UpdateParts", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+    inlineEditing.IEPageVM.updateSessionValuesUrl = '@Url.Action("UpdateSessionValues", "InlineEditing", new { area = "Mmr.InlineEditing" })';
+    inlineEditing.IEPageVM.BaseUrl = '@WorkContext.CurrentSite.BaseUrl';
+    
 
+    $(document).ready(function () {
 
-        $(document).ready(function () {
-
-            @* higlight parts *@
-            $('.highlighter').mouseenter(function () {
-                if (inlineEditing.IEPageVM.editorMode()) {
-                    $(this).effect('highlight', { color: '#c7e7c2' }, 'slow');
-                }
-            });
-
-            @* user dropdown *@
-            $('#inline-user').dropit({ triggerParentEl: 'nav' });
-            inlineEditing.IEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
-            @* this is needed to update UI on first load *@
-            inlineEditing.IEPageVM.parts.valueHasMutated();
-        });
-
-
-        @* spinner for ajax calls *@
-        $(document)
-          .ajaxStart(function () {
-              $("#icon-save").removeClass("icon-save");
-              $("#icon-save").addClass("icon-refresh icon-spin");
-          })
-          .ajaxStop(function () {
-              $("#icon-save").removeClass("icon-refresh icon-spin icon-large");
-              $("#icon-save").addClass("icon-save");
-          });
-
-        @* warning: unsaved changes*@
-        $(window).bind('beforeunload', function () {
-            if (inlineEditing.IEPageVM.isDirty()) {
-                return "@T("You have unsaved changes.Are you sure you want to leave?")";
+        @* higlight parts *@
+        $('.highlighter').mouseenter(function () {
+            if (inlineEditing.IEPageVM.editorMode()) {
+                $(this).effect('highlight', { color: '#c7e7c2' }, 'slow');
             }
         });
+
+        @* user dropdown *@
+        $('#inline-user').dropit({ triggerParentEl: 'nav' });
+
+        inlineEditing.IEPageVM.editorMode(@isEditorModeEnabledForThisSession.ToString().ToLower());
+        inlineEditing.IEPageVM.isCollapsed(@isCollapsedValueForThisSession.ToString().ToLower());
+
+        @* this is needed to update UI on first load *@
+        inlineEditing.IEPageVM.parts.valueHasMutated();
+        
+
+    });
+
+
+    @* spinner for ajax calls *@
+    $(document)
+      .ajaxStart(function () {
+          $("#icon-save").removeClass("icon-save");
+          $("#icon-save").addClass("icon-refresh icon-spin");
+      })
+      .ajaxStop(function () {
+          $("#icon-save").removeClass("icon-refresh icon-spin icon-large");
+          $("#icon-save").addClass("icon-save");
+      });
+
+    @* warning: unsaved changes*@
+    $(window).bind('beforeunload', function () {
+        if (inlineEditing.IEPageVM.isDirty()) {
+            return "@T("You have unsaved changes.Are you sure you want to leave?")";
+        }
+    });
     </script>
 }
 
-@* This divs only shows when topbar is collapsed *@
-<div class="inline-editing-topbar collapsedtopbar">
+@* This divs only shows when topbar is collapsed: iscollapsed == true *@
+<div class="inline-editing-topbar collapsedtopbar" >
     <ul class="command-bar" >
         <li>
             <a href="#"
@@ -73,8 +81,8 @@
     </ul>
 </div>
 
-@* This divs only shows when topbar is expanded *@
-<div class="inline-editing-topbar expandedtopbar" data-bind="visibleFade: !isCollapsed()">
+@* This divs only shows when topbar is expanded: iscollapsed == false.   data-bind=" visibleFade: !isCollapsed()" *@
+<div class="inline-editing-topbar expandedtopbar" data-bind="visible : !isCollapsed()" >
     <ul class="command-bar">
         @* Togle Collapse *@
         <li>
@@ -119,7 +127,7 @@
         </li>
 
         @* User Info *@
-        <li id="inline-user-wrapper" >
+        <li id="inline-user-wrapper">
             @Display.InlineEditing_UserMenu()
         </li>
 

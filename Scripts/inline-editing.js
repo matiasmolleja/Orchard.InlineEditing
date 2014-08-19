@@ -19,7 +19,7 @@
         self.dirtyParts = ko.observableArray([]);
         self.isDirty = new ko.computed(function () {
             return self.dirtyParts().length > 0;
-        }).extend({ throttle: 500 });;
+        }).extend({ throttle: 500 });
 
         self.bindHtmlFromMd = function (mybodypart) {
             return ko.computed({
@@ -66,7 +66,7 @@
                 self.resetToInitialValues();
                 
             }
-            self.updateSessionValues(newValue);
+            self.updateSessionValues();
         });
 
         self.addEditors = function () {
@@ -103,12 +103,22 @@
             self.removeEditors();
             self.addEditors();
         }
+
+
         // Collapse bar
         self.isCollapsed = ko.observable(false);
         self.toggleCollapseBar = function () {
             var newValue = !self.isCollapsed();
-            self.isCollapsed(newValue);
+            self.isCollapsed(newValue);            
         };
+
+        self.isCollapsed.subscribe(function (newValue) {
+            if (newValue!= self.isCollapsed) {
+                self.updateSessionValues();                
+            }            
+        });
+
+
 
         // Markdown Dialog
         self.mddialogPreviewEnabled = ko.observable(false);
@@ -119,9 +129,7 @@
         self.closeMarkdownDialog = function () {
            $('.mddialog-closer').dialog("close");
         };
-
-
-
+        
 
 
         // helper functions
@@ -183,16 +191,16 @@
 
         };
 
-        self.updateSessionValues = function (newValue) {
+        self.updateSessionValues = function () {
 
-            //update session with editor mode. todo: check if it is better using cookies.
             $.ajax({
                 type: "POST",
                 url: self.updateSessionValuesUrl,
                 dataType: "json",
                 traditional: true,
                 data: {
-                    editorMode: newValue,
+                    editorMode: self.editorMode(),
+                    isCollapsed : self.isCollapsed(),
                     __RequestVerificationToken: self.antiForgeryToken
                 },
             }).done(function (result) {
@@ -200,11 +208,12 @@
                     //console.log(notification.Message);
                 } else {
                     //Notify('error', 'There was an error: nothing returned from the server.')
-                    //console.log('There was an error: nothing returned from the server.');
+                    console.log('There was an error: nothing returned from the server.');
                 }
             }).fail(function (result) {
                 var notification = JSON.parse(result.responseText);
                 Notify(notification.MsgType, notification.Message);
+                console.log('There was an error when updating session values.');
             });
         }
     };
