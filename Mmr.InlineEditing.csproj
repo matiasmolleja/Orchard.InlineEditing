@@ -188,14 +188,6 @@
     <Content Include="Styles\font-awesome\css\font-awesome-ie7.min.css" />
     <Content Include="Styles\font-awesome\css\font-awesome.css" />
     <Content Include="Styles\font-awesome\css\font-awesome.min.css" />
-    <Content Include="Styles\font-awesome\font-awesome\css\font-awesome-ie7.min.css" />
-    <Content Include="Styles\font-awesome\font-awesome\css\font-awesome.min.css" />
-    <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome-ie7.css" />
-    <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome-ie7.min.css" />
-    <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome.css" />
-    <Content Include="Styles\font-awesome\font-awesome\font-awesome\css\font-awesome.min.css" />
-    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\fontawesome-webfont.svg" />
-    <Content Include="Styles\font-awesome\font-awesome\font\fontawesome-webfont.svg" />
     <Content Include="Styles\font-awesome\font\fontawesome-webfont.svg" />
     <Content Include="Styles\images\icon-close-dialog.gif" />
     <Content Include="Styles\images\icon-dashboard.gif" />
@@ -231,14 +223,6 @@
     <Content Include="Scripts\markdown\Markdown.Sanitizer.min.js.map">
       <DependentUpon>Markdown.Sanitizer.js</DependentUpon>
     </Content>
-    <Content Include="Styles\font-awesome\font-awesome\font\fontawesome-webfont.eot" />
-    <Content Include="Styles\font-awesome\font-awesome\font\fontawesome-webfont.ttf" />
-    <Content Include="Styles\font-awesome\font-awesome\font\fontawesome-webfont.woff" />
-    <Content Include="Styles\font-awesome\font-awesome\font\FontAwesome.otf" />
-    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\fontawesome-webfont.eot" />
-    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\fontawesome-webfont.ttf" />
-    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\fontawesome-webfont.woff" />
-    <Content Include="Styles\font-awesome\font-awesome\font-awesome\font\FontAwesome.otf" />
     <Content Include="Styles\font-awesome\less\bootstrap.less" />
     <Content Include="Styles\font-awesome\less\core.less" />
     <Content Include="Styles\font-awesome\less\extras.less" />
